@@ -23,10 +23,10 @@ Sin variables de Supabase todo corre en **modo local**: los datos viven en `loca
 | `/` | Público | El sitio: cortina, cartelera, paquetes, menú, galería, ubicación |
 | `/reservaciones/` | Cliente | Flujo de reserva: día y personas, mapa de mesas, datos, extras, depósito y boleto con QR |
 | `/tu-noche/?folio=` | Cliente | Su noche: cuenta regresiva, boleto, mesa, reglas, cómo llegar, playlist, modificar o cancelar |
-| `/mesa/?m=12` | Cliente en la cantina | App de la mesa: menú, al micro, dedicatoria, servicio, más (fotos, despechómetro, tarjeta) |
+| `/mesa/?m=12` | Cliente en la cantina | App de la mesa: menú, al micro, dedicatoria, servicio, más (fotos, fiestómetro, tarjeta) |
 | `/pantalla/` | Teles del bar | Ahora canta, dedicatorias, muro de fotos, cuenta al brindis y QR |
-| `/despechometro/` | Público | Quiz con imagen para story |
-| `/tarjeta/` | Cliente | La Tarjeta del Despechado (lealtad) |
+| `/fiestometro/` | Público | Quiz con imagen para story |
+| `/tarjeta/` | Cliente | La Tarjeta Fiestera (lealtad) |
 | `/como-te-fue/?folio=` | Cliente | Calificación: 5 estrellas a Google, 3 o menos privado |
 | `/admin/` | Equipo | Hoy, Mapa, Reservas, Micrófono, Llamados, Fotos, Lealtad, Reseñas, Clientes, Reportes, Demo y Ajustes |
 
@@ -70,8 +70,8 @@ Antes: abre `/admin/` en la laptop conectada al proyector (PIN en pantalla), dal
 2. **"Así llega el correo."** Admin > Ajustes > **Mandar correo de prueba**: abre en el celular el correo del cliente (boleto, QR, botones, .ics) y el del equipo con **VER EN EL ADMIN**, que abre la reserva resaltada. Dale **Confirmar**: al cliente le llega el correo de confirmación y su página "Tu noche" cambia en vivo.
 3. **"Así se vive en la mesa."** Que escaneen el QR de la **mesa 12**. Se apuntan al micro con una canción, mandan una dedicatoria y le dan a **Pedir la cuenta**. En el admin: pestaña Llamados (con el reloj corriendo) y El micrófono. Dale **Siguiente** hasta que en su celular salga **¡TE TOCA!**.
 4. **"Así se ve en el bar."** En `/pantalla/` sale AHORA CANTA, la dedicatoria como marquesina de cine y el muro. Que suban una foto desde la mesa (Más > Tu foto a la pantalla), apruébala en Fotos y salta a la pantalla.
-5. **El momento wow: el brindis.** Pide que todos tengan la mesa abierta en su celular y dale **🥂 Lanzar brindis** en el admin. Pantallas y celulares cuentan 3, 2, 1 con confeti de papel picado y "¡SALUD, Y SIN LLORAR!" al mismo tiempo.
-6. **"Y así crece el negocio."** Prende **Simular noche** para que se vea vivo y recorre Reportes (fuentes de Instagram, TikTok y creadores, ocasiones, canciones), Clientes con sus visitas y cumpleaños, la Tarjeta del Despechado (da un sello y que lo vean llegar a su celular), las reseñas privadas y el Despechómetro para stories.
+5. **El momento wow: el brindis.** Pide que todos tengan la mesa abierta en su celular y dale **🥂 Lanzar brindis** en el admin. Pantallas y celulares cuentan 3, 2, 1 con confeti de papel picado y "¡SALUD, Y QUE SIGA LA FIESTA!" al mismo tiempo.
+6. **"Y así crece el negocio."** Prende **Simular noche** para que se vea vivo y recorre Reportes (fuentes de Instagram, TikTok y creadores, ocasiones, canciones), Clientes con sus visitas y cumpleaños, la Tarjeta Fiestera (da un sello y que lo vean llegar a su celular), las reseñas privadas y el Fiestómetro para stories.
 
 Al terminar: **Reiniciar demo**.
 
@@ -111,7 +111,7 @@ La cartelera, el menú, la galería y el horario del sitio se pintan **en el HTM
 ```
 index.html                 el sitio (ES)
 reservaciones/ tu-noche/ mesa/ pantalla/ admin/
-despechometro/ tarjeta/ como-te-fue/
+fiestometro/ tarjeta/ como-te-fue/
 api/checkout.js            Stripe Checkout (Vercel)
 api/stripe-webhook.js      marca el depósito como pagado
 apps-script/               correos (Code.gs + README)
@@ -125,7 +125,7 @@ src/plataforma/
   disponibilidad.js        horarios y mesas libres
   mapa.js qr.js boleto.js pagos.js correos.js brindis.js lealtad.js
   reservaciones.js tu-noche.js mesa.js pantalla.js
-  despechometro.js tarjeta.js como-te-fue.js
+  fiestometro.js tarjeta.js como-te-fue.js
   admin/                   admin.js, store.js, acciones.js y las vistas
 src/styles/
 src/js/                    sitio: cortina, horario

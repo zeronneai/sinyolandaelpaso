@@ -51,7 +51,7 @@ $('#form-resena').addEventListener('submit', async (e) => {
   g.hidden = false;
   if (estrellas === 5) {
     g.innerHTML = `<h2 class="tarjeta__titulo">¡Ajúa! Gracias, compa</h2>
-      <p>¿Nos ayudas con una reseña en Google? Así más gente se entera de que aquí no se llora, aquí se canta.</p>
+      <p>¿Nos ayudas con una reseña en Google? Así más gente se entera de que aquí se prende la fiesta.</p>
       <a class="btn btn--mostaza btn--grande btn--ancho" href="${esc(CONFIG.resenaGoogle)}" target="_blank" rel="noopener">Dejar reseña en Google</a>`;
     setTimeout(() => window.open(CONFIG.resenaGoogle, '_blank', 'noopener'), 900);
   } else if (estrellas === 4) {

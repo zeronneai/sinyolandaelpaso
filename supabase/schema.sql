@@ -33,7 +33,7 @@ create table if not exists public.reservas (
   correo           text not null,
   telefono         text not null,
   ocasion          text,
-  corazon_roto     boolean not null default false,
+  modo_fiesta     boolean not null default false,
   comentarios      text check (char_length(comentarios) <= 500),
   extras           jsonb not null default '[]'::jsonb,
   estado           text not null default 'pendiente'

@@ -83,7 +83,7 @@ export async function registrarWalkIn({ nombre, personas, mesa_id, telefono = ''
     correo: '',
     telefono,
     ocasion: 'cantar',
-    corazon_roto: false,
+    modo_fiesta: false,
     comentarios: null,
     extras: [],
     estado: 'sentada',

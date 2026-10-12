@@ -111,7 +111,7 @@ function motorSupabase() {
 /* ============================================================
    Motor LOCAL (localStorage + BroadcastChannel)
    ============================================================ */
-const CLAVE = 'sy-demo-db-v1';
+const CLAVE = 'sy-demo-db-v2';
 
 function fechaMas(fechaISO, dias) {
   const [y, m, d] = fechaISO.split('-').map(Number);

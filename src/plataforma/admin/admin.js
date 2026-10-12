@@ -81,7 +81,7 @@ const TOAST = {
         ? [`Walk-in: ${esc(r.nombre)} en la mesa ${r.mesa_id}`, 'reserva', 'sombrero']
         : [`Nueva reserva: <b>${esc(r.nombre)}</b>, ${r.personas} p · ${fechaCorta(r.fecha)} ${hora(r.hora)}`, 'reserva', 'corazon'];
     }
-    if (vieja && r.estado === 'cancelada' && vieja.estado !== 'cancelada') return [`${esc(r.nombre)} canceló su reserva`, 'llamado', 'ojo'];
+    if (vieja && r.estado === 'cancelada' && vieja.estado !== 'cancelada') return [`${esc(r.nombre)} canceló su reserva`, 'llamado', 'llama'];
     if (vieja && (r.hora !== vieja.hora || r.personas !== vieja.personas)) return [`${esc(r.nombre)} modificó su reserva: ${r.personas} p · ${hora(r.hora)}`, 'reserva', 'corazon'];
     if (vieja && r.deposito_estado === 'pagado' && vieja.deposito_estado !== 'pagado') return [`Depósito pagado: ${esc(r.nombre)}`, 'reserva', 'corazon'];
     return null;

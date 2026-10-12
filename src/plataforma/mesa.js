@@ -73,10 +73,10 @@ $('#tabbar').addEventListener('click', (e) => {
    MENÚ
    ============================================================ */
 const NIVELES = [
-  ['¿Te dejaron en visto?', 'Cantarito doble.'],
+  ['¿Vienes a celebrar?', 'Cantarito doble.'],
   ['¿Viste sus historias 14 veces hoy?', 'Quesabirria con extra consomé, para el alma.'],
-  ['¿Te bloquearon de todos lados?', 'El Querida, y pide "Querida" al micro.'],
-  ['¿Ya supiste que tiene nueva pareja?', 'Se me olvidó otra vez. Literal.'],
+  ['¿Te sientes la reina de la noche?', 'El Rey, y pide "El Rey" al micro.'],
+  ['¿Vienes con toda tu bola?', 'Una ronda de Mátalas y a la pista.'],
   ['¿Lo superaste? (mentira)', 'Elotitos para compartir con tu bola.'],
 ];
 function pintarMenu() {
@@ -109,9 +109,9 @@ function pintarMenu() {
    AL MICRO
    ============================================================ */
 const SUGERENCIAS = [
-  ['Querida', 'Juan Gabriel'], ['El Rey', 'José Alfredo Jiménez'], ['La Puerta Negra', 'Los Tigres del Norte'], ['Mátalas', 'Alejandro Fernández'],
-  ['Se me olvidó otra vez', 'Juan Gabriel'], ['Amor eterno', 'Rocío Dúrcal'], ['Si nos dejan', 'Luis Miguel'], ['Tu recuerdo y yo', 'José Alfredo Jiménez'],
-  ['Paloma Negra', 'Lola Beltrán'], ['Hasta que te conocí', 'Juan Gabriel'], ['Te solté la rienda', 'José Alfredo Jiménez'], ['Costumbres', 'Rocío Dúrcal'],
+  ['El Rey', 'José Alfredo Jiménez'], ['La Bikina', 'Luis Miguel'], ['Mátalas', 'Alejandro Fernández'], ['La Negra', 'Mariachi Vargas'],
+  ['La Chona', 'Los Tucanes de Tijuana'], ['Payaso de rodeo', 'Caballo Dorado'], ['El Sinaloense', 'Banda El Recodo'], ['Me gustas mucho', 'Rocío Dúrcal'],
+  ['Amor a la mexicana', 'Thalía'], ['El Noa Noa', 'Juan Gabriel'], ['Juana la Cubana', 'Fito Olivares'], ['Si nos dejan', 'Luis Miguel'],
 ];
 function pintarSugerencias() {
   $('#sugerencias').innerHTML = SUGERENCIAS.map(([c, a], i) => `<button type="button" class="chip-btn" data-sug="${i}">${esc(c)}</button>`).join('');
@@ -289,15 +289,15 @@ function pintarLlamados() {
 }
 
 /* ============================================================
-   MÁS: Despechómetro, Tarjeta del Despechado y muro de fotos
+   MÁS: Fiestómetro, Tarjeta Fiestera y muro de fotos
    ============================================================ */
 function pintarMasExtra() {
   $('#mas-extra').innerHTML = `
     <div class="mas-grid">
-      <a class="mas-card mas-card--rosa" href="/despechometro/?mesa=${MESA.numero}">
-        <svg aria-hidden="true"><use href="#i-ojo"/></svg><strong>El Despechómetro</strong><span>¿Qué tan ardido estás? Sácalo para tu story.</span></a>
+      <a class="mas-card mas-card--rosa" href="/fiestometro/?mesa=${MESA.numero}">
+        <svg aria-hidden="true"><use href="#i-llama"/></svg><strong>El Fiestómetro</strong><span>¿Qué tan prendido vienes? Sácalo para tu story.</span></a>
       <a class="mas-card mas-card--mostaza" href="/tarjeta/?mesa=${MESA.numero}">
-        <svg aria-hidden="true"><use href="#i-corazon"/></svg><strong>Tarjeta del Despechado</strong><span>5 sellos y el cantarito va por la casa.</span></a>
+        <svg aria-hidden="true"><use href="#i-corazon"/></svg><strong>Tarjeta Fiestera</strong><span>5 sellos y el cantarito va por la casa.</span></a>
     </div>
     <form class="tarjeta muro" id="form-foto">
       <h2 class="tarjeta__titulo">Tu foto a la pantalla</h2>

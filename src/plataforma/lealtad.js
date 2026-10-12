@@ -1,4 +1,4 @@
-// La Tarjeta del Despechado: render compartido (página /tarjeta/, admin).
+// La Tarjeta Fiestera: render compartido (página /tarjeta/, admin).
 
 import { esc } from './ui.js';
 

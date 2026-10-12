@@ -135,7 +135,7 @@ export async function boletoPNG(r) {
 
   x.font = '36px "Special Elite"';
   x.fillStyle = '#3B1F14';
-  x.fillText('Aquí no se llora, aquí se canta.', W / 2, 1270);
+  x.fillText('Esto se va a prender.', W / 2, 1270);
   x.font = '40px "Bebas Neue"';
   x.fillText('340 VIN RAMBLA DR · EL PASO, TX · @SINYOLANDAELPASO', W / 2, 1360);
 

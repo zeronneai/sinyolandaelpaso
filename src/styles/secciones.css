@@ -294,7 +294,7 @@
   text-align: center;
   border-top: 3px dashed rgba(59, 31, 20, .25);
 }
-.porque__ojo { width: 92px; height: 92px; margin: 0 auto 18px; color: var(--terracota); }
+.porque__llama { width: 92px; height: 92px; margin: 0 auto 18px; color: var(--terracota); }
 .porque__titulo {
   font-family: var(--f-titulo);
   font-weight: 400;

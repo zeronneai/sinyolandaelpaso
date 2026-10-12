@@ -1,6 +1,6 @@
 /* ============================================================
    PLATAFORMA: estilos compartidos (reservaciones, tu noche, mesa,
-   despechómetro, cómo te fue, tarjeta). El admin y la pantalla
+   fiestómetro, cómo te fue, tarjeta). El admin y la pantalla
    agregan sus propios estilos encima.
    ============================================================ */
 @import '@fontsource/anton';
@@ -270,7 +270,7 @@ button.chip-btn:hover { background: var(--crema); }
   transition: background .2s;
 }
 .toggle__switch::after {
-  content: '💔';
+  content: '🔥';
   position: absolute;
   top: 2px; left: 2px;
   width: 28px; height: 28px;

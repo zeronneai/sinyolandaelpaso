@@ -34,7 +34,7 @@ const OCASIONES = {
   cantar: { es: 'Solo vengo a cantar', en: 'Just here to sing' },
   cumpleanos: { es: 'Cumpleaños', en: 'Birthday' },
   despedida: { es: 'Despedida de soltera', en: 'Bachelorette' },
-  divorcio: { es: 'Fiesta de divorcio', en: 'Divorce party' },
+  amigas: { es: 'Noche de amigas', en: "Girls' night out" },
   posada: { es: 'Posada de empresa', en: 'Company posada' },
   'recovery-brunch': { es: 'Recovery Brunch', en: 'Recovery Brunch' },
   otra: { es: 'Otra', en: 'Other' },
@@ -70,13 +70,13 @@ const T = {
     verNoche: 'VER MI NOCHE', invita: 'INVITA A TU BOLA', calendario: 'Agregar a mi calendario', llegar: 'Cómo llegar',
     textoInvita: (f, h, url) => `Ya apartamos en Sin Yolanda El Paso el ${f} a las ${h}. Aquí están los detalles: ${url}`,
     reglasT: 'Reglas de la casa',
-    reglas: ['Trae toda la actitud. Aquí nadie viene a llorar solo.', 'Ven con la garganta preparada. Un tecito antes no está de más.', 'Apúntate temprano al micrófono: la fila crece después de las 10.'],
+    reglas: ['Trae toda la actitud. Aquí se viene a gozar.', 'Ven con la garganta preparada. Un tecito antes no está de más.', 'Apúntate temprano al micrófono: la fila crece después de las 10.'],
     deposito: 'Depósito', depEstado: { pagado: 'Pagado', pendiente: 'Pendiente', reembolsado: 'Reembolsado', fallido: 'No se pudo cobrar' },
     cierres: {
-      cumpleanos: 'Y que no se te olvide: el pastel y Las Mañanitas van por nuestra cuenta de sentimiento. ¡Feliz cumple!',
+      cumpleanos: 'Pastel, velitas y Las Mañanitas versión cantina. ¡Feliz cumple, que se prenda!',
       despedida: 'Que la futura señora llegue lista: esta noche se despide en grande. ¡Ajúa!',
-      divorcio: 'Recién soltera, recién soltero: hoy se brinda por la libertad. ¡Salud!',
-      roto: 'Y tranquilo, aquí no se llora: aquí se canta.',
+      amigas: 'Hoy mandan ustedes: micro, tequila y su bola completa. ¡Salud, reinas!',
+      fiesta: 'Modo fiesta encendido: esto se va a prender. ¡Ajúa!',
       normal: 'Esto se va a prender. ¡Cáile!',
     },
     pie: 'Sin Yolanda El Paso · 340 Vin Rambla Dr, El Paso, TX · @sinyolandaelpaso',
@@ -102,13 +102,13 @@ const T = {
     verNoche: 'SEE MY NIGHT', invita: 'INVITE YOUR CREW', calendario: 'Add to my calendar', llegar: 'Directions',
     textoInvita: (f, h, url) => `We booked Sin Yolanda El Paso for ${f} at ${h}. Here are the details: ${url}`,
     reglasT: 'House rules',
-    reglas: ['Bring all the attitude. Nobody cries alone here.', 'Warm up that voice. A little tea before never hurts.', 'Sign up for the mic early: the line grows after 10.'],
+    reglas: ['Bring all the attitude. We came here to party.', 'Warm up that voice. A little tea before never hurts.', 'Sign up for the mic early: the line grows after 10.'],
     deposito: 'Deposit', depEstado: { pagado: 'Paid', pendiente: 'Pending', reembolsado: 'Refunded', fallido: 'Payment failed' },
     cierres: {
       cumpleanos: 'Birthday mode is on: cake, candles and Las Mañanitas, cantina style.',
       despedida: 'Get the bride-to-be ready: tonight she says goodbye in style. ¡Ajúa!',
-      divorcio: 'Newly single? Tonight we toast to freedom. ¡Salud!',
-      roto: "And don't worry: here we don't cry, we sing.",
+      amigas: 'Tonight you run the place: the mic, the tequila and your whole crew. ¡Salud!',
+      fiesta: 'Party mode on: this is about to get lit. ¡Ajúa!',
       normal: "This is about to get lit. See you there!",
     },
     pie: 'Sin Yolanda El Paso · 340 Vin Rambla Dr, El Paso, TX · @sinyolandaelpaso',
@@ -174,8 +174,8 @@ function correoCliente(r) {
 
   const cierre = r.ocasion === 'cumpleanos' ? t.cierres.cumpleanos
     : r.ocasion === 'despedida' ? t.cierres.despedida
-    : r.ocasion === 'divorcio' ? t.cierres.divorcio
-    : r.corazon_roto ? t.cierres.roto : t.cierres.normal;
+    : r.ocasion === 'amigas' ? t.cierres.amigas
+    : r.modo_fiesta ? t.cierres.fiesta : t.cierres.normal;
 
   const cuerpo = `
     ${titulo(t.hola(esc(primerNombre(r.nombre))))}
@@ -226,7 +226,7 @@ function correoEquipo(r) {
       ${fila('Personas', String(r.personas))}
       ${fila('Mesa y zona', r.mesaNumero ? `Mesa ${r.mesaNumero} · ${esc(r.zonaTexto)}` : esc(r.zonaTexto || 'Sin mesa'))}
       ${fila('Ocasión', esc(ocasion))}
-      ${fila('Corazón roto', r.corazon_roto ? 'Sí 💔' : 'No')}
+      ${fila('Modo fiesta', r.modo_fiesta ? 'Sí 🔥' : 'No')}
       ${fila('Extras', extras)}
       ${fila('Depósito', dep)}
       ${fila('Correo', esc(r.correo || ''))}
@@ -264,7 +264,7 @@ function correoCambioEstado(r) {
   const confirmada = r.estado === 'confirmada';
   const imagenes = imagenesInline(confirmada ? urlNoche : null);
   const cuerpo = confirmada
-    ? `${titulo(t.confirmadaT)}${parrafo(t.confirmadaTxt(fecha, hora))}${boleto(r, imagenes.qr ? 'cid:qr' : qrUrl(urlNoche))}${depositoHTML(r)}${boton(t.verNoche, urlNoche, MARCA.mostaza, MARCA.chocolate, true)}${parrafo(`<i>${r.corazon_roto ? t.cierres.roto : t.cierres.normal}</i>`, 'center')}`
+    ? `${titulo(t.confirmadaT)}${parrafo(t.confirmadaTxt(fecha, hora))}${boleto(r, imagenes.qr ? 'cid:qr' : qrUrl(urlNoche))}${depositoHTML(r)}${boton(t.verNoche, urlNoche, MARCA.mostaza, MARCA.chocolate, true)}${parrafo(`<i>${r.modo_fiesta ? t.cierres.fiesta : t.cierres.normal}</i>`, 'center')}`
     : `${titulo(t.canceladaT)}${parrafo(t.canceladaTxt(fecha, hora))}${boton(t.otraFecha, `${sitio()}/reservaciones/`, MARCA.mostaza, MARCA.chocolate, true)}`;
   MailApp.sendEmail({
     to: r.correo,
@@ -285,8 +285,8 @@ function reservaFalsa() {
   const en3 = new Date(hoy.getTime() + 3 * 86400000);
   return normalizar({
     folio: 'SY-EP-PRUEBA1', fecha: Utilities.formatDate(en3, ZONA_HORARIA, 'yyyy-MM-dd'), hora: '21:00', personas: 6,
-    mesa_id: 3, zona: 'cerca-micro', nombre: 'Lupita Prueba Despechada', correo: equipo()[0], telefono: '+1 915 555 0123',
-    ocasion: 'cumpleanos', corazon_roto: true, comentarios: 'Correo de prueba para la junta.',
+    mesa_id: 3, zona: 'cerca-micro', nombre: 'Lupita Prueba Fiestera', correo: equipo()[0], telefono: '+1 915 555 0123',
+    ocasion: 'cumpleanos', modo_fiesta: true, comentarios: 'Correo de prueba para la junta.',
     extras: [{ id: 'pastel', cantidad: 1 }, { id: 'mariachi', cantidad: 1 }], estado: 'pendiente',
     deposito_estado: 'pagado', monto_deposito: 185, source: 'prueba',
   }, 'es');
@@ -496,7 +496,7 @@ function normalizar(d, lang) {
     correo: String(d.correo || '').trim(),
     telefono: String(d.telefono || ''),
     ocasion: d.ocasion || 'cantar',
-    corazon_roto: d.corazon_roto === true || d.corazon_roto === 'true',
+    modo_fiesta: d.modo_fiesta === true || d.modo_fiesta === 'true',
     comentarios: d.comentarios ? String(d.comentarios).slice(0, 500) : '',
     extras: Array.isArray(d.extras) ? d.extras : [],
     estado: d.estado || 'pendiente',
@@ -528,7 +528,7 @@ function respaldoEnSheet(r) {
     lock.waitLock(10000);
     const hoja = hojaReservas(SpreadsheetApp.openById(id));
     hoja.appendRow([new Date(), r.folio, r.estado, r.nombre, r.correo, r.telefono, r.fecha, r.hora, r.personas,
-      r.mesaNumero || '', r.zonaTexto, (OCASIONES[r.ocasion] || OCASIONES.otra).es, r.corazon_roto ? 'Sí' : 'No',
+      r.mesaNumero || '', r.zonaTexto, (OCASIONES[r.ocasion] || OCASIONES.otra).es, r.modo_fiesta ? 'Sí' : 'No',
       r.extras.map((x) => x.id).join(', '), r.deposito_estado, r.monto_deposito, r.comentarios, r.lang, r.source]);
   } finally {
     lock.releaseLock();
@@ -540,7 +540,7 @@ function hojaReservas(libro) {
   if (!hoja) {
     hoja = libro.insertSheet('Reservas');
     const enc = ['Timestamp', 'Folio', 'Estado', 'Nombre', 'Correo', 'Teléfono', 'Fecha', 'Hora', 'Personas', 'Mesa', 'Zona',
-      'Ocasión', 'Corazón roto', 'Extras', 'Depósito', 'Monto', 'Comentarios', 'Idioma', 'Fuente'];
+      'Ocasión', 'Modo fiesta', 'Extras', 'Depósito', 'Monto', 'Comentarios', 'Idioma', 'Fuente'];
     hoja.getRange(1, 1, 1, enc.length).setValues([enc]).setFontWeight('bold').setBackground(MARCA.chocolate).setFontColor(MARCA.mostaza);
     hoja.setFrozenRows(1);
   }

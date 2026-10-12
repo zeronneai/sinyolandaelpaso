@@ -61,7 +61,7 @@ const DIAPOS = [
           <p class="marquesina__para">Para ${esc(d.para)}</p>
           <p class="marquesina__cancion">"${esc(d.cancion)}"</p>
           ${d.mensaje ? `<p class="marquesina__msg">${esc(d.mensaje)}</p>` : ''}
-          <p class="marquesina__de">${d.anonimo ? 'De: alguien que no te olvida' : `De: la mesa ${d.mesa}`}</p>
+          <p class="marquesina__de">${d.anonimo ? 'De: un admirador secreto' : `De: la mesa ${d.mesa}`}</p>
         </div>
       </section>`;
     },
@@ -84,7 +84,7 @@ const DIAPOS = [
     html: () => `<section class="d d--brindis">
       <p class="d__eti">Brindis de medianoche</p>
       <p class="cuenta-gigante" id="cuenta-brindis">${formatoCuenta()}</p>
-      <p class="d__mediano">¡Salud, y sin llorar!</p>
+      <p class="d__mediano">¡Salud, y que siga la fiesta!</p>
     </section>`,
   },
   {
@@ -94,7 +94,7 @@ const DIAPOS = [
       <div class="d-qr__qr">${qrMesa}</div>
       <div><p class="d__eti">Escanea el QR de tu mesa</p>
       <p class="d__gigante">Menú, micro y dedicatorias</p>
-      <p class="d__chico">Sin descargar nada. Apúntate a cantar y dedícale una al ex.</p></div>
+      <p class="d__chico">Sin descargar nada. Apúntate a cantar y dedícale una a tu bola.</p></div>
     </section>`,
   },
 ];
