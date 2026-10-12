@@ -1,0 +1,274 @@
+/* ============================================================
+   CORTINA METÁLICA (intro)
+   Solo existe con html.con-cortina, que pone el script del <head>.
+   ============================================================ */
+
+.cortina { display: none; }
+html.con-cortina .cortina { display: block; }
+
+.cortina {
+  --acero-1: #5d646b;
+  --acero-2: #aab1b8;
+  --acero-3: #d6dbdf;
+  --acero-4: #7a8189;
+  --acero-5: #3e4449;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+.cortina > * { pointer-events: auto; }
+
+/* Rodillo / caja donde se enrolla la cortina */
+.cortina__rodillo {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 30px;
+  z-index: 3;
+  background:
+    linear-gradient(180deg, #2a2e32 0, #6b7279 30%, #b9c0c6 48%, #5b6268 70%, #23272a 100%);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .55);
+}
+
+.cortina__panel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, .65), 0 6px 0 rgba(0, 0, 0, .35);
+  will-change: transform;
+}
+.cortina__panel:active { cursor: grabbing; }
+
+/* La lámina corrugada: duelas horizontales + suciedad + óxido + ruido */
+.cortina__lamina {
+  position: absolute;
+  inset: 0;
+  background:
+    /* viñeta de luz de la calle */
+    radial-gradient(120% 80% at 50% 35%, rgba(255, 255, 255, .10), transparent 60%),
+    linear-gradient(180deg, rgba(0, 0, 0, .35), transparent 18%, transparent 70%, rgba(0, 0, 0, .45)),
+    /* óxido sutil */
+    radial-gradient(18% 9% at 12% 82%, rgba(142, 58, 30, .45), transparent 70%),
+    radial-gradient(10% 14% at 88% 24%, rgba(142, 58, 30, .32), transparent 70%),
+    radial-gradient(22% 6% at 64% 90%, rgba(120, 60, 25, .35), transparent 70%),
+    radial-gradient(6% 10% at 33% 12%, rgba(142, 58, 30, .28), transparent 70%),
+    /* manchas de mugre */
+    radial-gradient(30% 20% at 80% 70%, rgba(20, 15, 10, .28), transparent 70%),
+    radial-gradient(25% 30% at 15% 30%, rgba(20, 15, 10, .22), transparent 70%),
+    /* duelas */
+    repeating-linear-gradient(180deg,
+      var(--acero-5) 0,
+      var(--acero-1) 2px,
+      var(--acero-2) 7px,
+      var(--acero-3) 11px,
+      var(--acero-2) 15px,
+      var(--acero-4) 21px,
+      var(--acero-5) 26px);
+  background-color: var(--acero-4);
+}
+/* Grano y escurrimientos de agua con SVG de ruido */
+.cortina__lamina::before,
+.cortina__lamina::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.cortina__lamina::before {
+  opacity: .55;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .17 0 0 0 0 .14 0 0 0 .9 -.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.cortina__lamina::after {
+  opacity: .35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .05' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .2 0 0 0 0 .15 0 0 0 1.4 -.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  background-size: 600px 400px;
+}
+
+/* Barra inferior con chapa y manijas */
+.cortina__barra {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(60px, 18vw, 220px);
+  background:
+    linear-gradient(180deg, #2b3034 0, #8d949b 14%, #c3c9ce 30%, #7d848b 60%, #3a3f44 100%);
+  border-top: 2px solid #23272a;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, .35);
+}
+.cortina__manija {
+  width: 54px; height: 14px;
+  border-radius: 7px;
+  background: linear-gradient(180deg, #e3e7ea, #6e757c);
+  box-shadow: 0 3px 0 #2a2e32, inset 0 1px 0 #fff;
+}
+.cortina__chapa {
+  position: relative;
+  width: 34px; height: 40px;
+  border-radius: 6px;
+  background: linear-gradient(160deg, #e9c45f, #a77a1f 60%, #6d4e12);
+  box-shadow: 0 3px 0 #2a2e32, inset 0 1px 0 rgba(255, 255, 255, .6);
+}
+.cortina__chapa::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 11px;
+  width: 8px; height: 16px;
+  transform: translateX(-50%);
+  border-radius: 4px 4px 2px 2px;
+  background: #2a1a10;
+}
+
+/* ---------- Grafiti ---------- */
+.grafiti {
+  position: absolute;
+  inset: 8% 0 90px;
+  display: grid;
+  place-items: center;
+}
+.grafiti__lienzo {
+  position: relative;
+  width: min(92vw, 860px);
+}
+/* El clip-path revela la pintura de izquierda a derecha (lo anima GSAP con --pintado) */
+.grafiti__pintura {
+  --pintado: 0%;
+  padding: 26px 30px 34px;
+  margin: -26px -30px -34px;
+  clip-path: inset(0 calc(100% - var(--pintado)) 0 0);
+  filter: url(#f-aerosol);
+}
+.grafiti__logo {
+  display: block;
+  aspect-ratio: 3228 / 1060;
+  background-color: var(--mostaza);
+  -webkit-mask: url('/assets/logos/sinyolanda-wordmark.svg') center / contain no-repeat;
+          mask: url('/assets/logos/sinyolanda-wordmark.svg') center / contain no-repeat;
+}
+
+/* Escurridos de pintura */
+.escurrido {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: var(--l);
+  border-radius: 0 0 99px 99px;
+  background: linear-gradient(180deg, var(--mostaza) 0, var(--mostaza) 82%, #c98d25 100%);
+  box-shadow: 1px 0 0 rgba(59, 31, 20, .35);
+  transform-origin: top center;
+  transform: scaleY(0);
+}
+.escurrido::after {
+  content: '';
+  position: absolute;
+  left: 50%; bottom: -3px;
+  width: calc(var(--w) * 1.7);
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--mostaza);
+}
+
+/* La boquilla de la lata: un halo que recorre el logo mientras se pinta */
+.grafiti__boquilla {
+  position: absolute;
+  width: 70px; height: 70px;
+  left: 0; top: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 166, 58, .7), rgba(224, 166, 58, 0) 70%);
+  filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tag {
+  position: absolute;
+  font-family: var(--f-grafiti);
+  line-height: 1;
+  opacity: 0;
+  white-space: nowrap;
+}
+.tag--raje {
+  left: 6%;
+  top: 6%;
+  font-size: clamp(1.6rem, 5.5vw, 3rem);
+  color: var(--rosa);
+  rotate: -9deg;
+  text-shadow: 0 0 6px rgba(232, 135, 154, .55), 3px 3px 0 rgba(59, 31, 20, .7);
+}
+.tag--chuco {
+  right: 7%;
+  bottom: 4%;
+  font-size: clamp(1.5rem, 5vw, 2.7rem);
+  color: var(--crema);
+  rotate: 6deg;
+  text-shadow: 0 0 6px rgba(243, 228, 200, .5), 3px 3px 0 rgba(59, 31, 20, .7);
+}
+.tag--chuco span { color: var(--rosa); }
+.tag--ojo {
+  left: 10%;
+  bottom: 2%;
+  width: clamp(64px, 14vw, 120px);
+  height: auto;
+  aspect-ratio: 1;
+  color: var(--terracota);
+  rotate: -12deg;
+  filter: drop-shadow(0 0 4px rgba(196, 80, 42, .6)) drop-shadow(3px 3px 0 rgba(59, 31, 20, .6));
+}
+
+@media (max-width: 640px) {
+  .grafiti { inset: 12% 0 120px; }
+  .tag--raje { top: 4%; left: 5%; }
+  .tag--chuco { bottom: 6%; right: 5%; }
+  .tag--ojo { bottom: 8%; left: 6%; }
+}
+
+/* Píldora "Jálale a la cortina" */
+.cortina__jalar {
+  position: absolute;
+  left: 50%;
+  bottom: 82px;
+  transform: translateX(-50%);
+  border: 3px solid var(--chocolate);
+  border-radius: 999px;
+  background: var(--mostaza);
+  color: var(--chocolate);
+  font-family: var(--f-etiqueta);
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  letter-spacing: .16em;
+  padding: .55em 1.3em .45em;
+  min-height: 52px;
+  white-space: nowrap;
+  box-shadow: 4px 4px 0 var(--chocolate);
+  animation: jalar 1.6s ease-in-out infinite;
+}
+.cortina__jalar:focus-visible { outline-color: var(--crema-claro); outline-offset: 5px; }
+@keyframes jalar {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -8px); }
+}
+
+.cortina__saltar {
+  position: absolute;
+  top: 44px;
+  right: 16px;
+  z-index: 4;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 2px solid var(--crema-claro);
+  border-radius: 999px;
+  background: rgba(30, 20, 14, .72);
+  color: var(--crema-claro);
+  font-family: var(--f-etiqueta);
+  font-size: 1.15rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.cortina__saltar:hover { background: var(--chocolate); }

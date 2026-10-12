@@ -1,0 +1,61 @@
+{
+  "_instrucciones": "Fotos de la galería. El archivo debe existir en public/assets/fotos. Las ig_* son placeholders de baja resolución: reemplázalas con el mismo nombre o cambia el archivo aquí. \"abajo\": true recorta desde abajo (para tapar el ícono de Reels). En escritorio: \"grande\" ocupa 2x2 y \"alto\" ocupa 1x2; con 1 grande, 2 altas y 4 normales la cuadrícula queda pareja.",
+  "fotos": [
+    {
+      "archivo": "mic.jpg",
+      "alt": {
+        "es": "El micrófono dorado de Sin Yolanda con su funda naranja, sobre una mesa de madera de la cantina",
+        "en": "Sin Yolanda's gold microphone with its orange sleeve on a wooden cantina table"
+      },
+      "grande": true
+    },
+    {
+      "archivo": "fl_cerillos.jpg",
+      "alt": {
+        "es": "Cerillos de Sin Yolanda encendidos junto a un micrófono: esto se va a prender",
+        "en": "Lit Sin Yolanda matchbook next to a microphone: this is about to get lit"
+      },
+      "alto": true
+    },
+    {
+      "archivo": "ig_brunch.jpg",
+      "alt": {
+        "es": "Póster del Recovery Brunch: amigos brindando en la cantina los domingos desde las 10 AM",
+        "en": "Recovery Brunch poster: friends toasting at the cantina on Sundays from 10 AM"
+      },
+      "abajo": true,
+      "alto": true
+    },
+    {
+      "archivo": "ig_singing.jpg",
+      "alt": {
+        "es": "Amigas cantando y bailando con sombrero vaquero en la cantina",
+        "en": "Friends singing and dancing in cowboy hats at the cantina"
+      },
+      "abajo": true
+    },
+    {
+      "archivo": "jarrito.jpg",
+      "alt": {
+        "es": "Jarrito de barro con cara de charro y sombrero negro, servido con fruta",
+        "en": "Clay jarrito shaped like a charro in a black hat, served with fruit"
+      }
+    },
+    {
+      "archivo": "ig_neon.jpg",
+      "alt": {
+        "es": "La entrada de Sin Yolanda El Paso con el letrero de neón encendido",
+        "en": "The entrance of Sin Yolanda El Paso with its neon sign lit up"
+      },
+      "abajo": true
+    },
+    {
+      "archivo": "ig_green.jpg",
+      "alt": {
+        "es": "Invitada con vestido verde de flecos posando en el salón",
+        "en": "Guest in a green fringe dress posing in the main room"
+      },
+      "abajo": true
+    }
+  ]
+}

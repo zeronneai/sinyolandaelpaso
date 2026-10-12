@@ -1,0 +1,47 @@
+{
+  "_instrucciones": "Cartelera editable. Cada evento necesita: id, diaSemana (0 = domingo ... 6 = sábado), nombre, descripcion y horario en es/en, color (terracota, mostaza, chocolate, rosa o crema), icono (ojo, corazon, sombrero, micro, cantarito, sol) y ocasion (la que se preselecciona en reservas). Marca con \"ejemplo\": true lo que todavía no es real. Nunca uses guiones largos en los textos.",
+  "eventos": [
+    {
+      "id": "recovery-brunch",
+      "diaSemana": 0,
+      "nombre": { "es": "Recovery Brunch", "en": "Recovery Brunch" },
+      "descripcion": {
+        "es": "Reponte de la de ayer. Prepárate para la que sigue.",
+        "en": "Recover from last night. Get ready for the next one."
+      },
+      "horario": { "es": "Desde las 10 AM", "en": "From 10 AM" },
+      "color": "mostaza",
+      "icono": "corazon",
+      "ocasion": "recovery-brunch",
+      "ejemplo": false
+    },
+    {
+      "id": "noche-de-juanga",
+      "diaSemana": 4,
+      "nombre": { "es": "Noche de Juanga", "en": "Juanga Night" },
+      "descripcion": {
+        "es": "Puro Divo de Juárez de principio a fin. Si te sabes \"Querida\" completa, la primera ronda va por la casa.",
+        "en": "Nothing but the Divo de Juárez, start to finish. Know all of \"Querida\" by heart? First round's on us."
+      },
+      "horario": { "es": "Desde las 8 PM", "en": "From 8 PM" },
+      "color": "rosa",
+      "icono": "micro",
+      "ocasion": "cantar",
+      "ejemplo": true
+    },
+    {
+      "id": "despecho-sin-llorar",
+      "diaSemana": 5,
+      "nombre": { "es": "Despecho sin llorar", "en": "Heartbreak, No Tears" },
+      "descripcion": {
+        "es": "Karaoke de ardidos. Aquí el que llora paga la siguiente, así que mejor cántale.",
+        "en": "Karaoke for the brokenhearted. Whoever cries buys the next round, so sing it out instead."
+      },
+      "horario": { "es": "Desde las 9 PM", "en": "From 9 PM" },
+      "color": "chocolate",
+      "icono": "ojo",
+      "ocasion": "cantar",
+      "ejemplo": true
+    }
+  ]
+}

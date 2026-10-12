@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sin Yolanda El Paso | Cantina mexicana y bar de despecho</title>
+  <meta name="description" content="Sin Yolanda El Paso: el bar de despecho y cantina mexicana en Vin Rambla. Karaoke, cantaritos, quesabirria y Recovery Brunch los domingos. Aparta tu mesa.">
+  <meta name="theme-color" content="#C4502A">
+  <link rel="canonical" href="https://sinyolandaelpaso.com/">
+  <link rel="alternate" hreflang="es" href="https://sinyolandaelpaso.com/">
+  <link rel="alternate" hreflang="en" href="https://sinyolandaelpaso.com/en/">
+  <link rel="alternate" hreflang="x-default" href="https://sinyolandaelpaso.com/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- La cortina sale una vez por sesión y nunca con prefers-reduced-motion.
+       Se decide antes de pintar para que no parpadee. Sin JS no hay cortina. -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!reducido && !sessionStorage.getItem('sy-cortina')) d.classList.add('con-cortina');
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <script type="module" src="/src/js/main.js"></script>
+</head>
+<body>
+  <!-- @iconos -->
+
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <!-- ============ CORTINA ============ -->
+  <div class="cortina" id="cortina" role="dialog" aria-modal="true" aria-label="Bienvenida a Sin Yolanda El Paso">
+    <div class="cortina__rodillo" aria-hidden="true"></div>
+    <div class="cortina__panel">
+      <div class="cortina__lamina" aria-hidden="true"></div>
+
+      <div class="grafiti" aria-hidden="true">
+        <div class="grafiti__lienzo">
+          <div class="grafiti__pintura">
+            <span class="grafiti__logo"></span>
+          </div>
+          <span class="escurrido" style="--x:9%;--y:66%;--l:46px;--w:5px;--d:.1s"></span>
+          <span class="escurrido" style="--x:29%;--y:93%;--l:64px;--w:6px;--d:.35s"></span>
+          <span class="escurrido" style="--x:41%;--y:46%;--l:38px;--w:4px;--d:.2s"></span>
+          <span class="escurrido" style="--x:47.5%;--y:94%;--l:82px;--w:6px;--d:.5s"></span>
+          <span class="escurrido" style="--x:65%;--y:93%;--l:52px;--w:5px;--d:.15s"></span>
+          <span class="escurrido" style="--x:72%;--y:50%;--l:34px;--w:4px;--d:.6s"></span>
+          <span class="escurrido" style="--x:93%;--y:72%;--l:58px;--w:5px;--d:.3s"></span>
+        </div>
+        <span class="grafiti__boquilla"></span>
+        <p class="tag tag--raje">¡No se raje!</p>
+        <p class="tag tag--chuco">El Chuco <span>♥</span></p>
+        <svg class="tag tag--ojo"><use href="#i-ojo"/></svg>
+      </div>
+
+      <button type="button" class="cortina__jalar" id="cortina-jalar">
+        <span aria-hidden="true">↑</span> Jálale a la cortina <span aria-hidden="true">↑</span>
+      </button>
+
+      <div class="cortina__barra" aria-hidden="true">
+        <span class="cortina__manija"></span>
+        <span class="cortina__chapa"></span>
+        <span class="cortina__manija"></span>
+      </div>
+    </div>
+    <button type="button" class="cortina__saltar" id="cortina-saltar">Saltar</button>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#inicio" aria-label="Sin Yolanda El Paso, inicio">
+        <span class="logo" aria-hidden="true"></span>
+      </a>
+      <nav class="nav__menu" id="nav-menu" aria-label="Principal">
+        <ul class="nav__links">
+          <li><a href="#reservas">Reservas</a></li>
+          <li><a href="#cartelera">Cartelera</a></li>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#paquetes">Paquetes</a></li>
+          <li><a href="#ubicacion">Ubicación</a></li>
+        </ul>
+        <p class="nav__idioma">
+          <a href="/" aria-current="page" lang="es" hreflang="es">ES</a>
+          <span aria-hidden="true">/</span>
+          <a href="/en/" lang="en" hreflang="en"><span class="sr-only">English version: </span>EN</a>
+        </p>
+      </nav>
+      <a class="btn btn--mostaza nav__cta" href="#reservas">Aparta tu mesa</a>
+      <button type="button" class="nav__burger" id="nav-burger" aria-expanded="false" aria-controls="nav-menu">
+        <span class="sr-only">Menú de navegación</span>
+        <span class="nav__burger-lineas" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+      <div class="hero__sol" aria-hidden="true"></div>
+
+      <svg class="papel-picado" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
+        <defs>
+          <mask id="pp-recorte" maskContentUnits="objectBoundingBox">
+            <rect width="1" height="1" fill="#fff"/>
+            <path d="M.5 .2l.08 .1-.08 .1-.08-.1zM.22 .5a.06 .05 0 1 0 .001 0zM.78 .5a.06 .05 0 1 0 .001 0zM.5 .5l.13 .16-.13 .16-.13-.16z" fill="#000"/>
+            <path d="M.14 .14h.14v.04h-.14zM.72 .14h.14v.04h-.14zM.3 .74l.05 .06-.05 .06-.05-.06zM.7 .74l.05 .06-.05 .06-.05-.06z" fill="#000"/>
+          </mask>
+          <path id="pp-bandera" d="M0 0h80v78l-6.7 8-6.6-8-6.7 8-6.7-8-6.6 8-6.7-8-6.7 8-6.6-8-6.7 8-6.7-8-6.6 8L0 78z" mask="url(#pp-recorte)"/>
+        </defs>
+        <path class="papel-picado__hilo" d="M-20 6 Q600 26 1220 6" fill="none"/>
+        <g class="papel-picado__fila">
+          <use href="#pp-bandera" class="bandera" x="10" y="8" fill="var(--mostaza)" style="--d:0s"/>
+          <use href="#pp-bandera" class="bandera" x="110" y="12" fill="var(--crema)" style="--d:-.6s"/>
+          <use href="#pp-bandera" class="bandera" x="210" y="15" fill="var(--rosa)" style="--d:-1.2s"/>
+          <use href="#pp-bandera" class="bandera" x="310" y="17" fill="var(--chocolate)" style="--d:-.3s"/>
+          <use href="#pp-bandera" class="bandera" x="410" y="18" fill="var(--mostaza)" style="--d:-1.6s"/>
+          <use href="#pp-bandera" class="bandera" x="510" y="19" fill="var(--crema)" style="--d:-.9s"/>
+          <use href="#pp-bandera" class="bandera" x="610" y="19" fill="var(--rosa)" style="--d:-2s"/>
+          <use href="#pp-bandera" class="bandera" x="710" y="18" fill="var(--chocolate)" style="--d:-.4s"/>
+          <use href="#pp-bandera" class="bandera" x="810" y="17" fill="var(--mostaza)" style="--d:-1.4s"/>
+          <use href="#pp-bandera" class="bandera" x="910" y="15" fill="var(--crema)" style="--d:-.7s"/>
+          <use href="#pp-bandera" class="bandera" x="1010" y="12" fill="var(--rosa)" style="--d:-1.8s"/>
+          <use href="#pp-bandera" class="bandera" x="1110" y="8" fill="var(--chocolate)" style="--d:-1s"/>
+        </g>
+      </svg>
+
+      <div class="hero__contenido">
+        <svg class="hero__corazon" aria-hidden="true"><use href="#i-corazon"/></svg>
+        <span class="logo hero__logo" role="img" aria-label="Sin Yolanda, El Paso, Texas"></span>
+        <h1 class="hero__titulo" id="hero-titulo">
+          <span>Aquí no se llora,</span>
+          <strong>aquí se canta.</strong>
+        </h1>
+        <p class="hero__sub">Cantina mexicana y bar de despecho en Vin Rambla. Micrófono abierto, cantaritos bien helados y cero lágrimas.</p>
+        <div class="hero__botones">
+          <a class="btn btn--mostaza btn--grande" href="#reservas">Aparta tu mesa</a>
+          <a class="btn btn--linea btn--grande" href="#cartelera">Ver la cartelera</a>
+        </div>
+      </div>
+
+      <div class="cinta" aria-label="¡Cáile! No se raje. ¡Ajúa! Salud, dinero y amor. Esto se va a prender. ¡Ándale!" role="img">
+        <div class="cinta__pista" aria-hidden="true">
+          <p class="cinta__texto">¡Cáile! <svg><use href="#i-destello"/></svg> No se raje <svg><use href="#i-destello"/></svg> ¡Ajúa! <svg><use href="#i-destello"/></svg> Salud, dinero y amor <svg><use href="#i-destello"/></svg> Esto se va a prender <svg><use href="#i-destello"/></svg> ¡Ándale! <svg><use href="#i-destello"/></svg></p>
+          <p class="cinta__texto">¡Cáile! <svg><use href="#i-destello"/></svg> No se raje <svg><use href="#i-destello"/></svg> ¡Ajúa! <svg><use href="#i-destello"/></svg> Salud, dinero y amor <svg><use href="#i-destello"/></svg> Esto se va a prender <svg><use href="#i-destello"/></svg> ¡Ándale! <svg><use href="#i-destello"/></svg></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CARTELERA ============ -->
+    <section class="seccion cartelera" id="cartelera" aria-labelledby="cartelera-titulo">
+      <div class="contenedor">
+        <header class="seccion__cabeza" data-entra>
+          <p class="eyebrow">Toda la semana</p>
+          <h2 class="titulo" id="cartelera-titulo">La cartelera del despecho</h2>
+          <p class="nota">Escoge tu noche. Nosotros ponemos el micro, tú pones el sentimiento.</p>
+        </header>
+        <ul class="cartelera__lista" role="list" data-entra-grupo>
+          <!-- @eventos -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PAQUETES ============ -->
+    <section class="seccion paquetes" id="paquetes" aria-labelledby="paquetes-titulo">
+      <div class="contenedor">
+        <header class="seccion__cabeza" data-entra>
+          <p class="eyebrow">Paquetes por ocasión</p>
+          <h2 class="titulo" id="paquetes-titulo">Aquí se celebra todo</h2>
+          <p class="nota">Lo bueno, lo malo y lo que firmaste ante notario.</p>
+        </header>
+        <ul class="paquetes__lista" role="list" data-entra-grupo>
+          <li class="paquete">
+            <svg class="paquete__icono" aria-hidden="true"><use href="#i-corazon"/></svg>
+            <h3 class="paquete__titulo">Despedida de soltera</h3>
+            <p class="paquete__copy">La última noche de soltera se canta a todo pulmón. Nosotros ponemos el micro, ustedes el escándalo.</p>
+            <a class="btn btn--chocolate paquete__btn" href="#reservas" data-reservar data-ocasion="despedida">Cotizar / Apartar<span class="sr-only">: despedida de soltera</span></a>
+          </li>
+          <li class="paquete paquete--rosa">
+            <svg class="paquete__icono" aria-hidden="true"><use href="#i-ojo"/></svg>
+            <h3 class="paquete__titulo">Fiesta de divorcio</h3>
+            <p class="paquete__lema">Recién soltera, recién soltero.</p>
+            <p class="paquete__copy">Firmaste los papeles, ahora firma el karaoke. La libertad se brinda con tequila.</p>
+            <a class="btn btn--chocolate paquete__btn" href="#reservas" data-reservar data-ocasion="divorcio">Cotizar / Apartar<span class="sr-only">: fiesta de divorcio</span></a>
+          </li>
+          <li class="paquete paquete--mostaza">
+            <svg class="paquete__icono" aria-hidden="true"><use href="#i-cantarito"/></svg>
+            <h3 class="paquete__titulo">Cumpleaños</h3>
+            <p class="paquete__copy">Un año más y ni una lágrima. Cantaritos, pastel y Las Mañanitas versión cantina.</p>
+            <a class="btn btn--chocolate paquete__btn" href="#reservas" data-reservar data-ocasion="cumpleanos">Cotizar / Apartar<span class="sr-only">: cumpleaños</span></a>
+          </li>
+          <li class="paquete paquete--crema">
+            <svg class="paquete__icono" aria-hidden="true"><use href="#i-sol"/></svg>
+            <h3 class="paquete__titulo">Recovery Brunch para grupos</h3>
+            <p class="paquete__copy">Para la banda que sobrevivió al sábado. Mesa larga, cantaritos y cero juicios. Domingos desde las 10 AM.</p>
+            <a class="btn btn--chocolate paquete__btn" href="#reservas" data-reservar data-dia="0" data-ocasion="recovery-brunch">Cotizar / Apartar<span class="sr-only">: Recovery Brunch para grupos</span></a>
+          </li>
+          <li class="paquete paquete--chocolate paquete--ancho">
+            <svg class="paquete__icono" aria-hidden="true"><use href="#i-micro"/></svg>
+            <p class="paquete__para">Para empresas · Diciembre</p>
+            <h3 class="paquete__titulo">Posada con despecho</h3>
+            <p class="paquete__copy">La posada de la oficina, pero con sentimiento. Grupo grande, menú para compartir y <strong>El Micrófono incluido</strong>, para que hasta el jefe se avente su canción.</p>
+            <a class="btn btn--mostaza paquete__btn" href="#reservas" data-reservar data-ocasion="posada">Cotizar / Apartar<span class="sr-only">: posada con despecho</span></a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ RESERVAS (el formulario llega en la Fase 2) ============ -->
+    <section class="seccion reservas" id="reservas" aria-labelledby="reservas-titulo">
+      <div class="contenedor contenedor--angosto">
+        <header class="seccion__cabeza" data-entra>
+          <p class="eyebrow">Reservaciones</p>
+          <h2 class="titulo" id="reservas-titulo">Aparta tu mesa</h2>
+          <p class="nota">Tres toques y el micrófono ya es tuyo.</p>
+        </header>
+        <div class="reservas__tarjeta" id="reservas-app">
+          <p class="reservas__provisional">Muy pronto vas a poder apartar aquí mismo. Mientras, cáile por OpenTable.</p>
+          <a class="btn btn--mostaza btn--grande" href="https://www.opentable.com/r/sin-yolanda-el-paso" target="_blank" rel="noopener">Reservar en OpenTable</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MENÚ ============ -->
+    <section class="seccion menu" id="menu" aria-labelledby="menu-titulo">
+      <div class="contenedor">
+        <header class="seccion__cabeza" data-entra>
+          <p class="eyebrow">La carta</p>
+          <h2 class="titulo" id="menu-titulo">Pa' picar, pa' brindar y pa' olvidar</h2>
+          <p class="nota">Elotitos, quesabirria, cantaritos y coctelería de autor. Cada cóctel de la casa lleva nombre de canción de despecho.</p>
+        </header>
+        <!-- @menu -->
+      </div>
+    </section>
+
+    <!-- ============ ¿POR QUÉ SIN YOLANDA? ============ -->
+    <section class="seccion porque" id="por-que" aria-labelledby="porque-titulo">
+      <div class="contenedor contenedor--angosto" data-entra>
+        <svg class="porque__ojo" aria-hidden="true"><use href="#i-ojo"/></svg>
+        <h2 class="porque__titulo" id="porque-titulo">¿Y por qué se llama Sin Yolanda?</h2>
+        <p class="porque__texto">Ven a la cantina y te lo contamos... con un tequila en la mano.</p>
+      </div>
+    </section>
+
+    <!-- ============ GALERÍA ============ -->
+    <section class="seccion galeria" id="galeria" aria-labelledby="galeria-titulo">
+      <div class="contenedor">
+        <header class="seccion__cabeza" data-entra>
+          <p class="eyebrow">Así se pone</p>
+          <h2 class="titulo" id="galeria-titulo">Lo que pasa en Sin Yolanda...</h2>
+          <p class="nota">...se sube a Instagram.</p>
+        </header>
+        <ul class="galeria__grid" role="list" data-entra-grupo>
+          <!-- @galeria -->
+        </ul>
+        <p class="galeria__cta">
+          <a class="btn btn--mostaza btn--grande" href="https://www.instagram.com/sinyolandaelpaso/" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-instagram"/></svg> Síguenos en @sinyolandaelpaso
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ UBICACIÓN Y HORARIO ============ -->
+    <section class="seccion ubicacion" id="ubicacion" aria-labelledby="ubicacion-titulo">
+      <div class="contenedor ubicacion__grid">
+        <div class="ubicacion__info" data-entra>
+          <p class="eyebrow">Aquí en El Chuco</p>
+          <h2 class="titulo" id="ubicacion-titulo">¿Dónde es el despecho?</h2>
+          <address class="ubicacion__direccion">
+            <svg aria-hidden="true"><use href="#i-pin"/></svg>
+            <span>340 Vin Rambla Dr<br>El Paso, TX</span>
+          </address>
+
+          <p class="estado" id="estado-apertura" aria-live="polite" hidden>
+            <span class="estado__punto" aria-hidden="true"></span>
+            <span class="estado__texto"></span>
+          </p>
+
+          <table class="horario">
+            <caption class="sr-only">Horario de Sin Yolanda El Paso</caption>
+            <tbody>
+              <!-- @horario -->
+            </tbody>
+          </table>
+
+          <div class="ubicacion__botones">
+            <a class="btn btn--mostaza btn--grande" href="https://www.google.com/maps/dir/?api=1&amp;destination=340+Vin+Rambla+Dr+El+Paso+TX" target="_blank" rel="noopener">Cómo llegar</a>
+            <a class="btn btn--linea btn--grande" href="#reservas">Aparta tu mesa</a>
+          </div>
+        </div>
+        <div class="ubicacion__mapa" data-entra>
+          <iframe
+            title="Mapa: Sin Yolanda El Paso, 340 Vin Rambla Dr"
+            src="https://www.google.com/maps?q=Sin+Yolanda,+340+Vin+Rambla+Dr,+El+Paso,+TX&amp;output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="seccion faq" id="faq" aria-labelledby="faq-titulo">
+      <div class="contenedor contenedor--angosto">
+        <header class="seccion__cabeza" data-entra>
+          <p class="eyebrow">Antes de venir</p>
+          <h2 class="titulo" id="faq-titulo">Preguntas frecuentes</h2>
+        </header>
+        <div class="faq__lista" data-entra-grupo>
+          <details class="faq__item">
+            <summary>¿Hay estacionamiento?</summary>
+            <p>Sí, hay estacionamiento gratis en la plaza, frente a la cantina. <!-- @borrador --></p>
+          </details>
+          <details class="faq__item">
+            <summary>¿Hay código de vestimenta?</summary>
+            <p>Casual con actitud. Botas, sombrero y lentejuelas siempre son bienvenidos. <!-- @borrador --></p>
+          </details>
+          <details class="faq__item">
+            <summary>¿Puedo venir con un grupo grande?</summary>
+            <p>¡Claro! Si son más de 12, aparta con tiempo y te contactamos para armarlo bien. Para despedidas, cumpleaños o posadas, checa los paquetes. <!-- @borrador --></p>
+          </details>
+          <details class="faq__item">
+            <summary>¿Pueden entrar menores de edad?</summary>
+            <p>En el Recovery Brunch, acompañados de un adulto. En la noche la cantina es solo para mayores de 21. <!-- @borrador --></p>
+          </details>
+          <details class="faq__item">
+            <summary>¿Puedo llegar sin reservación?</summary>
+            <p>Cáile, siempre tratamos de hacerte un lugar. Pero los fines de semana esto se llena, así que mejor aparta tu mesa. <!-- @borrador --></p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="contenedor footer__grid">
+      <div class="footer__marca">
+        <span class="logo footer__logo" role="img" aria-label="Sin Yolanda, El Paso, Texas"></span>
+        <p class="footer__lema">Salud, dinero y amor.</p>
+      </div>
+      <div>
+        <h2 class="footer__titulo">Visítanos</h2>
+        <address>340 Vin Rambla Dr<br>El Paso, TX</address>
+        <p><a href="https://www.google.com/maps/dir/?api=1&amp;destination=340+Vin+Rambla+Dr+El+Paso+TX" target="_blank" rel="noopener">Cómo llegar</a></p>
+      </div>
+      <div>
+        <h2 class="footer__titulo">Horario</h2>
+        <table class="horario horario--compacto">
+          <caption class="sr-only">Horario</caption>
+          <tbody>
+            <!-- @horario -->
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h2 class="footer__titulo">Síguenos</h2>
+        <ul class="footer__redes" role="list">
+          <li><a href="https://www.instagram.com/sinyolandaelpaso/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-instagram"/></svg> Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@sinyolandaelpaso" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-tiktok"/></svg> TikTok</a></li>
+        </ul>
+        <p class="footer__opentable">¿Prefieres OpenTable? <a href="https://www.opentable.com/r/sin-yolanda-el-paso" target="_blank" rel="noopener">Reserva ahí</a>.</p>
+      </div>
+    </div>
+
+    <div class="contenedor">
+      <details class="footer__privacidad" id="aviso-privacidad">
+        <summary>Aviso de privacidad</summary>
+        <p>Los datos que nos compartes al apartar (nombre, correo, teléfono y detalles de tu visita) solo se usan para confirmar y atender tu reservación. No los vendemos ni los compartimos con terceros. Si quieres que los borremos, escríbenos por Instagram o al correo de la sucursal. <!-- @borrador --></p>
+      </details>
+    </div>
+
+    <div class="contenedor footer__base">
+      <p>© 2026 Sin Yolanda El Paso. Tómatela con calma, pero tómatela.</p>
+      <a class="footer__credito" href="https://purpleroots.agency" target="_blank" rel="noopener">
+        Sitio por Purple Roots Agency
+        <span class="logo-pr" aria-hidden="true"></span>
+      </a>
+    </div>
+  </footer>
+</body>
+</html>
