@@ -1,57 +1,118 @@
 {
-  "_instrucciones": "Menú editable. Cada platillo lleva nombre y descripcion en es/en y precio (número o null). \"pendiente\": true muestra \"Próximamente en el menú\". \"propuesta\": true marca ideas de Purple Roots que el cliente aún no aprueba. Nunca uses guiones largos en los textos.",
+  "_instrucciones": "Menú editable. Cada platillo lleva nombre y descripcion en es/en y precio (número o null). \"pendiente\": true muestra \"Próximamente en el menú\". \"propuesta\": true marca ideas de Purple Roots que el cliente aún no aprueba. Nunca uses guiones largos en los textos. \"foto\" (opcional) es la ruta de una imagen para el menú digital de /mesa/. \"top\": true lo pone en \"Lo más pedido\".",
   "categorias": [
     {
       "id": "para-picar",
-      "nombre": { "es": "Para picar", "en": "To share" },
+      "nombre": {
+        "es": "Para picar",
+        "en": "To share"
+      },
       "platillos": [
         {
-          "nombre": { "es": "Elotitos", "en": "Elotitos" },
+          "nombre": {
+            "es": "Elotitos",
+            "en": "Elotitos"
+          },
           "descripcion": {
             "es": "Elote desgranado con mayo, queso, chile y limón. El clásico de la feria, versión cantina.",
             "en": "Street corn off the cob with mayo, cheese, chile and lime. A fair classic, cantina style."
           },
-          "precio": null
+          "precio": null,
+          "top": true
         },
-        { "nombre": { "es": "Más botanas", "en": "More snacks" }, "descripcion": { "es": "", "en": "" }, "precio": null, "pendiente": true }
+        {
+          "nombre": {
+            "es": "Más botanas",
+            "en": "More snacks"
+          },
+          "descripcion": {
+            "es": "",
+            "en": ""
+          },
+          "precio": null,
+          "pendiente": true
+        }
       ]
     },
     {
       "id": "platos-fuertes",
-      "nombre": { "es": "Platos fuertes", "en": "Mains" },
+      "nombre": {
+        "es": "Platos fuertes",
+        "en": "Mains"
+      },
       "platillos": [
         {
-          "nombre": { "es": "Quesabirria", "en": "Quesabirria" },
+          "nombre": {
+            "es": "Quesabirria",
+            "en": "Quesabirria"
+          },
           "descripcion": {
             "es": "Tortilla dorada con queso derretido y birria, con su consomé para chopear.",
             "en": "Crispy tortilla with melted cheese and birria, plus consomé for dipping."
           },
-          "precio": null
+          "precio": null,
+          "top": true
         },
-        { "nombre": { "es": "Más platos fuertes", "en": "More mains" }, "descripcion": { "es": "", "en": "" }, "precio": null, "pendiente": true }
+        {
+          "nombre": {
+            "es": "Más platos fuertes",
+            "en": "More mains"
+          },
+          "descripcion": {
+            "es": "",
+            "en": ""
+          },
+          "precio": null,
+          "pendiente": true
+        }
       ]
     },
     {
       "id": "mariscos",
-      "nombre": { "es": "Mariscos", "en": "Seafood" },
+      "nombre": {
+        "es": "Mariscos",
+        "en": "Seafood"
+      },
       "platillos": [
-        { "nombre": { "es": "Mariscos", "en": "Seafood" }, "descripcion": { "es": "", "en": "" }, "precio": null, "pendiente": true }
+        {
+          "nombre": {
+            "es": "Mariscos",
+            "en": "Seafood"
+          },
+          "descripcion": {
+            "es": "",
+            "en": ""
+          },
+          "precio": null,
+          "pendiente": true
+        }
       ]
     },
     {
       "id": "cocteles",
-      "nombre": { "es": "Cócteles de la casa", "en": "House cocktails" },
+      "nombre": {
+        "es": "Cócteles de la casa",
+        "en": "House cocktails"
+      },
       "platillos": [
         {
-          "nombre": { "es": "Cantaritos", "en": "Cantaritos" },
+          "nombre": {
+            "es": "Cantaritos",
+            "en": "Cantaritos"
+          },
           "descripcion": {
             "es": "En su jarrito de barro, con tequila, cítricos y refresco de toronja. Bien helado.",
             "en": "Served in a clay jarrito with tequila, citrus and grapefruit soda. Ice cold."
           },
-          "precio": null
+          "precio": null,
+          "foto": "/assets/fotos/jarrito.jpg",
+          "top": true
         },
         {
-          "nombre": { "es": "Coctelería de autor", "en": "Signature cocktails" },
+          "nombre": {
+            "es": "Coctelería de autor",
+            "en": "Signature cocktails"
+          },
           "descripcion": {
             "es": "Pregúntale a la barra por los de temporada.",
             "en": "Ask the bar about the seasonal ones."
@@ -59,16 +120,23 @@
           "precio": null
         },
         {
-          "nombre": { "es": "El Querida", "en": "El Querida" },
+          "nombre": {
+            "es": "El Querida",
+            "en": "El Querida"
+          },
           "descripcion": {
             "es": "Tequila blanco, jamaica, limón y escarchado de chile. Para cuando no te contestan.",
             "en": "Blanco tequila, hibiscus, lime and a chile rim. For when they won't text back."
           },
           "precio": null,
-          "propuesta": true
+          "propuesta": true,
+          "top": true
         },
         {
-          "nombre": { "es": "Se me olvidó otra vez", "en": "Se me olvidó otra vez" },
+          "nombre": {
+            "es": "Se me olvidó otra vez",
+            "en": "Se me olvidó otra vez"
+          },
           "descripcion": {
             "es": "Mezcal, toronja, romero y un toque de sal de gusano. Ni te acuerdas de quién.",
             "en": "Mezcal, grapefruit, rosemary and a pinch of worm salt. You won't even remember who."
@@ -77,7 +145,10 @@
           "propuesta": true
         },
         {
-          "nombre": { "es": "La Puerta Negra", "en": "La Puerta Negra" },
+          "nombre": {
+            "es": "La Puerta Negra",
+            "en": "La Puerta Negra"
+          },
           "descripcion": {
             "es": "Tequila reposado, café de olla y licor de cacao. Oscuro como la puerta que te cerraron.",
             "en": "Reposado tequila, café de olla and cacao liqueur. Dark as the door they shut on you."
@@ -86,7 +157,10 @@
           "propuesta": true
         },
         {
-          "nombre": { "es": "Paloma Negra", "en": "Paloma Negra" },
+          "nombre": {
+            "es": "Paloma Negra",
+            "en": "Paloma Negra"
+          },
           "descripcion": {
             "es": "Nuestra paloma con zarzamora y mezcal. Dulce al principio, amarga al final. Como siempre.",
             "en": "Our paloma with blackberry and mezcal. Sweet at first, bitter at the end. As usual."
@@ -95,7 +169,10 @@
           "propuesta": true
         },
         {
-          "nombre": { "es": "Mátalas", "en": "Mátalas" },
+          "nombre": {
+            "es": "Mátalas",
+            "en": "Mátalas"
+          },
           "descripcion": {
             "es": "Tequila, mango, chamoy y Tajín. Para salir a la pista sin pensarlo dos veces.",
             "en": "Tequila, mango, chamoy and Tajín. For hitting the dance floor without a second thought."
@@ -104,7 +181,10 @@
           "propuesta": true
         },
         {
-          "nombre": { "es": "Hasta que te conocí", "en": "Hasta que te conocí" },
+          "nombre": {
+            "es": "Hasta que te conocí",
+            "en": "Hasta que te conocí"
+          },
           "descripcion": {
             "es": "Mezcal, maracuyá, jengibre y chile. Todo iba bien hasta el primer trago.",
             "en": "Mezcal, passion fruit, ginger and chile. Everything was fine until the first sip."
@@ -116,16 +196,44 @@
     },
     {
       "id": "tequila-mezcal",
-      "nombre": { "es": "Tequila y mezcal", "en": "Tequila & mezcal" },
+      "nombre": {
+        "es": "Tequila y mezcal",
+        "en": "Tequila & mezcal"
+      },
       "platillos": [
-        { "nombre": { "es": "Tequila y mezcal", "en": "Tequila & mezcal" }, "descripcion": { "es": "", "en": "" }, "precio": null, "pendiente": true }
+        {
+          "nombre": {
+            "es": "Tequila y mezcal",
+            "en": "Tequila & mezcal"
+          },
+          "descripcion": {
+            "es": "",
+            "en": ""
+          },
+          "precio": null,
+          "pendiente": true
+        }
       ]
     },
     {
       "id": "sin-alcohol",
-      "nombre": { "es": "Sin alcohol", "en": "Zero proof" },
+      "nombre": {
+        "es": "Sin alcohol",
+        "en": "Zero proof"
+      },
       "platillos": [
-        { "nombre": { "es": "Sin alcohol", "en": "Zero proof" }, "descripcion": { "es": "", "en": "" }, "precio": null, "pendiente": true }
+        {
+          "nombre": {
+            "es": "Sin alcohol",
+            "en": "Zero proof"
+          },
+          "descripcion": {
+            "es": "",
+            "en": ""
+          },
+          "precio": null,
+          "pendiente": true
+        }
       ]
     }
   ]

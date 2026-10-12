@@ -45,17 +45,6 @@
 .progreso__barra span { display: block; height: 100%; background: var(--mostaza); transition: width .35s ease; }
 
 /* ---------- Pasos ---------- */
-.paso__titulo {
-  font-family: var(--f-titulo);
-  font-weight: 400;
-  text-transform: uppercase;
-  font-size: clamp(2rem, 9vw, 2.6rem);
-  line-height: 1;
-  color: var(--terracota);
-  text-shadow: 2px 2px 0 var(--chocolate);
-  margin-bottom: 14px;
-}
-.paso__titulo:focus { outline: none; }
 .paso__resumen { font-family: var(--f-maquina); margin: -6px 0 14px; }
 .paso__acciones {
   position: sticky;

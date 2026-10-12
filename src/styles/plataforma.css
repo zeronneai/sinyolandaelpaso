@@ -113,6 +113,19 @@ body.con-tabs .aviso-local { margin-bottom: 96px; }
   padding: 22px 16px 120px;
 }
 
+/* ---------- Títulos de sección ---------- */
+.paso__titulo {
+  font-family: var(--f-titulo);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 9vw, 2.6rem);
+  line-height: 1;
+  color: var(--terracota);
+  text-shadow: 2px 2px 0 var(--chocolate);
+  margin-bottom: 14px;
+}
+.paso__titulo:focus { outline: none; }
+
 /* ---------- Tarjetas ---------- */
 .tarjeta {
   background: #fff8ea;
