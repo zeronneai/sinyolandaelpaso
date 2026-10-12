@@ -1,24 +1,24 @@
-// El Despechómetro: quiz de 6 preguntas con resultado e imagen para story (1080x1920).
+// El Fiestómetro: quiz de 6 preguntas con resultado e imagen para story (1080x1920).
 
 import { $, esc, iniciarPlataforma } from './ui.js';
 
 iniciarPlataforma();
 
 const PREGUNTAS = [
-  ['¿Cuántas veces viste sus historias esta semana?', ['Ni una, ya ni me acuerdo', 'Una, por accidente', 'Todas, y en orden', 'Tengo su ubicación en tiempo real']],
-  ['¿Qué canción te representa hoy?', ['Mátalas', 'Se me olvidó otra vez', 'La Puerta Negra', 'Querida']],
-  ['Son las 2 AM y tienes su número a la mano. ¿Qué haces?', ['Duermo como bebé', 'Lo veo y lo bloqueo', 'Escribo y borro cinco veces', 'Le marco y le canto']],
-  ['¿Qué tienes todavía de esa persona?', ['Nada, quemé todo', 'Una foto escondida', 'Su sudadera, que todavía huele', 'Su contraseña de Netflix']],
-  ['Si entra por la puerta de Sin Yolanda...', ['Pido otra ronda, ni me inmuto', 'Me hago la interesante', 'Corro al micro con "Ya lo sé que tú te vas"', 'Lloro en el baño y luego canto']],
-  ['¿Cuánto tiempo ha pasado?', ['Años, ya ni sé', 'Unos meses', 'Semanas', 'Fue ayer']],
+  ['¿Cómo llegas a la fiesta?', ['Tranqui, a ver qué onda', 'Con ganas de una ronda', 'Con outfit y la bola completa', 'Con sombrero, botas y el micro en la mano']],
+  ['¿Qué canción te representa hoy?', ['Si nos dejan', 'Me gustas mucho', 'La Bikina', 'El Rey']],
+  ['Suena tu canción favorita. ¿Qué haces?', ['La tarareo en la mesa', 'Muevo los hombros', 'Me paro a bailar', 'Me subo al escenario sin pedir permiso']],
+  ['¿Qué pides primero?', ['Un agua mineral', 'Una cerveza', 'Un cantarito', 'La botella para la mesa']],
+  ['¿A qué hora te vas?', ['Antes de las 10', 'A medianoche, después del brindis', 'Cuando prenden las luces', 'Me tienen que sacar']],
+  ['¿Cómo termina tu noche?', ['En mi camita', 'Con unos tacos', 'Con fotos para la story', 'Siendo leyenda de Sin Yolanda']],
 ];
 
 const NIVELES = [
-  { max: 3, n: 1, titulo: 'Ya lo superaste, compa', frase: 'Vienes a cantar por puro gusto. Así da gusto.', receta: 'Mátalas y un cantarito para celebrar.' },
-  { max: 7, n: 2, titulo: 'Ardido, pero con dignidad', frase: 'Duele tantito, pero lo disimulas bien.', receta: 'Si nos dejan y una Paloma Negra.' },
-  { max: 11, n: 3, titulo: 'José Alfredo en la cantina', frase: 'Ya traes la voz quebrada y el tequila en la mano.', receta: 'El Rey y un mezcal derecho.' },
-  { max: 15, n: 4, titulo: 'Juan Gabriel en Bellas Artes', frase: 'Esto ya es arte. Que te escuche todo El Chuco.', receta: 'Querida y un cantarito doble.' },
-  { max: 18, n: 5, titulo: 'Rocío Dúrcal cantando Amor Eterno', frase: 'Nivel máximo. Pide el micro y que alguien te sostenga.', receta: 'Amor eterno y la botella completa.' },
+  { max: 3, n: 1, titulo: 'Calentando motores', frase: 'Vienes tranqui, pero la noche apenas empieza.', receta: 'Si nos dejan y un cantarito para arrancar.' },
+  { max: 7, n: 2, titulo: 'Ya se te subió el ritmo', frase: 'Los hombros ya se están moviendo solos.', receta: 'Me gustas mucho y una ronda para la mesa.' },
+  { max: 11, n: 3, titulo: 'Alma de la fiesta', frase: 'Donde llegas, se prende. Así de simple.', receta: 'La Bikina y un Mátalas.' },
+  { max: 15, n: 4, titulo: 'Juan Gabriel en Bellas Artes', frase: 'Esto ya es arte. Que te escuche todo El Chuco.', receta: 'El Noa Noa y un cantarito doble.' },
+  { max: 18, n: 5, titulo: 'Dueño del micro', frase: 'Nivel máximo. Tú no vienes a la fiesta: tú eres la fiesta.', receta: 'El Rey y la botella completa.' },
 ];
 
 const mesa = new URLSearchParams(location.search).get('mesa');
@@ -59,7 +59,7 @@ function mostrarResultado() {
   r.hidden = false;
   r.innerHTML = `
     <div class="resultado">
-      <p class="resultado__eti">Tu nivel de despecho</p>
+      <p class="resultado__eti">Tu nivel de fiesta</p>
       <p class="resultado__nivel">Nivel ${n.n}</p>
       <div class="medidor" role="img" aria-label="Nivel ${n.n} de 5">${[1, 2, 3, 4, 5].map((k) => `<span class="${k <= n.n ? 'lleno' : ''}">♥</span>`).join('')}</div>
       <h2 class="resultado__titulo">${esc(n.titulo)}</h2>
@@ -169,7 +169,7 @@ export async function storyPNG(n) {
   x.textAlign = 'center';
   x.fillStyle = '#FBF1DD';
   x.font = '64px "Bebas Neue"';
-  x.fillText('MI NIVEL DE DESPECHO', W / 2, 640);
+  x.fillText('MI NIVEL DE FIESTA', W / 2, 640);
 
   // Nivel gigante con sombra
   x.font = '300px Anton';
@@ -203,7 +203,7 @@ export async function storyPNG(n) {
   x.fillText('@SINYOLANDAELPASO', W / 2, H - 160);
   x.fillStyle = '#FBF1DD';
   x.font = '40px "Bebas Neue"';
-  x.fillText('HAZ EL TUYO EN SINYOLANDAELPASO.COM/DESPECHOMETRO', W / 2, H - 95);
+  x.fillText('HAZ EL TUYO EN SINYOLANDAELPASO.COM/FIESTOMETRO', W / 2, H - 95);
 
   return new Promise((ok) => c.toBlob(ok, 'image/png'));
 }
@@ -213,12 +213,12 @@ async function compartirStory(n) {
   btn.disabled = true;
   btn.textContent = 'Armando tu story...';
   const blob = await storyPNG(n);
-  const archivo = new File([blob], `despechometro-nivel-${n.n}.png`, { type: 'image/png' });
+  const archivo = new File([blob], `fiestometro-nivel-${n.n}.png`, { type: 'image/png' });
   btn.disabled = false;
   btn.textContent = 'Descargar para mi story';
   if (navigator.canShare?.({ files: [archivo] })) {
     try {
-      await navigator.share({ files: [archivo], title: 'Mi nivel de despecho', text: 'Etiqueta a @sinyolandaelpaso' });
+      await navigator.share({ files: [archivo], title: 'Mi nivel de fiesta', text: 'Etiqueta a @sinyolandaelpaso' });
       return;
     } catch (e) {
       if (e.name === 'AbortError') return;

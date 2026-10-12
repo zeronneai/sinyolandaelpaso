@@ -121,12 +121,12 @@
         },
         {
           "nombre": {
-            "es": "El Querida",
-            "en": "El Querida"
+            "es": "El Rey",
+            "en": "El Rey"
           },
           "descripcion": {
-            "es": "Tequila blanco, jamaica, limón y escarchado de chile. Para cuando no te contestan.",
-            "en": "Blanco tequila, hibiscus, lime and a chile rim. For when they won't text back."
+            "es": "Tequila reposado, naranja, piloncillo y canela. Para el que llega y manda.",
+            "en": "Reposado tequila, orange, piloncillo and cinnamon. For whoever walks in and runs the place."
           },
           "precio": null,
           "propuesta": true,
@@ -134,36 +134,12 @@
         },
         {
           "nombre": {
-            "es": "Se me olvidó otra vez",
-            "en": "Se me olvidó otra vez"
+            "es": "La Bikina",
+            "en": "La Bikina"
           },
           "descripcion": {
-            "es": "Mezcal, toronja, romero y un toque de sal de gusano. Ni te acuerdas de quién.",
-            "en": "Mezcal, grapefruit, rosemary and a pinch of worm salt. You won't even remember who."
-          },
-          "precio": null,
-          "propuesta": true
-        },
-        {
-          "nombre": {
-            "es": "La Puerta Negra",
-            "en": "La Puerta Negra"
-          },
-          "descripcion": {
-            "es": "Tequila reposado, café de olla y licor de cacao. Oscuro como la puerta que te cerraron.",
-            "en": "Reposado tequila, café de olla and cacao liqueur. Dark as the door they shut on you."
-          },
-          "precio": null,
-          "propuesta": true
-        },
-        {
-          "nombre": {
-            "es": "Paloma Negra",
-            "en": "Paloma Negra"
-          },
-          "descripcion": {
-            "es": "Nuestra paloma con zarzamora y mezcal. Dulce al principio, amarga al final. Como siempre.",
-            "en": "Our paloma with blackberry and mezcal. Sweet at first, bitter at the end. As usual."
+            "es": "Mezcal, toronja, romero y un toque de sal de gusano. Altiva y bien plantada.",
+            "en": "Mezcal, grapefruit, rosemary and a pinch of worm salt. Proud and standing tall."
           },
           "precio": null,
           "propuesta": true
@@ -182,12 +158,36 @@
         },
         {
           "nombre": {
-            "es": "Hasta que te conocí",
-            "en": "Hasta que te conocí"
+            "es": "La Negra",
+            "en": "La Negra"
           },
           "descripcion": {
-            "es": "Mezcal, maracuyá, jengibre y chile. Todo iba bien hasta el primer trago.",
-            "en": "Mezcal, passion fruit, ginger and chile. Everything was fine until the first sip."
+            "es": "Tequila reposado, café de olla y licor de cacao. Pa' que suene el mariachi.",
+            "en": "Reposado tequila, café de olla and cacao liqueur. Cue the mariachi."
+          },
+          "precio": null,
+          "propuesta": true
+        },
+        {
+          "nombre": {
+            "es": "Me gustas mucho",
+            "en": "Me gustas mucho"
+          },
+          "descripcion": {
+            "es": "Tequila blanco, jamaica, limón y escarchado de chile. Para brindar con tu bola.",
+            "en": "Blanco tequila, hibiscus, lime and a chile rim. For toasting with your crew."
+          },
+          "precio": null,
+          "propuesta": true
+        },
+        {
+          "nombre": {
+            "es": "El Sinaloense",
+            "en": "El Sinaloense"
+          },
+          "descripcion": {
+            "es": "Nuestra paloma con zarzamora y mezcal. Pa' bailar hasta que cierren.",
+            "en": "Our paloma with blackberry and mezcal. Dance till closing time."
           },
           "precio": null,
           "propuesta": true

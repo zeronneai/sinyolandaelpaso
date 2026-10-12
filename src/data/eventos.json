@@ -4,12 +4,18 @@
     {
       "id": "recovery-brunch",
       "diaSemana": 0,
-      "nombre": { "es": "Recovery Brunch", "en": "Recovery Brunch" },
+      "nombre": {
+        "es": "Recovery Brunch",
+        "en": "Recovery Brunch"
+      },
       "descripcion": {
         "es": "Reponte de la de ayer. Prepárate para la que sigue.",
         "en": "Recover from last night. Get ready for the next one."
       },
-      "horario": { "es": "Desde las 10 AM", "en": "From 10 AM" },
+      "horario": {
+        "es": "Desde las 10 AM",
+        "en": "From 10 AM"
+      },
       "color": "mostaza",
       "icono": "corazon",
       "ocasion": "recovery-brunch",
@@ -18,29 +24,41 @@
     {
       "id": "noche-de-juanga",
       "diaSemana": 4,
-      "nombre": { "es": "Noche de Juanga", "en": "Juanga Night" },
-      "descripcion": {
-        "es": "Puro Divo de Juárez de principio a fin. Si te sabes \"Querida\" completa, la primera ronda va por la casa.",
-        "en": "Nothing but the Divo de Juárez, start to finish. Know all of \"Querida\" by heart? First round's on us."
+      "nombre": {
+        "es": "Noche de Juanga",
+        "en": "Juanga Night"
       },
-      "horario": { "es": "Desde las 8 PM", "en": "From 8 PM" },
+      "descripcion": {
+        "es": "Puro Divo de Juárez de principio a fin. Si te sabes \"El Noa Noa\" completa, la primera ronda va por la casa.",
+        "en": "Nothing but the Divo de Juárez, start to finish. Know all of \"El Noa Noa\" by heart? First round's on us."
+      },
+      "horario": {
+        "es": "Desde las 8 PM",
+        "en": "From 8 PM"
+      },
       "color": "rosa",
       "icono": "micro",
       "ocasion": "cantar",
       "ejemplo": true
     },
     {
-      "id": "despecho-sin-llorar",
+      "id": "viernes-de-reinas",
       "diaSemana": 5,
-      "nombre": { "es": "Despecho sin llorar", "en": "Heartbreak, No Tears" },
-      "descripcion": {
-        "es": "Karaoke de ardidos. Aquí el que llora paga la siguiente, así que mejor cántale.",
-        "en": "Karaoke for the brokenhearted. Whoever cries buys the next round, so sing it out instead."
+      "nombre": {
+        "es": "Viernes de Reinas",
+        "en": "Queens Friday"
       },
-      "horario": { "es": "Desde las 9 PM", "en": "From 9 PM" },
+      "descripcion": {
+        "es": "Karaoke para las que mandan. Súbete al micro con tu bola y que se entere todo El Chuco.",
+        "en": "Karaoke for the ones in charge. Grab the mic with your crew and let all of El Chuco hear it."
+      },
+      "horario": {
+        "es": "Desde las 9 PM",
+        "en": "From 9 PM"
+      },
       "color": "chocolate",
-      "icono": "ojo",
-      "ocasion": "cantar",
+      "icono": "llama",
+      "ocasion": "amigas",
       "ejemplo": true
     }
   ]

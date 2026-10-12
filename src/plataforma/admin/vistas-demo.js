@@ -15,13 +15,13 @@ import { hoyEnElPaso } from '../../js/horario.js';
 const NOMBRES = ['Alejandra', 'Brayan', 'Citlali', 'Diego', 'Estefanía', 'Fátima', 'Gerardo', 'Itzel', 'Jorge', 'Lucía', 'Marisol', 'Nayeli', 'Omar', 'Pamela', 'Raúl', 'Sofía', 'Tania', 'Uriel', 'Vianey', 'Yahir'];
 const APELLIDOS = ['Gallegos', 'Holguín', 'Ibarra', 'Jáquez', 'Loya', 'Márquez', 'Nájera', 'Ontiveros', 'Payán', 'Quintana', 'Rentería', 'Saenz', 'Terrazas', 'Valles', 'Zubía'];
 const CANCIONES = [
-  ['Querida', 'Juan Gabriel'], ['El Rey', 'José Alfredo Jiménez'], ['La Puerta Negra', 'Los Tigres del Norte'], ['Mátalas', 'Alejandro Fernández'],
-  ['Hasta que te conocí', 'Juan Gabriel'], ['Si nos dejan', 'Luis Miguel'], ['Amor eterno', 'Rocío Dúrcal'], ['Ella', 'José Alfredo Jiménez'],
-  ['Te solté la rienda', 'José Alfredo Jiménez'], ['Inolvidable', 'Luis Miguel'], ['Costumbres', 'Rocío Dúrcal'], ['Me nace del corazón', 'Juan Gabriel'],
-  ['Tu recuerdo y yo', 'José Alfredo Jiménez'], ['Bohemio de afición', 'Javier Solís'], ['Contigo aprendí', 'Armando Manzanero'],
+  ['El Rey', 'José Alfredo Jiménez'], ['La Bikina', 'Luis Miguel'], ['Mátalas', 'Alejandro Fernández'], ['La Negra', 'Mariachi Vargas'],
+  ['La Chona', 'Los Tucanes de Tijuana'], ['Payaso de rodeo', 'Caballo Dorado'], ['El Sinaloense', 'Banda El Recodo'], ['Me gustas mucho', 'Rocío Dúrcal'],
+  ['Amor a la mexicana', 'Thalía'], ['El Noa Noa', 'Juan Gabriel'], ['Cielito lindo', 'Pedro Infante'], ['Si nos dejan', 'Luis Miguel'],
+  ['El Mariachi Loco', 'Mariachi Vargas'], ['Juana la Cubana', 'Fito Olivares'], ['Que no quede huella', 'Bronco'],
 ];
-const PARA = ['Mi ex', 'La cumpleañera', 'El Brayan', 'Todas las solteras', 'Mi compadre', 'La novia', 'El que me dejó en visto', 'Mi suegra (no)', 'La mesa 4'];
-const MENSAJES = ['Ojalá te duela tantito.', 'Feliz cumple, que este año sí te contesten.', 'Ya ni me acuerdo de ti. Bueno, poquito.', 'Salud por los que no nos supieron querer.', 'Para que sepas que aquí sigo, cantando.', 'Esta va con todo mi rencor y cariño.'];
+const PARA = ['La cumpleañera', 'Mi bola', 'Todas las reinas', 'Mi compadre', 'La novia', 'Los de la barra', 'Mi suegra (sí)', 'La mesa 4', 'El mesero estrella'];
+const MENSAJES = ['¡A darle que es mole de olla!', 'Feliz cumple, que se prenda.', 'Esta va por las que mandan.', '¡Salud, dinero y amor!', 'Pa\' que se oiga hasta Juárez.', 'Esta va con todo el cariño de tu bola.'];
 const FOTOS = ['/assets/fotos/ig_singing.jpg', '/assets/fotos/ig_green.jpg', '/assets/fotos/jarrito.jpg', '/assets/fotos/mic.jpg', '/assets/fotos/ig_neon.jpg'];
 const azar = (a) => a[Math.floor(Math.random() * a.length)];
 const mesaAzar = () => azar(MESAS).id;
@@ -41,7 +41,7 @@ async function pasoSimulacion() {
     await insertar('reservas', {
       folio: nuevoFolio(), fecha, hora: h, personas, mesa_id: mesa?.id ?? null, zona: mesa?.zona ?? null,
       nombre, correo: `${nombre.split(' ')[0].toLowerCase()}@example.com`, telefono: `+1 915 555 0${Math.floor(100 + Math.random() * 899)}`,
-      ocasion: azar(['cantar', 'cantar', 'cumpleanos', 'despedida', 'divorcio']), corazon_roto: Math.random() < 0.4,
+      ocasion: azar(['cantar', 'cantar', 'cumpleanos', 'despedida', 'amigas']), modo_fiesta: Math.random() < 0.4,
       comentarios: null, extras: [], estado: 'pendiente', deposito_estado: 'no_aplica', monto_deposito: 0,
       source: azar(['instagram', 'instagram', 'tiktok', 'google', 'creador-lalo', 'directo']),
     });

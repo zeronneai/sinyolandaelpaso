@@ -30,7 +30,7 @@ export function mostrarBrindis({ conSonido = true } = {}) {
     <canvas class="brindis__confeti" aria-hidden="true"></canvas>
     <p class="brindis__cuenta" aria-hidden="true"></p>
     <div class="brindis__final" hidden>
-      <p class="brindis__salud">¡Salud,<br><span>y sin llorar!</span></p>
+      <p class="brindis__salud">¡Salud,<br><span>y que siga la fiesta!</span></p>
       <p class="brindis__sub">Brindis de medianoche · Sin Yolanda El Paso</p>
     </div>`;
   document.body.append(capa);

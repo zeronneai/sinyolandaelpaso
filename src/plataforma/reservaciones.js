@@ -402,7 +402,7 @@ async function crearReserva(pago, btn, errorEl, { mostrar = true } = {}) {
       correo: $('#correo').value.trim().toLowerCase(),
       telefono: normalizarTelefono($('#telefono').value),
       ocasion: S.ocasion,
-      corazon_roto: $('#corazon').checked,
+      modo_fiesta: $('#corazon').checked,
       comentarios: $('#comentarios').value.trim() || null,
       extras: [...S.extras].map((id) => ({ id, cantidad: 1 })),
       estado: 'pendiente',
@@ -436,7 +436,7 @@ async function pintarConfirmacion(r) {
   $('#p6-sub').textContent = `${fechaLarga(r.fecha)} a las ${hora(r.hora)}, ${r.personas} ${r.personas === 1 ? 'persona' : 'personas'}${
     mesa ? `, mesa ${mesa.numero}` : ''
   }. Folio ${r.folio}. ${r.estado === 'confirmada' ? 'Tu depósito quedó pagado.' : 'La cantina te confirma por correo o WhatsApp.'}${
-    r.corazon_roto ? ' Y tranquilo, aquí no se llora: aquí se canta.' : ''
+    r.modo_fiesta ? ' Modo fiesta encendido: esto se va a prender.' : ''
   }`;
   $('#boleto').innerHTML = await htmlBoleto(r);
   $('#calendario-link').href = linkCalendario({
@@ -448,7 +448,7 @@ async function pintarConfirmacion(r) {
   });
   $('#invitar').href = linkWhatsApp(
     '',
-    `¡Ya aparté en Sin Yolanda El Paso! 🎤 ${fechaLarga(r.fecha)} a las ${hora(r.hora)}. Aquí no se llora, aquí se canta. Ve los detalles: ${urlTuNoche(r.folio)}`,
+    `¡Ya aparté en Sin Yolanda El Paso! 🎤 ${fechaLarga(r.fecha)} a las ${hora(r.hora)}. Esto se va a prender. Ve los detalles: ${urlTuNoche(r.folio)}`,
   );
   $('#ver-noche').href = urlTuNoche(r.folio);
   $('#guardar-boleto').onclick = () => descargarBoleto(r);

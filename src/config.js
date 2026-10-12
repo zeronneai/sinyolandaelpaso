@@ -48,7 +48,7 @@ export const CONFIG = {
     { id: 'cantar', es: 'Solo vengo a cantar', en: 'Just here to sing' },
     { id: 'cumpleanos', es: 'Cumpleaños', en: 'Birthday' },
     { id: 'despedida', es: 'Despedida de soltera', en: 'Bachelorette' },
-    { id: 'divorcio', es: 'Fiesta de divorcio', en: 'Divorce party' },
+    { id: 'amigas', es: 'Noche de amigas', en: "Girls' night out" },
     { id: 'posada', es: 'Posada de empresa', en: 'Company posada' },
     { id: 'recovery-brunch', es: 'Recovery Brunch', en: 'Recovery Brunch' },
   ],
@@ -63,7 +63,7 @@ export const CONFIG = {
 
   // Depósito: se cobra solo si hay paquete, evento con boleto o extras.
   deposito: {
-    paquetes: ['despedida', 'divorcio', 'posada'], // ocasiones que son paquete
+    paquetes: ['despedida', 'amigas', 'posada'], // ocasiones que son paquete
     montoPaquete: 50, // POR CONFIRMAR
   },
 
@@ -71,21 +71,21 @@ export const CONFIG = {
   playlist: {
     url: 'https://open.spotify.com/', // TODO cliente: link de la playlist oficial
     top10: [
-      ['Querida', 'Juan Gabriel'],
       ['El Rey', 'José Alfredo Jiménez'],
-      ['La Puerta Negra', 'Los Tigres del Norte'],
+      ['La Bikina', 'Luis Miguel'],
       ['Mátalas', 'Alejandro Fernández'],
-      ['Hasta que te conocí', 'Juan Gabriel'],
-      ['Tu recuerdo y yo', 'José Alfredo Jiménez'],
-      ['Paloma Negra', 'Lola Beltrán'],
-      ['Si nos dejan', 'Luis Miguel'],
-      ['Amor eterno', 'Rocío Dúrcal'],
+      ['La Negra', 'Mariachi Vargas de Tecalitlán'],
+      ['La Chona', 'Los Tucanes de Tijuana'],
+      ['Payaso de rodeo', 'Caballo Dorado'],
+      ['El Sinaloense', 'Banda El Recodo'],
       ['Me gustas mucho', 'Rocío Dúrcal'],
+      ['Amor a la mexicana', 'Thalía'],
+      ['El Noa Noa', 'Juan Gabriel'],
     ],
   },
 
   // Qué pedir en tu noche (nombres de menu.json).
-  recomendaciones: ['Cantaritos', 'Quesabirria', 'El Querida'],
+  recomendaciones: ['Cantaritos', 'Quesabirria', 'El Rey'],
 
   // Reseñas: con 5 estrellas se manda aquí. TODO cliente: link real de Google.
   resenaGoogle: 'https://search.google.com/local/writereview?placeid=TODO',

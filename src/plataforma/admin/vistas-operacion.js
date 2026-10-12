@@ -49,7 +49,7 @@ function tarjetaReserva(r) {
   return `<article class="res res--${r.estado}">
     <div class="res__hora">${hora(r.hora)}</div>
     <div class="res__info">
-      <p class="res__nombre">${esc(r.nombre)} ${r.corazon_roto ? '<span title="Viene con el corazón roto">💔</span>' : ''}</p>
+      <p class="res__nombre">${esc(r.nombre)} ${r.modo_fiesta ? '<span title="Viene en modo fiesta">🔥</span>' : ''}</p>
       <p class="res__meta">
         <span>${r.personas} p</span>
         <span>${mesa ? `Mesa ${mesa.numero} · ${esc(nombreZona(mesa.zona))}` : r.zona ? esc(nombreZona(r.zona)) : 'Sin mesa'}</span>
@@ -122,7 +122,7 @@ const hoyVista = {
       ['Personas esperadas', activas.reduce((s, r) => s + r.personas, 0), 'sombrero', ''],
       ['Mesas libres', esHoy ? MESAS.length - ocupadas.size : '·', 'cantarito', esHoy ? `de ${MESAS.length}` : 'solo hoy'],
       ['Fila del micro', fila, 'micro', ''],
-      ['Llamados pendientes', llamados, 'ojo', llamados ? 'alerta' : ''],
+      ['Llamados pendientes', llamados, 'llama', llamados ? 'alerta' : ''],
     ]
       .map(
         ([t, n, i, extra]) => `<div class="stat${extra === 'alerta' ? ' stat--alerta' : ''}">
@@ -353,7 +353,7 @@ const reservasVista = {
       .map(
         (r) => `<tr class="fila--${r.estado}${r.folio === destacado ? ' fila--destacada' : ''}">
         <td data-l="Fecha" class="c-fecha">${fechaCorta(r.fecha)}</td><td data-l="Hora" class="c-hora">${hora(r.hora)}</td><td data-l="Folio" class="mono c-folio">${esc(r.folio)}</td>
-        <td data-l="Nombre" class="c-nombre"><strong>${esc(r.nombre)}</strong>${r.corazon_roto ? ' 💔' : ''}<br><small>${esc(r.telefono)}</small></td>
+        <td data-l="Nombre" class="c-nombre"><strong>${esc(r.nombre)}</strong>${r.modo_fiesta ? ' 🔥' : ''}<br><small>${esc(r.telefono)}</small></td>
         <td data-l="Personas">${r.personas}</td><td data-l="Mesa">${r.mesa_id ?? '·'}</td><td data-l="Ocasión">${esc(ocasionTexto(r.ocasion))}</td>
         <td data-l="Extras">${(r.extras || []).map(extraTexto).map(esc).join(', ') || '·'}</td>
         <td data-l="Depósito">${r.deposito_estado === 'no_aplica' ? '·' : `<span class="tag tag--dep-${r.deposito_estado}">${r.deposito_estado}</span> ${dinero(Number(r.monto_deposito))}`}</td>
@@ -441,7 +441,7 @@ async function ponerCantando(id) {
 const llamadosVista = {
   id: 'llamados',
   titulo: 'Llamados',
-  icono: 'ojo',
+  icono: 'llama',
   badgeAlerta: true,
   badge: () => llamadosPendientes().length || '',
   montar(el) {

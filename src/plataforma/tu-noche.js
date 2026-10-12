@@ -56,7 +56,7 @@ async function pintar() {
     fecha: R.fecha, hora: R.hora, titulo: 'Sin Yolanda El Paso: ¡a cantar!',
     detalles: `Folio ${R.folio}. ${urlTuNoche(R.folio)}`, lugar: '340 Vin Rambla Dr, El Paso, TX',
   });
-  $('#invitar').href = linkWhatsApp('', `¡Vente a Sin Yolanda El Paso! 🎤 ${fechaLarga(R.fecha)} a las ${hora(R.hora)}. Aquí no se llora, aquí se canta: ${urlTuNoche(R.folio)}`);
+  $('#invitar').href = linkWhatsApp('', `¡Vente a Sin Yolanda El Paso! 🎤 ${fechaLarga(R.fecha)} a las ${hora(R.hora)}. Esto se va a prender: ${urlTuNoche(R.folio)}`);
 
   const mesa = mesaPorId(R.mesa_id);
   pintarMapa($('#mapa'), {
@@ -80,7 +80,7 @@ async function pintar() {
     <div><dt>Ocasión</dt><dd>${esc(ocasion)}</dd></div>
     ${extras.length ? `<div><dt>Extras</dt><dd>${extras.map(esc).join(', ')}</dd></div>` : ''}
     <div><dt>Depósito</dt><dd>${dep}${R.monto_deposito ? ` · ${dinero(Number(R.monto_deposito))}` : ''}</dd></div>
-    ${R.corazon_roto ? '<div><dt>Corazón</dt><dd>Roto, pero aquí se canta 💔</dd></div>' : ''}
+    ${R.modo_fiesta ? '<div><dt>Modo fiesta</dt><dd>Encendido 🔥</dd></div>' : ''}
     ${R.comentarios ? `<div><dt>Comentarios</dt><dd>${esc(R.comentarios)}</dd></div>` : ''}`;
 
   if (ENV.demo && !$('#demo-resena')) {

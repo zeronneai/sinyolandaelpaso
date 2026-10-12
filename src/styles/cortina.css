@@ -212,7 +212,7 @@ html.con-cortina .cortina { display: block; }
   text-shadow: 0 0 6px rgba(243, 228, 200, .5), 3px 3px 0 rgba(59, 31, 20, .7);
 }
 .tag--chuco span { color: var(--rosa); }
-.tag--ojo {
+.tag--llama {
   left: 10%;
   bottom: 2%;
   width: clamp(64px, 14vw, 120px);
@@ -227,7 +227,7 @@ html.con-cortina .cortina { display: block; }
   .grafiti { inset: 12% 0 120px; }
   .tag--raje { top: 4%; left: 5%; }
   .tag--chuco { bottom: 6%; right: 5%; }
-  .tag--ojo { bottom: 8%; left: 6%; }
+  .tag--llama { bottom: 8%; left: 6%; }
 }
 
 /* Píldora "Jálale a la cortina" */

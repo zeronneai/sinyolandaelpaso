@@ -28,7 +28,7 @@ function contenidoEditable() {
 }
 
 // Sitio + páginas de la plataforma. Cada carpeta con index.html es una página.
-const RUTAS = ['en', 'reservaciones', 'tu-noche', 'admin', 'mesa', 'pantalla', 'despechometro', 'como-te-fue', 'tarjeta'];
+const RUTAS = ['en', 'reservaciones', 'tu-noche', 'admin', 'mesa', 'pantalla', 'fiestometro', 'como-te-fue', 'tarjeta'];
 const paginas = { main: resolve(import.meta.dirname, 'index.html') };
 for (const ruta of RUTAS) {
   if (existsSync(resolve(import.meta.dirname, ruta, 'index.html'))) paginas[ruta] = resolve(import.meta.dirname, ruta, 'index.html');
