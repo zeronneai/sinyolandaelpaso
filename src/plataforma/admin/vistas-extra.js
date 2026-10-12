@@ -199,13 +199,13 @@ const clientesVista = {
     };
     $('#crm').innerHTML = lista
       .map((c) => `<tr>
-        <td><strong>${esc(c.nombre)}</strong></td>
-        <td>${esc(c.telefono || '')}<br><small>${esc(c.correo || '')}</small></td>
-        <td>${c.visitas || 0}</td><td>${c.sellos || 0}/${SELLOS_PREMIO}</td>
-        <td>${c.ultima_visita ? fechaCorta(c.ultima_visita) : '·'}</td>
-        <td>${c.cumpleanos ? `${fechaCorta(c.cumpleanos).split(' ').slice(1).join(' ')}${cumpleProximo(c) ? ' 🎂' : ''}` : '·'}</td>
-        <td><input class="crm-input" data-crm="${c.id}" data-campo="etiquetas" value="${esc((c.etiquetas || []).join(', '))}" aria-label="Etiquetas de ${esc(c.nombre)}"></td>
-        <td><input class="crm-input" data-crm="${c.id}" data-campo="notas" value="${esc(c.notas || '')}" aria-label="Notas de ${esc(c.nombre)}"></td>
+        <td data-l="Nombre" class="c-nombre"><strong>${esc(c.nombre)}</strong></td>
+        <td data-l="Contacto" class="c-ancho">${esc(c.telefono || '')}<br><small>${esc(c.correo || '')}</small></td>
+        <td data-l="Visitas">${c.visitas || 0}</td><td data-l="Sellos">${c.sellos || 0}/${SELLOS_PREMIO}</td>
+        <td data-l="Última visita">${c.ultima_visita ? fechaCorta(c.ultima_visita) : '·'}</td>
+        <td data-l="Cumpleaños">${c.cumpleanos ? `${fechaCorta(c.cumpleanos).split(' ').slice(1).join(' ')}${cumpleProximo(c) ? ' 🎂' : ''}` : '·'}</td>
+        <td data-l="Etiquetas" class="c-ancho"><input class="crm-input" data-crm="${c.id}" data-campo="etiquetas" value="${esc((c.etiquetas || []).join(', '))}" aria-label="Etiquetas de ${esc(c.nombre)}"></td>
+        <td data-l="Notas" class="c-ancho"><input class="crm-input" data-crm="${c.id}" data-campo="notas" value="${esc(c.notas || '')}" aria-label="Notas de ${esc(c.nombre)}"></td>
       </tr>`)
       .join('');
   },

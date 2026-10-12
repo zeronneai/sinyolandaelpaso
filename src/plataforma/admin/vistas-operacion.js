@@ -352,13 +352,13 @@ const reservasVista = {
     $('#tabla-res').innerHTML = lista
       .map(
         (r) => `<tr class="fila--${r.estado}${r.folio === destacado ? ' fila--destacada' : ''}">
-        <td>${fechaCorta(r.fecha)}</td><td>${hora(r.hora)}</td><td class="mono">${esc(r.folio)}</td>
-        <td><strong>${esc(r.nombre)}</strong>${r.corazon_roto ? ' 💔' : ''}<br><small>${esc(r.telefono)}</small></td>
-        <td>${r.personas}</td><td>${r.mesa_id ?? '·'}</td><td>${esc(ocasionTexto(r.ocasion))}</td>
-        <td>${(r.extras || []).map(extraTexto).map(esc).join(', ') || '·'}</td>
-        <td>${r.deposito_estado === 'no_aplica' ? '·' : `<span class="tag tag--dep-${r.deposito_estado}">${r.deposito_estado}</span> ${dinero(Number(r.monto_deposito))}`}</td>
-        <td>${esc(r.source || '')}</td>
-        <td><select data-reserva="${r.id}" aria-label="Estado de ${esc(r.nombre)}">${Object.entries(ESTADOS_RESERVA)
+        <td data-l="Fecha" class="c-fecha">${fechaCorta(r.fecha)}</td><td data-l="Hora" class="c-hora">${hora(r.hora)}</td><td data-l="Folio" class="mono c-folio">${esc(r.folio)}</td>
+        <td data-l="Nombre" class="c-nombre"><strong>${esc(r.nombre)}</strong>${r.corazon_roto ? ' 💔' : ''}<br><small>${esc(r.telefono)}</small></td>
+        <td data-l="Personas">${r.personas}</td><td data-l="Mesa">${r.mesa_id ?? '·'}</td><td data-l="Ocasión">${esc(ocasionTexto(r.ocasion))}</td>
+        <td data-l="Extras">${(r.extras || []).map(extraTexto).map(esc).join(', ') || '·'}</td>
+        <td data-l="Depósito">${r.deposito_estado === 'no_aplica' ? '·' : `<span class="tag tag--dep-${r.deposito_estado}">${r.deposito_estado}</span> ${dinero(Number(r.monto_deposito))}`}</td>
+        <td data-l="Fuente">${esc(r.source || '')}</td>
+        <td data-l="Estado" class="c-estado"><select data-reserva="${r.id}" aria-label="Estado de ${esc(r.nombre)}">${Object.entries(ESTADOS_RESERVA)
           .map(([k, v]) => `<option value="${k}" ${k === r.estado ? 'selected' : ''}>${v}</option>`)
           .join('')}</select></td></tr>`,
       )

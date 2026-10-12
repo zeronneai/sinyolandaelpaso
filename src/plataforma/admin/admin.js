@@ -45,7 +45,28 @@ function mostrarLogin() {
 let vistaActual = null;
 let sonidoOn = (() => { try { return localStorage.getItem('sy-admin-sonido') !== '0'; } catch (e) { return true; } })();
 
+// Barra inferior en celular: las 4 vistas que más se usan en servicio + "Más".
+const PRINCIPALES = ['hoy', 'mapa', 'micro', 'llamados'];
+const CORTOS = { hoy: 'Hoy', mapa: 'Mapa', micro: 'Micro', llamados: 'Llamados' };
+const badgeHTML = (v) => (v.badge?.() ? `<b class="badge${v.badgeAlerta ? ' badge--alerta' : ''}">${v.badge()}</b>` : '');
+
+function pintarTabbar() {
+  const otras = VISTAS.filter((v) => !PRINCIPALES.includes(v.id));
+  const enMas = otras.some((v) => v.id === vistaActual?.id);
+  const pendientesMas = otras.reduce((n, v) => n + (Number(v.badge?.()) || 0), 0);
+  $('#tabbar').innerHTML = PRINCIPALES.map((id) => VISTAS.find((v) => v.id === id)).filter(Boolean).map(
+    (v) => `<button type="button" class="tab" data-vista="${v.id}" aria-current="${vistaActual?.id === v.id ? 'page' : 'false'}">
+      <span class="tab__ico"><svg aria-hidden="true"><use href="#i-${v.icono}"/></svg>${badgeHTML(v)}</span><span class="tab__t">${CORTOS[v.id] || esc(v.titulo)}</span></button>`,
+  ).join('') + `<button type="button" class="tab" id="tab-mas" aria-current="${enMas ? 'page' : 'false'}" aria-haspopup="dialog">
+      <span class="tab__ico"><span class="tab__puntos" aria-hidden="true">•••</span>${pendientesMas ? `<b class="badge">${pendientesMas}</b>` : ''}</span><span class="tab__t">${enMas ? esc(vistaActual.titulo) : 'Más'}</span></button>`;
+  $('#mas-lista').innerHTML = otras.map(
+    (v) => `<li><button type="button" class="mas__item" data-vista="${v.id}" aria-current="${vistaActual?.id === v.id ? 'page' : 'false'}">
+      <svg aria-hidden="true"><use href="#i-${v.icono}"/></svg><span>${esc(v.titulo)}</span>${badgeHTML(v)}</button></li>`,
+  ).join('');
+}
+
 function pintarNav() {
+  pintarTabbar();
   $('#nav').innerHTML = VISTAS.map(
     (v) => `<li><button type="button" class="lateral__item" data-vista="${v.id}" aria-current="${vistaActual?.id === v.id ? 'page' : 'false'}">
       <svg aria-hidden="true"><use href="#i-${v.icono}"/></svg><span>${esc(v.titulo)}</span>
@@ -67,6 +88,20 @@ function ir(id) {
   pintarNav();
   history.replaceState(null, '', `#${v.id}`);
 }
+
+$('#tabbar').addEventListener('click', (e) => {
+  if (e.target.closest('#tab-mas')) { $('#mas').showModal(); return; }
+  const b = e.target.closest('[data-vista]');
+  if (b) { ir(b.dataset.vista); window.scrollTo({ top: 0 }); }
+});
+$('#mas-lista').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-vista]');
+  if (b) { $('#mas').close(); ir(b.dataset.vista); window.scrollTo({ top: 0 }); }
+});
+$('#mas-cerrar').addEventListener('click', () => $('#mas').close());
+$('#mas').addEventListener('click', (e) => { if (e.target === $('#mas')) $('#mas').close(); });
+$('#mas-sonido').addEventListener('click', () => $('#sonido').click());
+$('#mas-salir').addEventListener('click', () => $('#salir').click());
 
 $('#nav').addEventListener('click', (e) => {
   const b = e.target.closest('[data-vista]');
@@ -127,6 +162,7 @@ $('#sonido').addEventListener('click', () => {
   try { localStorage.setItem('sy-admin-sonido', sonidoOn ? '1' : '0'); } catch (e) {}
   $('#sonido').setAttribute('aria-pressed', String(sonidoOn));
   $('#sonido').textContent = sonidoOn ? '🔔 Sonido' : '🔕 Silencio';
+  $('#mas-sonido').textContent = $('#sonido').textContent;
   if (sonidoOn) sonar('ding');
 });
 $('#salir').addEventListener('click', () => {
@@ -140,6 +176,8 @@ $('#btn-brindis').addEventListener('click', async () => {
 
 async function arrancar() {
   $('#app').hidden = false;
+  $('#tabbar').hidden = false;
+  $('#mas-sonido').textContent = sonidoOn ? '🔔 Sonido' : '🔕 Silencio';
   $('#sonido').setAttribute('aria-pressed', String(sonidoOn));
   $('#sonido').textContent = sonidoOn ? '🔔 Sonido' : '🔕 Silencio';
   reloj();

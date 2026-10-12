@@ -51,12 +51,23 @@
         <div class="cabecera__der">
           <span class="en-vivo" id="en-vivo"><span aria-hidden="true"></span> En vivo</span>
           <span class="reloj" id="reloj"></span>
-          <button type="button" class="btn btn--mostaza btn--chico" id="btn-brindis">🥂 Lanzar brindis</button>
+          <button type="button" class="btn btn--mostaza btn--chico btn-brindis" id="btn-brindis" aria-label="Lanzar brindis">🥂 <span class="btn-brindis__t">Lanzar brindis</span></button>
         </div>
       </header>
       <div class="vista" id="vista"></div>
     </main>
   </div>
+
+  <!-- Barra inferior (celular) -->
+  <nav class="tabbar" id="tabbar" aria-label="Secciones principales" hidden></nav>
+  <dialog class="mas" id="mas" aria-label="Más secciones">
+    <div class="mas__cab"><p>Más secciones</p><button type="button" class="mas__cerrar" id="mas-cerrar" aria-label="Cerrar">✕</button></div>
+    <ul class="mas__lista" id="mas-lista" role="list"></ul>
+    <div class="mas__pie">
+      <button type="button" class="mas__btn" id="mas-sonido">🔔 Sonido</button>
+      <button type="button" class="mas__btn" id="mas-salir">Salir</button>
+    </div>
+  </dialog>
 
   <dialog class="hoja hoja--oscura" id="hoja"><div id="hoja-contenido"></div></dialog>
 </body>
