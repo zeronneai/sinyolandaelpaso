@@ -2,13 +2,14 @@ import { ENV } from '../entorno.js';
 import { iniciarPlataforma, toast, sonar, $, esc, fechaLarga, fechaCorta, hora } from '../ui.js';
 import { iniciarStore, alCambiar } from './store.js';
 import { lanzarBrindis, escucharBrindis, brindisAutomatico } from '../brindis.js';
-import { VISTAS_OPERACION } from './vistas-operacion.js';
+import { VISTAS_OPERACION, destacarReserva } from './vistas-operacion.js';
+import { VISTAS_AJUSTES } from './vistas-ajustes.js';
 import { VISTAS_DEMO } from './vistas-demo.js';
 import { VISTAS_EXTRA } from './vistas-extra.js';
 import { esPropio } from './acciones.js';
 import { hoyEnElPaso } from '../../js/horario.js';
 
-const VISTAS = [...VISTAS_OPERACION, ...VISTAS_EXTRA, ...VISTAS_DEMO];
+const VISTAS = [...VISTAS_OPERACION, ...VISTAS_EXTRA, ...VISTAS_DEMO, ...VISTAS_AJUSTES];
 
 /* ============================================================
    Acceso con PIN
@@ -147,7 +148,13 @@ async function arrancar() {
   escucharBrindis({ conSonido: false });
   brindisAutomatico(() => lanzarBrindis('automatico'));
   await iniciarStore();
-  ir(location.hash.slice(1) || 'hoy');
+  // Link del correo al equipo: /admin/?reserva=FOLIO abre esa reserva resaltada.
+  const folio = new URLSearchParams(location.search).get('reserva');
+  if (folio) {
+    destacarReserva(folio.trim().toUpperCase());
+    ir('reservas');
+    document.querySelector('#res-destacada')?.scrollIntoView({ block: 'start' });
+  } else ir(location.hash.slice(1) || 'hoy');
 }
 
 iniciarPlataforma();

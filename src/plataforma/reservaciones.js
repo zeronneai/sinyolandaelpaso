@@ -1,5 +1,4 @@
 import { CONFIG } from '../config.js';
-import { ENV } from './entorno.js';
 import { listar, insertar, suscribir, guardarCliente, normalizarTelefono, nuevoFolio } from './datos.js';
 import {
   $, $$, esc, iniciarPlataforma, toast, fechaLarga, fechaCorta, hora, sumarDias,
@@ -13,6 +12,7 @@ import { pintarMapa } from './mapa.js';
 import { cobrar, dinero, proveedor } from './pagos.js';
 import { htmlBoleto, descargarBoleto, urlTuNoche } from './boleto.js';
 import { hoyEnElPaso } from '../js/horario.js';
+import { mandarCorreo } from './correos.js';
 import eventosData from '../data/eventos.json';
 
 iniciarPlataforma({ recargar: () => cargarReservasDelDia() });
@@ -414,7 +414,7 @@ async function crearReserva(pago, btn, errorEl, { mostrar = true } = {}) {
 
     // El CRM y el correo no deben tumbar la reserva si fallan.
     guardarCliente({ nombre: r.nombre, correo: r.correo, telefono: r.telefono }).catch(() => {});
-    enviarCorreo(r);
+    mandarCorreo('nueva', r, { lang: 'es' });
     track('reserva_enviada', { personas: r.personas, ocasion: r.ocasion, value: r.monto_deposito, currency: 'USD' });
 
     if (mostrar) await pintarConfirmacion(r);
@@ -426,17 +426,6 @@ async function crearReserva(pago, btn, errorEl, { mostrar = true } = {}) {
     btn.disabled = false;
     btn.textContent = textoBtn;
   }
-}
-
-function enviarCorreo(r) {
-  if (!ENV.appsScriptUrl) return;
-  const ocasion = CONFIG.ocasiones.find((o) => o.id === r.ocasion)?.es;
-  fetch(ENV.appsScriptUrl, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ ...r, ocasionTexto: ocasion, mesa: mesaPorId(r.mesa_id)?.numero ?? null, lang: 'es', userAgent: navigator.userAgent, linkTuNoche: urlTuNoche(r.folio) }),
-  }).catch(() => {});
 }
 
 /* ============================================================

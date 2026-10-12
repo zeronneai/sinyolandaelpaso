@@ -3,6 +3,8 @@
 
 import { actualizar, insertar, obtener, guardarCliente, nuevoFolio } from '../datos.js';
 import { hoyEnElPaso, ahoraEnElPaso } from '../../js/horario.js';
+import { mandarCorreo } from '../correos.js';
+import { toast } from '../ui.js';
 
 const propios = new Map(); // id -> expira
 
@@ -47,6 +49,12 @@ export async function cambiarEstadoReserva(r, estado) {
   const cambios = { estado };
   if ((estado === 'llego' || estado === 'sentada') && !r.llegada_at) cambios.llegada_at = new Date().toISOString();
   const nueva = await cambiar('reservas', r.id, cambios);
+  // Confirmada o cancelada: correo corto al cliente (si tiene correo).
+  if ((estado === 'confirmada' || estado === 'cancelada') && r.correo) {
+    mandarCorreo('estado', { ...r, ...cambios }).then((res) => {
+      if (res.ok && !res.omitido) toast(`Le avisamos por correo a ${r.nombre.split(' ')[0]}`, { tipo: 'info', duracion: 3000 });
+    });
+  }
   // Primera vez que llega: cuenta la visita en el CRM.
   if (estado === 'llego' && !r.llegada_at && r.telefono) {
     const c = await obtener('clientes', { telefono: r.telefono }).catch(() => null);

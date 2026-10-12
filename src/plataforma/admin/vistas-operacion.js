@@ -289,6 +289,11 @@ function escucharEstadosUnaVez(el) {
    RESERVAS (tabla con búsqueda y filtros)
    ============================================================ */
 const filtros = { q: '', fecha: '', ocasion: '', estado: '' };
+let destacado = null; // folio que llega por /admin/?reserva=FOLIO
+export function destacarReserva(folio) {
+  destacado = folio;
+  Object.assign(filtros, { q: '', fecha: '', ocasion: '', estado: '' });
+}
 const reservasVista = {
   id: 'reservas',
   titulo: 'Reservas',
@@ -301,6 +306,7 @@ const reservasVista = {
         <select name="ocasion" aria-label="Ocasión"><option value="">Todas las ocasiones</option>${CONFIG.ocasiones.map((o) => `<option value="${o.id}">${esc(o.es)}</option>`).join('')}</select>
         <select name="estado" aria-label="Estado"><option value="">Todos los estados</option>${Object.entries(ESTADOS_RESERVA).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select>
       </form>
+      <div id="res-destacada"></div>
       <p class="conteo" id="conteo"></p>
       <div class="tabla-scroll"><table class="tabla"><thead><tr>
         <th>Fecha</th><th>Hora</th><th>Folio</th><th>Nombre</th><th>P</th><th>Mesa</th><th>Ocasión</th><th>Extras</th><th>Depósito</th><th>Fuente</th><th>Estado</th>
@@ -313,6 +319,7 @@ const reservasVista = {
       this.actualizar();
     });
     f.addEventListener('submit', (e) => e.preventDefault());
+    escucharEstados($('#res-destacada'));
     $('#tabla-res').addEventListener('change', async (e) => {
       const s = e.target.closest('select[data-reserva]');
       if (!s) return;
@@ -330,10 +337,21 @@ const reservasVista = {
       .filter((r) => !filtros.estado || r.estado === filtros.estado)
       .filter((r) => !q || [r.nombre, r.folio, r.telefono, r.correo].join(' ').toLowerCase().includes(q))
       .sort((a, b) => a.fecha.localeCompare(b.fecha) || minutosServicio(a.hora) - minutosServicio(b.hora));
+    if (destacado) {
+      const r = datos.reservas.find((x) => x.folio === destacado);
+      $('#res-destacada').innerHTML = `<div class="destacada"><div class="destacada__cab"><p>Reserva ${esc(destacado)}</p>
+        <button type="button" class="btn-texto btn-texto--claro" id="quitar-destacada">Cerrar</button></div>
+        ${r ? tarjetaReserva(r) : '<p class="vacio vacio--oscuro">No encontramos ese folio.</p>'}</div>`;
+      $('#quitar-destacada').onclick = () => {
+        destacado = null;
+        history.replaceState(null, '', location.pathname + location.hash);
+        this.actualizar();
+      };
+    } else $('#res-destacada').innerHTML = '';
     $('#conteo').textContent = `${lista.length} ${lista.length === 1 ? 'reserva' : 'reservas'} · ${lista.reduce((s, r) => s + r.personas, 0)} personas`;
     $('#tabla-res').innerHTML = lista
       .map(
-        (r) => `<tr class="fila--${r.estado}">
+        (r) => `<tr class="fila--${r.estado}${r.folio === destacado ? ' fila--destacada' : ''}">
         <td>${fechaCorta(r.fecha)}</td><td>${hora(r.hora)}</td><td class="mono">${esc(r.folio)}</td>
         <td><strong>${esc(r.nombre)}</strong>${r.corazon_roto ? ' 💔' : ''}<br><small>${esc(r.telefono)}</small></td>
         <td>${r.personas}</td><td>${r.mesa_id ?? '·'}</td><td>${esc(ocasionTexto(r.ocasion))}</td>

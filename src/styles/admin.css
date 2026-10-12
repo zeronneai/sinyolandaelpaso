@@ -238,3 +238,17 @@ dialog.hoja--oscura::backdrop { background: rgba(0, 0, 0, .6); }
   .qr-mesa__qr svg { width: 100%; height: 100%; }
   .qr-mesa__txt { font-family: var(--f-maquina); font-size: 9pt; }
 }
+
+/* ---------- Reserva resaltada (/admin/?reserva=FOLIO) ---------- */
+.destacada { margin-bottom: 16px; padding: 14px; border-radius: 18px; border: 2px solid var(--mostaza); background: rgba(224, 166, 58, .08); animation: llega .4s var(--ease-rebote); }
+.destacada__cab { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.destacada__cab p { font-family: var(--f-etiqueta); letter-spacing: .14em; font-size: 1.2rem; color: var(--mostaza); }
+.destacada .res { margin-bottom: 0; }
+.fila--destacada td { background: rgba(224, 166, 58, .18) !important; }
+
+/* ---------- Ajustes ---------- */
+.ajustes { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.estado-config { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-weight: 700; }
+.estado-config::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: #e5484d; }
+.estado-config--ok::before { background: #3ccf6e; }
+.resultado-prueba { margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: var(--panel-2); }
