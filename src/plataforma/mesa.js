@@ -1,4 +1,4 @@
-import { listar, insertar, suscribir } from './datos.js';
+import { listar, insertar, suscribir, subirFoto } from './datos.js';
 import { $, $$, esc, iniciarPlataforma, toast, sonar, linkUber, haceCuanto } from './ui.js';
 import { mesaPorId, nombreZona, MESAS } from './disponibilidad.js';
 import { escucharBrindis } from './brindis.js';
@@ -8,9 +8,10 @@ const numero = Number(new URLSearchParams(location.search).get('m'));
 const MESA = mesaPorId(numero);
 const CLAVE = `sy-mesa-${numero}`;
 
-const estado = { turnos: [], dedicatorias: [], llamados: [] };
+const estado = { turnos: [], dedicatorias: [], llamados: [], fotos: [] };
 const mios = (() => {
-  try { return JSON.parse(localStorage.getItem(CLAVE)) || { turnos: [], dedicatorias: [], llamados: [] }; } catch (e) { return { turnos: [], dedicatorias: [], llamados: [] }; }
+  const vacio = { turnos: [], dedicatorias: [], llamados: [], fotos: [] };
+  try { return { ...vacio, ...JSON.parse(localStorage.getItem(CLAVE)) }; } catch (e) { return vacio; }
 })();
 const guardarMios = () => {
   try { localStorage.setItem(CLAVE, JSON.stringify(mios)); } catch (e) {}
@@ -31,8 +32,9 @@ function iniciar() {
   $('#uber').href = linkUber();
   escucharBrindis();
   cargar();
-  suscribir(['turnos_micro', 'dedicatorias', 'llamados'], ({ tabla, nueva }) => {
-    const lista = { turnos_micro: estado.turnos, dedicatorias: estado.dedicatorias, llamados: estado.llamados }[tabla];
+  pintarMasExtra();
+  suscribir(['turnos_micro', 'dedicatorias', 'llamados', 'fotos'], ({ tabla, nueva }) => {
+    const lista = { turnos_micro: estado.turnos, dedicatorias: estado.dedicatorias, llamados: estado.llamados, fotos: estado.fotos }[tabla];
     const i = lista.findIndex((x) => x.id === nueva.id);
     if (i >= 0) lista[i] = { ...lista[i], ...nueva };
     else lista.push(nueva);
@@ -43,10 +45,12 @@ function iniciar() {
 }
 
 async function cargar() {
-  const [t, d, l] = await Promise.all([listar('turnos_micro'), listar('dedicatorias'), listar('llamados')]);
+  const [t, d, l, f] = await Promise.all([listar('turnos_micro'), listar('dedicatorias'), listar('llamados'), listar('fotos')]);
   estado.turnos = t;
   estado.dedicatorias = d;
   estado.llamados = l;
+  estado.fotos = f;
+  pintarMisFotos();
   pintarMiTurno();
   pintarMiDedicatoria();
   pintarFila();
@@ -284,8 +288,98 @@ function pintarLlamados() {
     .join('');
 }
 
+/* ============================================================
+   MÁS: Despechómetro, Tarjeta del Despechado y muro de fotos
+   ============================================================ */
+function pintarMasExtra() {
+  $('#mas-extra').innerHTML = `
+    <div class="mas-grid">
+      <a class="mas-card mas-card--rosa" href="/despechometro/?mesa=${MESA.numero}">
+        <svg aria-hidden="true"><use href="#i-ojo"/></svg><strong>El Despechómetro</strong><span>¿Qué tan ardido estás? Sácalo para tu story.</span></a>
+      <a class="mas-card mas-card--mostaza" href="/tarjeta/?mesa=${MESA.numero}">
+        <svg aria-hidden="true"><use href="#i-corazon"/></svg><strong>Tarjeta del Despechado</strong><span>5 sellos y el cantarito va por la casa.</span></a>
+    </div>
+    <form class="tarjeta muro" id="form-foto">
+      <h2 class="tarjeta__titulo">Tu foto a la pantalla</h2>
+      <p>Sube tu foto y, si el host la aprueba, sale en las pantallas del bar.</p>
+      <label class="muro__elegir">
+        <input type="file" accept="image/*" id="foto-archivo" required>
+        <span id="foto-nombre">📸 Escoger o tomar foto</span>
+      </label>
+      <img class="muro__preview" id="foto-preview" alt="" hidden>
+      <label class="check"><input type="checkbox" id="foto-ok" required>
+        <span>Acepto que Sin Yolanda muestre esta foto en sus pantallas y redes. Todos los que salen están de acuerdo.</span></label>
+      <button class="btn btn--mostaza btn--ancho" id="foto-enviar">Mandar a la pantalla</button>
+      <div id="mis-fotos" aria-live="polite"></div>
+    </form>`;
+
+  const archivo = $('#foto-archivo');
+  archivo.addEventListener('change', () => {
+    const f = archivo.files[0];
+    if (!f) return;
+    $('#foto-nombre').textContent = '📸 Cambiar foto';
+    const p = $('#foto-preview');
+    p.src = URL.createObjectURL(f);
+    p.hidden = false;
+  });
+  $('#form-foto').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!archivo.files[0]) return toast('Primero escoge una foto.', { tipo: 'error' });
+    if (!$('#foto-ok').checked) return toast('Falta aceptar el uso de la foto.', { tipo: 'error' });
+    const b = $('#foto-enviar');
+    b.disabled = true;
+    b.textContent = 'Subiendo...';
+    try {
+      const blob = await reducirFoto(archivo.files[0]);
+      const url = await subirFoto(blob);
+      const foto = await insertar('fotos', { mesa: MESA.numero, url, estado: 'pendiente' });
+      mios.fotos.push(foto.id);
+      guardarMios();
+      if (!estado.fotos.find((x) => x.id === foto.id)) estado.fotos.push(foto);
+      e.target.reset();
+      $('#foto-preview').hidden = true;
+      $('#foto-nombre').textContent = '📸 Escoger o tomar foto';
+      pintarMisFotos();
+      toast('¡Foto enviada! El host la revisa y sale en la pantalla.', { tipo: 'foto', icono: 'sol' });
+    } catch (er) {
+      toast('No se pudo subir la foto. Intenta otra vez.', { tipo: 'error' });
+    } finally {
+      b.disabled = false;
+      b.textContent = 'Mandar a la pantalla';
+    }
+  });
+}
+
+/** Reduce la foto a 1080 px de ancho máximo, JPEG. */
+async function reducirFoto(archivo) {
+  const img = await new Promise((ok, mal) => {
+    const i = new Image();
+    i.onload = () => ok(i);
+    i.onerror = mal;
+    i.src = URL.createObjectURL(archivo);
+  });
+  const escala = Math.min(1, 1080 / Math.max(img.width, img.height));
+  const c = document.createElement('canvas');
+  c.width = Math.round(img.width * escala);
+  c.height = Math.round(img.height * escala);
+  c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+  return new Promise((ok) => c.toBlob(ok, 'image/jpeg', 0.82));
+}
+
+function pintarMisFotos() {
+  const cont = $('#mis-fotos');
+  if (!cont) return;
+  const mis = estado.fotos.filter((f) => mios.fotos.includes(f.id)).sort((a, b) => b.created_at.localeCompare(a.created_at)).slice(0, 3);
+  const TXT = { pendiente: 'En revisión con el host', aprobada: '¡Ya está en la pantalla!', rechazada: 'Esta no pasó el filtro' };
+  cont.innerHTML = mis.map((f) => `<p class="mi-foto mi-foto--${f.estado}"><img src="${esc(f.url)}" alt="">${TXT[f.estado]}</p>`).join('');
+}
+
 /* ---------- En vivo ---------- */
 function pintarVivo(tabla, nueva) {
+  if (tabla === 'fotos') {
+    pintarMisFotos();
+    if (mios.fotos.includes(nueva.id) && nueva.estado === 'aprobada') toast('¡Tu foto ya está en la pantalla!', { tipo: 'foto', icono: 'sol' });
+  }
   if (tabla === 'turnos_micro') {
     pintarMiTurno();
     pintarFila();

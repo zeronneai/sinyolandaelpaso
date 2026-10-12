@@ -1,4 +1,5 @@
 import { CONFIG } from '../config.js';
+import { ENV } from './entorno.js';
 import { obtener, listar, actualizar, suscribir } from './datos.js';
 import { $, esc, iniciarPlataforma, toast, fechaLarga, hora, linkCalendario, linkWhatsApp, linkUber } from './ui.js';
 import { mesaPorId, nombreZona, horariosDelDia, mesasOcupadas } from './disponibilidad.js';
@@ -82,6 +83,9 @@ async function pintar() {
     ${R.corazon_roto ? '<div><dt>Corazón</dt><dd>Roto, pero aquí se canta 💔</dd></div>' : ''}
     ${R.comentarios ? `<div><dt>Comentarios</dt><dd>${esc(R.comentarios)}</dd></div>` : ''}`;
 
+  if (ENV.demo && !$('#demo-resena')) {
+    $('#datos').insertAdjacentHTML('afterend', `<a class="btn btn--rosa btn--ancho" id="demo-resena" style="margin-top:12px" href="/como-te-fue/?folio=${encodeURIComponent(R.folio)}">Demo: simular el "¿Cómo te fue?" del día siguiente</a>`);
+  }
   const cerrada = ['cancelada', 'se_fue', 'no_llego'].includes(R.estado);
   $('#modificar').hidden = cerrada;
   $('#cancelar').hidden = cerrada;

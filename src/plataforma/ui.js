@@ -54,6 +54,10 @@ export function haceCuanto(iso) {
   if (m < 1) return 'ahorita';
   if (m < 60) return `hace ${m} min`;
   const h = Math.floor(m / 60);
+  if (h >= 24) {
+    const d = Math.floor(h / 24);
+    return d === 1 ? 'ayer' : `hace ${d} días`;
+  }
   return `hace ${h} h ${m % 60} min`;
 }
 

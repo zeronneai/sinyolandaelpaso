@@ -35,7 +35,7 @@ cuerpo += insert('reservas', S.reservasSeed, (r) => ({
 }));
 cuerpo += insert('turnos_micro', S.turnosSeed, (t) => ({ ...conLit(t), created_at: hace(t._hace) }));
 cuerpo += insert('dedicatorias', S.dedicatoriasSeed, (d) => ({ ...conLit(d), created_at: hace(d._hace) }));
-cuerpo += insert('llamados', S.llamadosSeed, (l) => ({ ...conLit(l), created_at: hace(l._hace) }));
+cuerpo += insert('llamados', S.llamadosSeed, (l) => ({ ...conLit(l), atendido_at: l._atendido ? hace(l._hace - l._atendido) : 'null', created_at: hace(l._hace) }));
 cuerpo += insert('lista_espera', S.esperaSeed, (e) => ({ ...conLit(e), created_at: hace(e._hace) }));
 cuerpo += insert('clientes', S.clientesSeed, (c) => ({ ...conLit(c), ultima_visita: c._ultima ? `hoy - ${c._ultima}` : 'null' }));
 cuerpo += insert('resenas', S.resenasSeed, (r) => ({ ...conLit(r), created_at: hace(r._hace) }));

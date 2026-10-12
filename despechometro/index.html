@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>El Despechómetro | Sin Yolanda El Paso</title>
+  <meta name="description" content="¿Qué tan ardido estás? Haz el Despechómetro de Sin Yolanda El Paso y comparte tu nivel en tu story.">
+  <meta name="theme-color" content="#C4502A">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="El Despechómetro de Sin Yolanda El Paso">
+  <meta property="og:description" content="6 preguntas para saber qué tan ardido estás. Del 1 al Juan Gabriel en Bellas Artes.">
+  <meta property="og:image" content="/assets/fotos/fl_cerillos.jpg">
+  <link rel="stylesheet" href="/src/styles/plataforma.css">
+  <link rel="stylesheet" href="/src/styles/extras.css">
+  <script type="module" src="/src/plataforma/despechometro.js"></script>
+</head>
+<body class="app">
+  <!-- @iconos -->
+  <header class="app-top">
+    <!-- @papel -->
+    <a href="/" aria-label="Ir a Sin Yolanda El Paso"><span class="logo app-top__logo"></span></a>
+    <h1 class="app-top__titulo">El Despechómetro</h1>
+    <p class="app-top__sub">6 preguntas. Cero mentiras. Bueno, pocas.</p>
+  </header>
+  <main class="app-main">
+    <a class="btn-texto volver-mesa" id="volver-mesa" hidden>‹ Volver a la mesa</a>
+    <section id="quiz" aria-live="polite"></section>
+    <section id="resultado" hidden tabindex="-1"></section>
+  </main>
+</body>
+</html>

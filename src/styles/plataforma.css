@@ -181,6 +181,12 @@ body.con-tabs .aviso-local { margin-bottom: 96px; }
 fieldset.campo { border: 0; padding: 0; margin: 0; }
 .contador { float: right; font-size: .8rem; color: #6b4a3a; font-weight: 400; }
 
+/* ---------- Checkbox y honeypot ---------- */
+.campo--oculto { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400 !important; cursor: pointer; }
+.check input { width: 24px; height: 24px; min-height: 0; flex: none; accent-color: var(--chocolate); margin-top: 1px; }
+
+
 /* ---------- Chips (radio o checkbox con look de botón) ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { position: relative; }

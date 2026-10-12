@@ -126,10 +126,6 @@
 .mesa-elegida { margin-top: 10px; text-align: center; font-size: 1.05rem; min-height: 1.6em; }
 
 /* ---------- Datos ---------- */
-.campo--oculto { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400 !important; cursor: pointer; }
-.check input { width: 24px; height: 24px; min-height: 0; flex: none; accent-color: var(--chocolate); margin-top: 1px; }
-
 /* ---------- Extras ---------- */
 .extras { display: grid; gap: 12px; }
 .extra {

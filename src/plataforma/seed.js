@@ -49,6 +49,11 @@ export const dedicatoriasSeed = [
 export const llamadosSeed = [
   { mesa: 5, tipo: 'mesero', estado: 'pendiente', _hace: 2 },
   { mesa: 2, tipo: 'cuenta', estado: 'pendiente', _hace: 7 },
+  // Ya atendidos (para el reporte de tiempo promedio). `_atendido`: minutos después de creados.
+  { mesa: 3, tipo: 'mesero', estado: 'atendido', _hace: 50, _atendido: 2 },
+  { mesa: 8, tipo: 'cuenta', estado: 'atendido', _hace: 40, _atendido: 6 },
+  { mesa: 11, tipo: 'mesero', estado: 'atendido', _hace: 25, _atendido: 3 },
+  { mesa: 18, tipo: 'ayuda', estado: 'atendido', _hace: 15, _atendido: 4 },
 ];
 
 export const esperaSeed = [

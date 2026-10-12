@@ -252,3 +252,51 @@ dialog.hoja--oscura::backdrop { background: rgba(0, 0, 0, .6); }
 .estado-config::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: #e5484d; }
 .estado-config--ok::before { background: #3ccf6e; }
 .resultado-prueba { margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: var(--panel-2); }
+
+/* ---------- Fotos ---------- */
+.fotos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.fotos-grid--chica { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.foto-mod { margin: 0; padding: 10px; border-radius: 14px; background: var(--panel); border: 1px solid var(--linea); }
+.foto-mod img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; }
+.foto-mod figcaption { color: var(--tenue); font-size: .85rem; margin: 6px 0; }
+.foto-mod__btns { display: flex; gap: 6px; align-items: center; }
+.foto-mod__btns .btn { box-shadow: none; flex: 1; }
+
+/* ---------- Lealtad ---------- */
+.lealtad { display: grid; gap: 16px; }
+@media (min-width: 1000px) { .lealtad { grid-template-columns: 360px 1fr; align-items: start; } }
+.buscar { width: 100%; min-height: 46px; padding: 8px 12px; border-radius: 12px; border: 1px solid var(--linea); background: var(--panel-2); color: var(--texto); font: inherit; margin-bottom: 10px; }
+.leal-lista { display: grid; gap: 4px; list-style: none; padding: 0; margin-bottom: 14px; }
+.leal-item { display: flex; justify-content: space-between; align-items: center; width: 100%; min-height: 52px; padding: 8px 12px; border-radius: 10px; border: 1px solid transparent; background: var(--panel-2); color: var(--texto); text-align: left; }
+.leal-item small { display: block; color: var(--tenue); }
+.leal-item.activo { border-color: var(--mostaza); }
+.leal-item__sellos { color: var(--mostaza); letter-spacing: 2px; }
+.leal-nuevo { display: grid; gap: 6px; }
+.leal-nuevo input { min-height: 42px; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--linea); background: var(--panel-2); color: var(--texto); font: inherit; }
+.leal-nuevo .btn { box-shadow: none; }
+.leal-carta { max-width: 460px; }
+
+/* ---------- Reseñas ---------- */
+.resenas { display: grid; gap: 10px; }
+.resena-item { padding: 14px 16px; border-radius: 14px; background: var(--panel); border: 1px solid var(--linea); display: grid; gap: 4px; }
+.resena-item--privada { border-left: 6px solid #e5484d; }
+.resena-item__estrellas { color: var(--mostaza); font-size: 1.3rem; letter-spacing: 2px; }
+.resena-item__estrellas span { color: rgba(243, 228, 200, .2); }
+.resena-item__txt { font-family: var(--f-maquina); }
+.resena-item__de { color: var(--tenue); font-size: .85rem; }
+.resena-item__de a { color: var(--mostaza); }
+
+/* ---------- Clientes ---------- */
+.crm-input { width: 100%; min-width: 160px; min-height: 36px; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--linea); background: transparent; color: var(--texto); font: inherit; font-size: .85rem; }
+.crm-input:focus { background: var(--panel-2); }
+
+/* ---------- Reportes (barras de una sola serie, magnitud) ---------- */
+.reportes-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+.barras { display: grid; gap: 8px; list-style: none; padding: 0; }
+.barra { display: grid; grid-template-columns: 130px 1fr auto; align-items: center; gap: 10px; padding: 2px 0; border-radius: 6px; }
+.barra:hover { background: rgba(255, 255, 255, .04); }
+.barra__etq { font-size: .88rem; color: var(--texto); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.barra__pista { height: 14px; border-radius: 0 4px 4px 0; background: rgba(243, 228, 200, .06); overflow: hidden; }
+.barra__relleno { display: block; height: 100%; min-width: 3px; border-radius: 0 4px 4px 0; background: var(--mostaza); }
+.barra__v { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--texto); white-space: nowrap; }
+.barra__v small { font-weight: 400; color: var(--tenue); }

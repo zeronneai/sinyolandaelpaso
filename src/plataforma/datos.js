@@ -145,7 +145,7 @@ export function generarSeedLocal() {
     ),
     turnos_micro: SEED.turnosSeed.map((t) => base(t, { created_at: haceISO(t._hace) })),
     dedicatorias: SEED.dedicatoriasSeed.map((d) => base(d, { created_at: haceISO(d._hace) })),
-    llamados: SEED.llamadosSeed.map((l) => base(l, { atendido_at: null, created_at: haceISO(l._hace) })),
+    llamados: SEED.llamadosSeed.map((l) => base(l, { atendido_at: l._atendido ? haceISO(l._hace - l._atendido) : null, created_at: haceISO(l._hace) })),
     lista_espera: SEED.esperaSeed.map((e) => base(e, { created_at: haceISO(e._hace) })),
     clientes: SEED.clientesSeed.map((c) => base(c, { ultima_visita: c._ultima ? fechaMas(hoy, -c._ultima) : null })),
     resenas: SEED.resenasSeed.map((r) => base(r, { created_at: haceISO(r._hace) })),

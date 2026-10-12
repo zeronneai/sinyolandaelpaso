@@ -41,21 +41,21 @@ begin
   on conflict (id) do update set numero = excluded.numero, zona = excluded.zona, capacidad = excluded.capacidad, x = excluded.x, y = excluded.y, forma = excluded.forma;
 
   insert into public.reservas (extras, corazon_roto, comentarios, deposito_estado, monto_deposito, folio, hora, personas, mesa_id, zona, nombre, correo, telefono, ocasion, estado, source, fecha, llegada_at, created_at) values
-    ('[{"id":"pastel","cantidad":1}]'::jsonb, false, null, 'pagado', 35, 'SY-EP-DEMO01', '19:00', 4, 2, 'cerca-micro', 'Valeria Domínguez', 'valeria.dominguez@example.com', '+1 915 555 0141', 'cumpleanos', 'sentada', 'instagram', hoy + 0, now() - interval '35 minutes', now() - interval '3026 minutes'),
-    ('[{"id":"despedida","cantidad":1}]'::jsonb, false, 'Somos 8 y la novia no sabe nada. Shhh.', 'pagado', 50, 'SY-EP-DEMO02', '19:30', 8, 5, 'cerca-micro', 'Mariana Treviño', 'mariana.trevino@example.com', '+52 656 555 0192', 'despedida', 'llego', 'tiktok', hoy + 0, now() - interval '6 minutes', now() - interval '3205 minutes'),
-    ('[]'::jsonb, true, null, 'no_aplica', 0, 'SY-EP-DEMO03', '20:00', 2, 7, 'cerca-micro', 'Jesús "Chuy" Arellano', 'chuy.arellano@example.com', '+1 915 555 0177', 'cantar', 'confirmada', 'google', hoy + 0, null, now() - interval '2977 minutes'),
-    ('[{"id":"botella","cantidad":1}]'::jsonb, true, 'Firmó ayer. Queremos que se sienta reina.', 'pagado', 120, 'SY-EP-DEMO04', '20:30', 6, 3, 'cerca-micro', 'Daniela Robles', 'dani.robles@example.com', '+1 915 555 0118', 'divorcio', 'confirmada', 'instagram', hoy + 0, null, now() - interval '2930 minutes'),
-    ('[]'::jsonb, false, null, 'no_aplica', 0, 'SY-EP-DEMO05', '21:00', 4, 11, 'tranquis', 'Carlos Ochoa', 'carlos.ochoa@example.com', '+1 915 555 0163', 'cantar', 'pendiente', 'creador-lalo', hoy + 0, null, now() - interval '2944 minutes'),
-    ('[]'::jsonb, true, null, 'no_aplica', 0, 'SY-EP-DEMO06', '21:30', 3, 18, 'barra', 'Andrea Saucedo', 'andrea.saucedo@example.com', '+52 656 555 0110', 'cantar', 'pendiente', 'instagram', hoy + 0, null, now() - interval '3314 minutes'),
-    ('[{"id":"mariachi","cantidad":1}]'::jsonb, false, 'Posada de la oficina, factura a nombre de la empresa.', 'pagado', 200, 'SY-EP-DEMO07', '22:00', 12, 8, 'cerca-micro', 'Luis Fernando Holguín', 'lf.holguin@example.com', '+1 915 555 0155', 'posada', 'confirmada', 'google', hoy + 0, null, now() - interval '3111 minutes'),
-    ('[]'::jsonb, false, null, 'no_aplica', 0, 'SY-EP-DEMO08', '19:00', 2, 9, 'tranquis', 'Paola Chávez', 'paola.chavez@example.com', '+1 915 555 0124', 'cantar', 'confirmada', 'instagram', dia_abierto(1), null, now() - interval '3334 minutes'),
-    ('[{"id":"pastel","cantidad":1}]'::jsonb, false, null, 'pendiente', 35, 'SY-EP-DEMO09', '20:30', 6, 4, 'cerca-micro', 'Ricardo Montes', 'ricardo.montes@example.com', '+1 915 555 0181', 'cumpleanos', 'pendiente', 'tiktok', dia_abierto(1), null, now() - interval '2989 minutes'),
-    ('[{"id":"despedida","cantidad":1},{"id":"botella","cantidad":1}]'::jsonb, false, null, 'pagado', 170, 'SY-EP-DEMO10', '21:00', 10, 14, 'tranquis', 'Karla Villalobos', 'karla.villalobos@example.com', '+52 656 555 0137', 'despedida', 'confirmada', 'instagram', dia_abierto(2), null, now() - interval '3478 minutes'),
-    ('[]'::jsonb, true, null, 'no_aplica', 0, 'SY-EP-DEMO11', '22:00', 4, 1, 'cerca-micro', 'Brenda Lucero', 'brenda.lucero@example.com', '+1 915 555 0109', 'divorcio', 'confirmada', 'creador-lalo', dia_abierto(2), null, now() - interval '3335 minutes'),
-    ('[]'::jsonb, false, null, 'no_aplica', 0, 'SY-EP-DEMO12', '10:30', 8, 24, 'terraza', 'Óscar Meraz', 'oscar.meraz@example.com', '+1 915 555 0146', 'recovery-brunch', 'confirmada', 'google', hoy + (7 - extract(dow from hoy)::int), null, now() - interval '3145 minutes'),
-    ('[]'::jsonb, true, null, 'no_aplica', 0, 'SY-EP-DEMO13', '12:00', 4, 21, 'terraza', 'Fernanda Quiñones', 'fer.quinones@example.com', '+52 656 555 0170', 'recovery-brunch', 'pendiente', 'instagram', hoy + (7 - extract(dow from hoy)::int), null, now() - interval '3221 minutes'),
-    ('[]'::jsonb, false, null, 'no_aplica', 0, 'SY-EP-DEMO14', '19:30', 2, 10, 'tranquis', 'Miguel Ángel Durán', 'miguel.duran@example.com', '+1 915 555 0158', 'cantar', 'cancelada', 'google', dia_abierto(4), null, now() - interval '3202 minutes'),
-    ('[{"id":"pastel","cantidad":1},{"id":"mariachi","cantidad":1}]'::jsonb, false, null, 'pagado', 185, 'SY-EP-DEMO15', '20:00', 6, 22, 'terraza', 'Ximena Portillo', 'ximena.portillo@example.com', '+1 915 555 0133', 'cumpleanos', 'confirmada', 'tiktok', dia_abierto(5), null, now() - interval '3307 minutes');
+    ('[{"id":"pastel","cantidad":1}]'::jsonb, false, null, 'pagado', 35, 'SY-EP-DEMO01', '19:00', 4, 2, 'cerca-micro', 'Valeria Domínguez', 'valeria.dominguez@example.com', '+1 915 555 0141', 'cumpleanos', 'sentada', 'instagram', hoy + 0, now() - interval '35 minutes', now() - interval '3199 minutes'),
+    ('[{"id":"despedida","cantidad":1}]'::jsonb, false, 'Somos 8 y la novia no sabe nada. Shhh.', 'pagado', 50, 'SY-EP-DEMO02', '19:30', 8, 5, 'cerca-micro', 'Mariana Treviño', 'mariana.trevino@example.com', '+52 656 555 0192', 'despedida', 'llego', 'tiktok', hoy + 0, now() - interval '6 minutes', now() - interval '3063 minutes'),
+    ('[]'::jsonb, true, null, 'no_aplica', 0, 'SY-EP-DEMO03', '20:00', 2, 7, 'cerca-micro', 'Jesús "Chuy" Arellano', 'chuy.arellano@example.com', '+1 915 555 0177', 'cantar', 'confirmada', 'google', hoy + 0, null, now() - interval '3057 minutes'),
+    ('[{"id":"botella","cantidad":1}]'::jsonb, true, 'Firmó ayer. Queremos que se sienta reina.', 'pagado', 120, 'SY-EP-DEMO04', '20:30', 6, 3, 'cerca-micro', 'Daniela Robles', 'dani.robles@example.com', '+1 915 555 0118', 'divorcio', 'confirmada', 'instagram', hoy + 0, null, now() - interval '3426 minutes'),
+    ('[]'::jsonb, false, null, 'no_aplica', 0, 'SY-EP-DEMO05', '21:00', 4, 11, 'tranquis', 'Carlos Ochoa', 'carlos.ochoa@example.com', '+1 915 555 0163', 'cantar', 'pendiente', 'creador-lalo', hoy + 0, null, now() - interval '2911 minutes'),
+    ('[]'::jsonb, true, null, 'no_aplica', 0, 'SY-EP-DEMO06', '21:30', 3, 18, 'barra', 'Andrea Saucedo', 'andrea.saucedo@example.com', '+52 656 555 0110', 'cantar', 'pendiente', 'instagram', hoy + 0, null, now() - interval '2959 minutes'),
+    ('[{"id":"mariachi","cantidad":1}]'::jsonb, false, 'Posada de la oficina, factura a nombre de la empresa.', 'pagado', 200, 'SY-EP-DEMO07', '22:00', 12, 8, 'cerca-micro', 'Luis Fernando Holguín', 'lf.holguin@example.com', '+1 915 555 0155', 'posada', 'confirmada', 'google', hoy + 0, null, now() - interval '3438 minutes'),
+    ('[]'::jsonb, false, null, 'no_aplica', 0, 'SY-EP-DEMO08', '19:00', 2, 9, 'tranquis', 'Paola Chávez', 'paola.chavez@example.com', '+1 915 555 0124', 'cantar', 'confirmada', 'instagram', dia_abierto(1), null, now() - interval '3462 minutes'),
+    ('[{"id":"pastel","cantidad":1}]'::jsonb, false, null, 'pendiente', 35, 'SY-EP-DEMO09', '20:30', 6, 4, 'cerca-micro', 'Ricardo Montes', 'ricardo.montes@example.com', '+1 915 555 0181', 'cumpleanos', 'pendiente', 'tiktok', dia_abierto(1), null, now() - interval '2891 minutes'),
+    ('[{"id":"despedida","cantidad":1},{"id":"botella","cantidad":1}]'::jsonb, false, null, 'pagado', 170, 'SY-EP-DEMO10', '21:00', 10, 14, 'tranquis', 'Karla Villalobos', 'karla.villalobos@example.com', '+52 656 555 0137', 'despedida', 'confirmada', 'instagram', dia_abierto(2), null, now() - interval '3474 minutes'),
+    ('[]'::jsonb, true, null, 'no_aplica', 0, 'SY-EP-DEMO11', '22:00', 4, 1, 'cerca-micro', 'Brenda Lucero', 'brenda.lucero@example.com', '+1 915 555 0109', 'divorcio', 'confirmada', 'creador-lalo', dia_abierto(2), null, now() - interval '3227 minutes'),
+    ('[]'::jsonb, false, null, 'no_aplica', 0, 'SY-EP-DEMO12', '10:30', 8, 24, 'terraza', 'Óscar Meraz', 'oscar.meraz@example.com', '+1 915 555 0146', 'recovery-brunch', 'confirmada', 'google', hoy + (7 - extract(dow from hoy)::int), null, now() - interval '3011 minutes'),
+    ('[]'::jsonb, true, null, 'no_aplica', 0, 'SY-EP-DEMO13', '12:00', 4, 21, 'terraza', 'Fernanda Quiñones', 'fer.quinones@example.com', '+52 656 555 0170', 'recovery-brunch', 'pendiente', 'instagram', hoy + (7 - extract(dow from hoy)::int), null, now() - interval '3383 minutes'),
+    ('[]'::jsonb, false, null, 'no_aplica', 0, 'SY-EP-DEMO14', '19:30', 2, 10, 'tranquis', 'Miguel Ángel Durán', 'miguel.duran@example.com', '+1 915 555 0158', 'cantar', 'cancelada', 'google', dia_abierto(4), null, now() - interval '3236 minutes'),
+    ('[{"id":"pastel","cantidad":1},{"id":"mariachi","cantidad":1}]'::jsonb, false, null, 'pagado', 185, 'SY-EP-DEMO15', '20:00', 6, 22, 'terraza', 'Ximena Portillo', 'ximena.portillo@example.com', '+1 915 555 0133', 'cumpleanos', 'confirmada', 'tiktok', dia_abierto(5), null, now() - interval '3432 minutes');
 
   insert into public.turnos_micro (mesa, nombre, cancion, artista, estado, created_at) values
     (2, 'Valeria', 'Hasta que te conocí', 'Juan Gabriel', 'cantando', now() - interval '4 minutes'),
@@ -70,9 +70,13 @@ begin
     (11, 'La Puerta Negra', 'Mi ex', 'Ni aunque me pongan la puerta negra.', true, 'cantada', now() - interval '40 minutes'),
     (18, 'Tu recuerdo y yo', 'Todos los de la barra', 'Salud por los que no nos supieron querer.', false, 'en_fila', now() - interval '2 minutes');
 
-  insert into public.llamados (mesa, tipo, estado, created_at) values
-    (5, 'mesero', 'pendiente', now() - interval '2 minutes'),
-    (2, 'cuenta', 'pendiente', now() - interval '7 minutes');
+  insert into public.llamados (mesa, tipo, estado, atendido_at, created_at) values
+    (5, 'mesero', 'pendiente', null, now() - interval '2 minutes'),
+    (2, 'cuenta', 'pendiente', null, now() - interval '7 minutes'),
+    (3, 'mesero', 'atendido', now() - interval '48 minutes', now() - interval '50 minutes'),
+    (8, 'cuenta', 'atendido', now() - interval '34 minutes', now() - interval '40 minutes'),
+    (11, 'mesero', 'atendido', now() - interval '22 minutes', now() - interval '25 minutes'),
+    (18, 'ayuda', 'atendido', now() - interval '11 minutes', now() - interval '15 minutes');
 
   insert into public.lista_espera (nombre, telefono, personas, estado, created_at) values
     ('Rocío Galindo', '+1 915 555 0190', 4, 'esperando', now() - interval '22 minutes'),
