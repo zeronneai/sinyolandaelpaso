@@ -41,6 +41,8 @@ Sin variables de Supabase todo corre en **modo local**: los datos viven en `loca
 
 El botón **Reiniciar demo** del admin llama a la función `reiniciar_demo()`, que borra todo y vuelve a sembrar.
 
+**Si ya habías corrido una versión anterior:** vuelve a correr `schema.sql` completo y luego `seed.sql`. El schema es seguro de correr varias veces y migra solo lo que cambió (por ejemplo, la columna `corazon_roto` ahora se llama `modo_fiesta`).
+
 ## 2. Variables de entorno en Vercel
 
 En **Vercel > Project > Settings > Environment Variables** (las `VITE_` van al navegador; las demás solo a las funciones):

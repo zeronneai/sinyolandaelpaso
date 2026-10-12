@@ -47,6 +47,22 @@ create table if not exists public.reservas (
 );
 create index if not exists reservas_fecha_idx on public.reservas (fecha);
 
+-- Migración: versiones anteriores tenían "corazon_roto"; ahora es "modo_fiesta".
+-- Seguro de correr varias veces.
+do $$
+begin
+  if exists (select 1 from information_schema.columns
+             where table_schema = 'public' and table_name = 'reservas' and column_name = 'corazon_roto') then
+    if exists (select 1 from information_schema.columns
+               where table_schema = 'public' and table_name = 'reservas' and column_name = 'modo_fiesta') then
+      alter table public.reservas drop column corazon_roto;
+    else
+      alter table public.reservas rename column corazon_roto to modo_fiesta;
+    end if;
+  end if;
+end $$;
+alter table public.reservas add column if not exists modo_fiesta boolean not null default false;
+
 create table if not exists public.lista_espera (
   id          uuid primary key default gen_random_uuid(),
   nombre      text not null,
