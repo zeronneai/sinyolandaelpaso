@@ -1,0 +1,10 @@
+@import '@fontsource/anton';
+@import '@fontsource/bebas-neue';
+@import '@fontsource/special-elite';
+@import '@fontsource/permanent-marker';
+@import '@fontsource-variable/inter';
+
+@import './base.css';
+@import './cortina.css';
+@import './hero.css';
+@import './secciones.css';
