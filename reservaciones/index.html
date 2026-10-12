@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Aparta tu mesa | Sin Yolanda El Paso</title>
+  <meta name="description" content="Reserva en Sin Yolanda El Paso: escoge tu noche, tu mesa en el mapa y llega directo a cantar. Cantina mexicana y bar de despecho en Vin Rambla.">
+  <meta name="theme-color" content="#C4502A">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Aparta tu mesa en Sin Yolanda El Paso">
+  <meta property="og:description" content="Tres toques y el micrófono ya es tuyo.">
+  <meta property="og:image" content="/assets/fotos/fl_cerillos.jpg">
+  <link rel="stylesheet" href="/src/styles/plataforma.css">
+  <link rel="stylesheet" href="/src/styles/reservaciones.css">
+  <script type="module" src="/src/plataforma/reservaciones.js"></script>
+</head>
+<body class="app">
+  <!-- @iconos -->
+
+  <header class="app-top">
+    <!-- @papel -->
+    <a href="/" class="app-top__volver" aria-label="Volver a Sin Yolanda El Paso"><span class="logo app-top__logo"></span></a>
+    <h1 class="app-top__titulo">Aparta tu mesa</h1>
+    <p class="app-top__sub">Tres toques y el micrófono ya es tuyo.</p>
+  </header>
+
+  <nav class="progreso" aria-label="Pasos de la reservación">
+    <ol>
+      <li data-paso="1"><span>1</span> Cuándo</li>
+      <li data-paso="2"><span>2</span> Mesa</li>
+      <li data-paso="3"><span>3</span> Datos</li>
+      <li data-paso="4"><span>4</span> Extras</li>
+      <li data-paso="5"><span>5</span> Depósito</li>
+    </ol>
+    <div class="progreso__barra"><span></span></div>
+  </nav>
+
+  <main class="app-main" id="app">
+    <noscript><p class="tarjeta">Para apartar necesitas JavaScript. También puedes reservar en <a href="https://www.opentable.com/r/sin-yolanda-el-paso">OpenTable</a>.</p></noscript>
+
+    <!-- PASO 1 -->
+    <section class="paso" id="paso-1" aria-labelledby="p1-t" hidden>
+      <h2 class="paso__titulo" id="p1-t">¿Cuándo y cuántos?</h2>
+
+      <div class="tarjeta">
+        <span class="etiqueta" id="cal-etq">Escoge el día</span>
+        <div class="calendario" id="calendario" aria-labelledby="cal-etq"></div>
+        <p class="ayuda">Lunes y martes descansamos. Puedes apartar hasta 60 días antes.</p>
+      </div>
+
+      <div class="tarjeta">
+        <span class="etiqueta" id="pers-etq">¿Cuántos vienen?</span>
+        <div class="personas">
+          <div class="stepper" role="group" aria-labelledby="pers-etq">
+            <button type="button" id="menos" aria-label="Una persona menos">−</button>
+            <output id="personas" aria-live="polite">2<small>personas</small></output>
+            <button type="button" id="mas" aria-label="Una persona más">+</button>
+          </div>
+        </div>
+        <p class="aviso-grupo" id="aviso-grupo" hidden>Grupo grande: te contactamos para armarlo bien.</p>
+      </div>
+
+      <div class="tarjeta">
+        <span class="etiqueta" id="hora-etq">¿A qué hora?</span>
+        <div class="horas chips" id="horas" role="radiogroup" aria-labelledby="hora-etq">
+          <p class="vacio">Primero escoge el día.</p>
+        </div>
+      </div>
+
+      <div class="paso__acciones">
+        <button type="button" class="btn btn--mostaza btn--grande btn--ancho" data-ir="2" id="p1-sig" disabled>Siguiente: tu mesa</button>
+      </div>
+    </section>
+
+    <!-- PASO 2 -->
+    <section class="paso" id="paso-2" aria-labelledby="p2-t" hidden>
+      <h2 class="paso__titulo" id="p2-t">¿Dónde te sientas?</h2>
+      <p class="paso__resumen" id="p2-resumen"></p>
+
+      <div class="tarjeta tarjeta--mapa">
+        <ul class="leyenda" role="list">
+          <li><i class="leyenda__libre"></i> Libre</li>
+          <li><i class="leyenda__elegida"></i> Tu mesa</li>
+          <li><i class="leyenda__ocupada"></i> Ocupada</li>
+          <li><i class="leyenda__chica"></i> Muy chica</li>
+        </ul>
+        <div class="mapa-scroll"><div id="mapa"></div></div>
+        <span class="mapa-pista" aria-hidden="true">Desliza para ver todo el lugar ↔</span>
+        <p class="mesa-elegida" id="mesa-elegida" aria-live="polite">Toca una mesa libre.</p>
+      </div>
+
+      <div class="tarjeta" id="grupo-grande" hidden>
+        <h3 class="tarjeta__titulo">Grupo grande, mesa grande</h3>
+        <p>Para más de 12 personas el host junta mesas para ustedes. Dinos qué zona les late:</p>
+        <div class="chips" role="radiogroup" aria-label="Zona preferida" id="zona-pref"></div>
+      </div>
+
+      <div class="paso__acciones">
+        <button type="button" class="btn-texto" data-ir="1">Atrás</button>
+        <button type="button" class="btn btn--mostaza btn--grande" data-ir="3" id="p2-sig" disabled>Siguiente: tus datos</button>
+      </div>
+    </section>
+
+    <!-- PASO 3 -->
+    <section class="paso" id="paso-3" aria-labelledby="p3-t" hidden>
+      <h2 class="paso__titulo" id="p3-t">Tus datos</h2>
+      <form class="tarjeta" id="form-datos" novalidate>
+        <div class="campo">
+          <label for="nombre">Nombre completo</label>
+          <input id="nombre" name="nombre" autocomplete="name" required>
+        </div>
+        <div class="campo">
+          <label for="correo">Correo</label>
+          <input id="correo" name="correo" type="email" autocomplete="email" inputmode="email" required>
+        </div>
+        <div class="campo">
+          <label for="telefono">WhatsApp</label>
+          <input id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" placeholder="915 555 0123 o +52 656..." required>
+          <p class="ayuda">Número de EE. UU. o de México (+52). Por aquí te confirmamos.</p>
+        </div>
+        <fieldset class="campo">
+          <legend>Ocasión</legend>
+          <div class="chips" id="ocasiones"></div>
+        </fieldset>
+        <div class="campo">
+          <label class="toggle">
+            <input type="checkbox" id="corazon" name="corazon_roto">
+            <span class="toggle__texto">Vengo con el corazón roto<small>Tranquilo, aquí no se llora: aquí se canta.</small></span>
+            <span class="toggle__switch" aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="campo">
+          <label for="comentarios">Comentarios <span class="contador" id="contador">0/500</span></label>
+          <textarea id="comentarios" name="comentarios" maxlength="500" placeholder="Alergias, sorpresas, el nombre de la cumpleañera..."></textarea>
+        </div>
+        <div class="campo campo--oculto" aria-hidden="true">
+          <label for="sitio">No llenes esto</label>
+          <input id="sitio" name="sitio" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="campo">
+          <label class="check">
+            <input type="checkbox" id="privacidad" name="privacidad" required>
+            <span>Acepto el <a href="/#aviso-privacidad" target="_blank">aviso de privacidad</a>.</span>
+          </label>
+        </div>
+      </form>
+      <div class="paso__acciones">
+        <button type="button" class="btn-texto" data-ir="2">Atrás</button>
+        <button type="button" class="btn btn--mostaza btn--grande" id="p3-sig">Siguiente: extras</button>
+      </div>
+    </section>
+
+    <!-- PASO 4 -->
+    <section class="paso" id="paso-4" aria-labelledby="p4-t" hidden>
+      <h2 class="paso__titulo" id="p4-t">Hazla más especial</h2>
+      <p class="paso__resumen">Opcional. Los precios están por confirmar.</p>
+      <div class="extras" id="extras"></div>
+      <div class="tarjeta total" id="total-extras"></div>
+      <p class="estado-envio" id="p4-error" role="alert" hidden></p>
+      <div class="paso__acciones">
+        <button type="button" class="btn-texto" data-ir="3">Atrás</button>
+        <button type="button" class="btn btn--mostaza btn--grande" id="p4-sig">Apartar mi mesa</button>
+      </div>
+    </section>
+
+    <!-- PASO 5 -->
+    <section class="paso" id="paso-5" aria-labelledby="p5-t" hidden>
+      <h2 class="paso__titulo" id="p5-t">Tu depósito</h2>
+      <div class="tarjeta" id="resumen-deposito"></div>
+      <p class="estado-envio" id="p5-error" role="alert" hidden></p>
+      <div class="paso__acciones">
+        <button type="button" class="btn-texto" data-ir="4">Atrás</button>
+        <button type="button" class="btn btn--mostaza btn--grande" id="p5-pagar">Pagar depósito</button>
+      </div>
+    </section>
+
+    <!-- CONFIRMACIÓN -->
+    <section class="paso exito" id="paso-6" aria-labelledby="p6-t" hidden tabindex="-1">
+      <svg class="exito__palomita" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="46"/><path d="M27 50l14 14 28-30"/></svg>
+      <h2 class="exito__titulo" id="p6-t">¡Ya quedó, compa!</h2>
+      <p class="maquina exito__sub" id="p6-sub"></p>
+      <div id="boleto" class="exito__boleto"></div>
+      <div class="botones">
+        <button type="button" class="btn btn--mostaza" id="guardar-boleto">Guardar boleto</button>
+        <a class="btn" id="calendario-link" target="_blank" rel="noopener">Agregar al calendario</a>
+        <a class="btn btn--rosa" id="invitar" target="_blank" rel="noopener">Invita a tu bola</a>
+      </div>
+      <a class="btn btn--chocolate btn--grande btn--ancho exito__noche" id="ver-noche">Ver mi noche</a>
+    </section>
+  </main>
+</body>
+</html>

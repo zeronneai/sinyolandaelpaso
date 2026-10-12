@@ -1,0 +1,21 @@
+<svg class="papel-picado papel-picado--app" viewBox="0 0 600 70" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
+  <defs>
+    <mask id="pp-app-recorte" maskContentUnits="objectBoundingBox">
+      <rect width="1" height="1" fill="#fff"/>
+      <path d="M.5 .2l.08 .1-.08 .1-.08-.1zM.22 .5a.06 .05 0 1 0 .001 0zM.78 .5a.06 .05 0 1 0 .001 0zM.5 .5l.13 .16-.13 .16-.13-.16z" fill="#000"/>
+    </mask>
+    <path id="pp-app-bandera" d="M0 0h44v44l-3.7 5-3.6-5-3.7 5-3.7-5-3.6 5-3.7-5-3.7 5-3.6-5-3.7 5-3.7-5-3.6 5L0 44z" mask="url(#pp-app-recorte)"/>
+  </defs>
+  <path class="papel-picado__hilo" d="M-10 4 Q300 16 610 4" fill="none"/>
+  <use href="#pp-app-bandera" class="bandera" x="8" y="5" fill="var(--mostaza)" style="--d:0s"/>
+  <use href="#pp-app-bandera" class="bandera" x="62" y="8" fill="var(--crema)" style="--d:-.6s"/>
+  <use href="#pp-app-bandera" class="bandera" x="116" y="10" fill="var(--rosa)" style="--d:-1.2s"/>
+  <use href="#pp-app-bandera" class="bandera" x="170" y="11" fill="var(--chocolate)" style="--d:-.3s"/>
+  <use href="#pp-app-bandera" class="bandera" x="224" y="12" fill="var(--mostaza)" style="--d:-1.6s"/>
+  <use href="#pp-app-bandera" class="bandera" x="278" y="12" fill="var(--crema)" style="--d:-.9s"/>
+  <use href="#pp-app-bandera" class="bandera" x="332" y="12" fill="var(--rosa)" style="--d:-2s"/>
+  <use href="#pp-app-bandera" class="bandera" x="386" y="11" fill="var(--chocolate)" style="--d:-.4s"/>
+  <use href="#pp-app-bandera" class="bandera" x="440" y="10" fill="var(--mostaza)" style="--d:-1.4s"/>
+  <use href="#pp-app-bandera" class="bandera" x="494" y="8" fill="var(--crema)" style="--d:-.7s"/>
+  <use href="#pp-app-bandera" class="bandera" x="548" y="5" fill="var(--rosa)" style="--d:-1.8s"/>
+</svg>

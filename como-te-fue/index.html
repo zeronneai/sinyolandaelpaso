@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>¿Cómo te fue? | Sin Yolanda El Paso</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#C4502A">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/src/styles/plataforma.css">
+  <link rel="stylesheet" href="/src/styles/extras.css">
+  <script type="module" src="/src/plataforma/como-te-fue.js"></script>
+</head>
+<body class="app">
+  <!-- @iconos -->
+  <header class="app-top">
+    <!-- @papel -->
+    <a href="/" aria-label="Ir a Sin Yolanda El Paso"><span class="logo app-top__logo"></span></a>
+    <h1 class="app-top__titulo">¿Cómo te fue?</h1>
+    <p class="app-top__sub" id="sub">Cuéntanos de tu noche en Sin Yolanda.</p>
+  </header>
+  <main class="app-main">
+    <form class="tarjeta resena" id="form-resena">
+      <fieldset class="estrellas">
+        <legend class="etiqueta">Califica tu noche</legend>
+        <div class="estrellas__fila">
+          <input type="radio" name="estrellas" id="e1" value="1"><label for="e1" title="1 estrella">★<span class="sr-only">1 estrella</span></label>
+          <input type="radio" name="estrellas" id="e2" value="2"><label for="e2" title="2 estrellas">★<span class="sr-only">2 estrellas</span></label>
+          <input type="radio" name="estrellas" id="e3" value="3"><label for="e3" title="3 estrellas">★<span class="sr-only">3 estrellas</span></label>
+          <input type="radio" name="estrellas" id="e4" value="4"><label for="e4" title="4 estrellas">★<span class="sr-only">4 estrellas</span></label>
+          <input type="radio" name="estrellas" id="e5" value="5"><label for="e5" title="5 estrellas">★<span class="sr-only">5 estrellas</span></label>
+        </div>
+        <p class="estrellas__texto maquina" id="estrellas-texto">Toca las estrellas.</p>
+      </fieldset>
+      <div class="campo" id="caja-comentario" hidden>
+        <label for="comentario" id="comentario-label">¿Qué pasó? Cuéntanos para arreglarlo</label>
+        <textarea id="comentario" maxlength="500"></textarea>
+        <p class="ayuda" id="comentario-ayuda">Esto solo lo lee el equipo de la cantina.</p>
+      </div>
+      <button class="btn btn--mostaza btn--grande btn--ancho" id="enviar" disabled>Enviar</button>
+    </form>
+    <div class="tarjeta gracias" id="gracias" hidden tabindex="-1"></div>
+  </main>
+</body>
+</html>

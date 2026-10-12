@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tu noche | Sin Yolanda El Paso</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#C4502A">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="¡Nos vemos en Sin Yolanda El Paso!">
+  <meta property="og:description" content="Aquí no se llora, aquí se canta. Ve los detalles de la noche.">
+  <meta property="og:image" content="/assets/fotos/fl_cerillos.jpg">
+  <link rel="stylesheet" href="/src/styles/plataforma.css">
+  <link rel="stylesheet" href="/src/styles/reservaciones.css">
+  <link rel="stylesheet" href="/src/styles/tu-noche.css">
+  <script type="module" src="/src/plataforma/tu-noche.js"></script>
+</head>
+<body class="app">
+  <!-- @iconos -->
+  <header class="app-top">
+    <!-- @papel -->
+    <a href="/" aria-label="Volver a Sin Yolanda El Paso"><span class="logo app-top__logo"></span></a>
+    <h1 class="app-top__titulo" id="titulo">Tu noche</h1>
+    <p class="app-top__sub" id="sub">Cargando tu reserva...</p>
+  </header>
+
+  <main class="app-main" id="app">
+    <p class="cargando" id="cargando">Buscando tu folio...</p>
+
+    <div id="contenido" hidden>
+      <p class="estado-reserva" id="estado" aria-live="polite"></p>
+
+      <section class="tarjeta cuenta" aria-labelledby="cuenta-t">
+        <h2 class="etiqueta" id="cuenta-t">Faltan</h2>
+        <div class="cuenta__numeros" id="cuenta" aria-live="off"></div>
+        <p class="cuenta__frase maquina" id="cuenta-frase"></p>
+      </section>
+
+      <section class="seccion-app" aria-labelledby="boleto-t">
+        <h2 class="paso__titulo" id="boleto-t">Tu boleto</h2>
+        <div id="boleto"></div>
+        <div class="botones">
+          <button type="button" class="btn btn--mostaza" id="guardar-boleto">Guardar boleto</button>
+          <a class="btn" id="calendario-link" target="_blank" rel="noopener">Al calendario</a>
+          <a class="btn btn--rosa" id="invitar" target="_blank" rel="noopener">Invita a tu bola</a>
+        </div>
+      </section>
+
+      <section class="seccion-app" aria-labelledby="mesa-t">
+        <h2 class="paso__titulo" id="mesa-t">Tu mesa</h2>
+        <div class="tarjeta tarjeta--mapa">
+          <div class="mapa-scroll"><div id="mapa"></div></div>
+          <p class="mesa-elegida" id="mesa-texto"></p>
+        </div>
+        <dl class="tarjeta datos" id="datos"></dl>
+        <div class="botones">
+          <button type="button" class="btn" id="modificar">Modificar</button>
+          <button type="button" class="btn btn--terracota" id="cancelar">Cancelar reserva</button>
+        </div>
+      </section>
+
+      <section class="seccion-app" aria-labelledby="reglas-t">
+        <h2 class="paso__titulo" id="reglas-t">Reglas de la casa</h2>
+        <ol class="reglas tarjeta">
+          <li>Trae toda la actitud. Aquí nadie viene a llorar solo.</li>
+          <li>Ven con la garganta preparada. Un tecito antes no está de más.</li>
+          <li>Apúntate temprano al micrófono: la fila crece después de las 10.</li>
+          <li>El que se fue a la villa, perdió su silla: si se paran todos, dejen a alguien cuidando.</li>
+          <li>Prohibido marcarle al ex, a menos que sea para dedicarle una canción.</li>
+          <li>Lo que pasa en Sin Yolanda, se canta en Sin Yolanda.</li>
+          <li><span>Si tomas, no manejes. <a href="#" class="uber-link">Pide tu Uber desde aquí.</a></span></li>
+        </ol>
+      </section>
+
+      <section class="seccion-app" aria-labelledby="llegar-t">
+        <h2 class="paso__titulo" id="llegar-t">Cómo llegar</h2>
+        <div class="tarjeta">
+          <p class="direccion"><svg aria-hidden="true"><use href="#i-pin"/></svg> 340 Vin Rambla Dr, El Paso, TX</p>
+          <div class="mapa-google">
+            <iframe title="Mapa de Sin Yolanda El Paso" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Sin+Yolanda,+340+Vin+Rambla+Dr,+El+Paso,+TX&amp;output=embed"></iframe>
+          </div>
+          <p class="ayuda" id="estacionamiento"></p>
+          <div class="botones">
+            <a class="btn btn--mostaza" href="https://www.google.com/maps/dir/?api=1&amp;destination=340+Vin+Rambla+Dr+El+Paso+TX" target="_blank" rel="noopener">Google Maps</a>
+            <a class="btn btn--chocolate uber-link" href="#" target="_blank" rel="noopener">Pedir Uber</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccion-app" aria-labelledby="garganta-t">
+        <h2 class="paso__titulo" id="garganta-t">Calienta la garganta</h2>
+        <div class="tarjeta">
+          <p class="maquina">Las 10 más cantadas en Sin Yolanda. Ensáyalas en el carro.</p>
+          <ol class="top10" id="top10"></ol>
+          <a class="btn btn--chocolate btn--ancho" id="playlist" target="_blank" rel="noopener">Escuchar la playlist en Spotify</a>
+        </div>
+      </section>
+
+      <section class="seccion-app" aria-labelledby="pedir-t">
+        <h2 class="paso__titulo" id="pedir-t">Qué pedir</h2>
+        <ul class="pedir" id="pedir" role="list"></ul>
+      </section>
+    </div>
+
+    <div class="tarjeta" id="no-encontrado" hidden>
+      <h2 class="tarjeta__titulo">No encontramos ese folio</h2>
+      <p>Revisa el link de tu correo o aparta una mesa nueva.</p>
+      <div class="botones"><a class="btn btn--mostaza" href="/reservaciones/">Aparta tu mesa</a></div>
+    </div>
+  </main>
+
+  <dialog class="hoja" id="hoja-modificar" aria-labelledby="hm-t">
+    <form method="dialog" class="hoja__caja">
+      <h2 class="tarjeta__titulo" id="hm-t">Modificar reserva</h2>
+      <div class="campo">
+        <span class="etiqueta">Personas</span>
+        <div class="stepper" role="group" aria-label="Personas">
+          <button type="button" id="hm-menos" aria-label="Una persona menos">−</button>
+          <output id="hm-personas">2</output>
+          <button type="button" id="hm-mas" aria-label="Una persona más">+</button>
+        </div>
+        <p class="ayuda" id="hm-ayuda"></p>
+      </div>
+      <div class="campo">
+        <label for="hm-hora">Hora</label>
+        <select id="hm-hora"></select>
+      </div>
+      <p class="campo__error" id="hm-error" hidden></p>
+      <div class="botones">
+        <button class="btn-texto" value="cerrar" formnovalidate>Cerrar</button>
+        <button class="btn btn--mostaza" value="guardar" id="hm-guardar">Guardar cambios</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="hoja" id="hoja-cancelar" aria-labelledby="hc-t">
+    <form method="dialog" class="hoja__caja">
+      <h2 class="tarjeta__titulo" id="hc-t">¿Te vas a rajar?</h2>
+      <p>Si cancelas, tu mesa se libera para alguien más. ¿Seguro?</p>
+      <div class="botones">
+        <button class="btn" value="no">No, sí voy</button>
+        <button class="btn btn--terracota" value="si">Sí, cancelar</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

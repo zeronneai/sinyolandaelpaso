@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tu mesa | Sin Yolanda El Paso</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#C4502A">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/src/styles/plataforma.css">
+  <link rel="stylesheet" href="/src/styles/extras.css">
+  <link rel="stylesheet" href="/src/styles/mesa.css">
+  <link rel="stylesheet" href="/src/styles/brindis.css">
+  <script type="module" src="/src/plataforma/mesa.js"></script>
+</head>
+<body class="app con-tabs">
+  <!-- @iconos -->
+
+  <header class="app-top app-top--mesa">
+    <!-- @papel -->
+    <span class="logo app-top__logo" role="img" aria-label="Sin Yolanda El Paso"></span>
+    <h1 class="mesa-titulo" id="mesa-titulo">Tu mesa</h1>
+  </header>
+
+  <main class="app-main" id="app">
+    <!-- MENÚ -->
+    <section class="tab" id="tab-menu" aria-labelledby="t-menu" hidden>
+      <h2 class="paso__titulo" id="t-menu">Lo más pedido</h2>
+      <ul class="top-pedidos" id="top-pedidos" role="list"></ul>
+
+      <h2 class="paso__titulo">Pa' tu nivel de despecho</h2>
+      <ul class="nivel" id="nivel" role="list"></ul>
+
+      <h2 class="paso__titulo">La carta</h2>
+      <div id="carta"></div>
+      <p class="ayuda centro">No se ordena desde aquí: tu mesero te atiende.</p>
+      <button type="button" class="btn btn--mostaza btn--grande btn--ancho" data-llamar="mesero">Llamar al mesero</button>
+    </section>
+
+    <!-- AL MICRO -->
+    <section class="tab" id="tab-micro" aria-labelledby="t-micro" hidden>
+      <div class="mi-turno" id="mi-turno" aria-live="polite" hidden></div>
+      <h2 class="paso__titulo" id="t-micro">Apúntate para cantar</h2>
+      <form class="tarjeta" id="form-micro">
+        <div class="campo"><label for="mi-nombre">Tu nombre (o el de tu bola)</label><input id="mi-nombre" name="nombre" required maxlength="40" autocomplete="given-name"></div>
+        <div class="campo"><label for="mi-cancion">Canción</label><input id="mi-cancion" name="cancion" required maxlength="80"></div>
+        <div class="campo"><label for="mi-artista">Artista</label><input id="mi-artista" name="artista" maxlength="60"></div>
+        <div class="campo">
+          <span class="etiqueta">¿No sabes cuál? Agarra una:</span>
+          <div class="chips chips--sugerencias" id="sugerencias"></div>
+        </div>
+        <button class="btn btn--mostaza btn--grande btn--ancho">Apuntarme al micro</button>
+      </form>
+      <h3 class="subtitulo">La fila ahorita</h3>
+      <ol class="fila-publica" id="fila-publica"></ol>
+    </section>
+
+    <!-- DEDICATORIA -->
+    <section class="tab" id="tab-dedic" aria-labelledby="t-dedic" hidden>
+      <div class="mi-turno mi-turno--rosa" id="mi-dedic" aria-live="polite" hidden></div>
+      <h2 class="paso__titulo" id="t-dedic">Dedica una canción</h2>
+      <form class="tarjeta" id="form-dedic">
+        <div class="campo"><label for="d-cancion">Canción</label><input id="d-cancion" name="cancion" required maxlength="80" placeholder="Ej. Se me olvidó otra vez"></div>
+        <div class="campo"><label for="d-para">¿Para quién?</label><input id="d-para" name="para" required maxlength="40" placeholder="Ej. Mi ex, la cumpleañera..."></div>
+        <div class="campo"><label for="d-mensaje">Mensaje <span class="contador" id="d-contador">0/140</span></label><textarea id="d-mensaje" name="mensaje" maxlength="140" placeholder="Que le duela tantito."></textarea></div>
+        <div class="campo">
+          <label class="toggle toggle--anonimo">
+            <input type="checkbox" name="anonimo" id="d-anonimo">
+            <span class="toggle__texto">Mandarla anónima<small>Nadie sabrá que fuiste tú. Bueno, casi nadie.</small></span>
+            <span class="toggle__switch" aria-hidden="true"></span>
+          </label>
+        </div>
+        <button class="btn btn--rosa btn--grande btn--ancho">Mandar dedicatoria</button>
+      </form>
+    </section>
+
+    <!-- SERVICIO -->
+    <section class="tab" id="tab-servicio" aria-labelledby="t-serv" hidden>
+      <h2 class="paso__titulo" id="t-serv">¿Qué se te ofrece?</h2>
+      <div class="servicio">
+        <button type="button" class="servicio__btn servicio__btn--mesero" data-llamar="mesero"><span aria-hidden="true">🙋</span> Llamar al mesero</button>
+        <button type="button" class="servicio__btn servicio__btn--cuenta" data-llamar="cuenta"><span aria-hidden="true">💵</span> Pedir la cuenta</button>
+        <button type="button" class="servicio__btn servicio__btn--ayuda" data-llamar="ayuda"><span aria-hidden="true">🆘</span> Ayuda</button>
+      </div>
+      <div id="mis-llamados" aria-live="polite"></div>
+    </section>
+
+    <!-- MÁS -->
+    <section class="tab" id="tab-mas" aria-labelledby="t-mas" hidden>
+      <div id="mas-extra"></div>
+      <h2 class="paso__titulo" id="t-mas">Reglas de la casa</h2>
+      <ol class="reglas-mesa tarjeta">
+        <li>Trae toda la actitud. Aquí nadie viene a llorar solo.</li>
+        <li>Ven con la garganta preparada. Un tecito antes no está de más.</li>
+        <li>Apúntate temprano al micrófono: la fila crece después de las 10.</li>
+        <li>El que se fue a la villa, perdió su silla: si se paran todos, dejen a alguien cuidando.</li>
+        <li>Prohibido marcarle al ex, a menos que sea para dedicarle una canción.</li>
+        <li>Lo que pasa en Sin Yolanda, se canta en Sin Yolanda.</li>
+        <li>Si tomas, no manejes.</li>
+      </ol>
+      <div class="tarjeta regreso">
+        <h3 class="tarjeta__titulo">Si tomaste, no manejes</h3>
+        <p>Pide tu Uber de regreso desde aquí. Mañana vienes por el carro.</p>
+        <div class="botones">
+          <a class="btn btn--chocolate" id="uber" target="_blank" rel="noopener">Pedir Uber</a>
+          <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=340+Vin+Rambla+Dr+El+Paso+TX" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </div>
+      <div class="tarjeta story">
+        <h3 class="tarjeta__titulo">Etiquétanos en tu story</h3>
+        <p>Sube tu momento y etiqueta a <strong>@sinyolandaelpaso</strong>. Las mejores salen en nuestra cuenta.</p>
+        <a class="btn btn--mostaza btn--ancho" href="https://www.instagram.com/sinyolandaelpaso/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-instagram"/></svg> Abrir Instagram</a>
+      </div>
+    </section>
+
+    <section class="tarjeta" id="sin-mesa" hidden>
+      <h2 class="tarjeta__titulo">¿En qué mesa estás?</h2>
+      <p>Escanea el QR de tu mesa o escoge el número:</p>
+      <div class="chips" id="escoger-mesa"></div>
+    </section>
+  </main>
+
+  <nav class="tabbar" id="tabbar" aria-label="Secciones de la mesa" hidden>
+    <button type="button" data-tab="menu"><svg aria-hidden="true"><use href="#i-cantarito"/></svg>Menú</button>
+    <button type="button" data-tab="micro"><svg aria-hidden="true"><use href="#i-micro"/></svg>Al micro</button>
+    <button type="button" data-tab="dedic"><svg aria-hidden="true"><use href="#i-corazon"/></svg>Dedicatoria</button>
+    <button type="button" data-tab="servicio"><svg aria-hidden="true"><use href="#i-sombrero"/></svg>Servicio</button>
+    <button type="button" data-tab="mas"><svg aria-hidden="true"><use href="#i-destello"/></svg>Más</button>
+  </nav>
+</body>
+</html>

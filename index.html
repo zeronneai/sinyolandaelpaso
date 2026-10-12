@@ -91,7 +91,7 @@
           <a href="/en/" lang="en" hreflang="en"><span class="sr-only">English version: </span>EN</a>
         </p>
       </nav>
-      <a class="btn btn--mostaza nav__cta" href="#reservas">Aparta tu mesa</a>
+      <a class="btn btn--mostaza nav__cta" href="/reservaciones/">Aparta tu mesa</a>
       <button type="button" class="nav__burger" id="nav-burger" aria-expanded="false" aria-controls="nav-menu">
         <span class="sr-only">Menú de navegación</span>
         <span class="nav__burger-lineas" aria-hidden="true"></span>
@@ -140,7 +140,7 @@
         </h1>
         <p class="hero__sub">Cantina mexicana y bar de despecho en Vin Rambla. Micrófono abierto, cantaritos bien helados y cero lágrimas.</p>
         <div class="hero__botones">
-          <a class="btn btn--mostaza btn--grande" href="#reservas">Aparta tu mesa</a>
+          <a class="btn btn--mostaza btn--grande" href="/reservaciones/">Aparta tu mesa</a>
           <a class="btn btn--linea btn--grande" href="#cartelera">Ver la cartelera</a>
         </div>
       </div>
@@ -180,33 +180,33 @@
             <svg class="paquete__icono" aria-hidden="true"><use href="#i-corazon"/></svg>
             <h3 class="paquete__titulo">Despedida de soltera</h3>
             <p class="paquete__copy">La última noche de soltera se canta a todo pulmón. Nosotros ponemos el micro, ustedes el escándalo.</p>
-            <a class="btn btn--chocolate paquete__btn" href="#reservas" data-reservar data-ocasion="despedida">Cotizar / Apartar<span class="sr-only">: despedida de soltera</span></a>
+            <a class="btn btn--chocolate paquete__btn" href="/reservaciones/" data-reservar data-ocasion="despedida">Cotizar / Apartar<span class="sr-only">: despedida de soltera</span></a>
           </li>
           <li class="paquete paquete--rosa">
             <svg class="paquete__icono" aria-hidden="true"><use href="#i-ojo"/></svg>
             <h3 class="paquete__titulo">Fiesta de divorcio</h3>
             <p class="paquete__lema">Recién soltera, recién soltero.</p>
             <p class="paquete__copy">Firmaste los papeles, ahora firma el karaoke. La libertad se brinda con tequila.</p>
-            <a class="btn btn--chocolate paquete__btn" href="#reservas" data-reservar data-ocasion="divorcio">Cotizar / Apartar<span class="sr-only">: fiesta de divorcio</span></a>
+            <a class="btn btn--chocolate paquete__btn" href="/reservaciones/" data-reservar data-ocasion="divorcio">Cotizar / Apartar<span class="sr-only">: fiesta de divorcio</span></a>
           </li>
           <li class="paquete paquete--mostaza">
             <svg class="paquete__icono" aria-hidden="true"><use href="#i-cantarito"/></svg>
             <h3 class="paquete__titulo">Cumpleaños</h3>
             <p class="paquete__copy">Un año más y ni una lágrima. Cantaritos, pastel y Las Mañanitas versión cantina.</p>
-            <a class="btn btn--chocolate paquete__btn" href="#reservas" data-reservar data-ocasion="cumpleanos">Cotizar / Apartar<span class="sr-only">: cumpleaños</span></a>
+            <a class="btn btn--chocolate paquete__btn" href="/reservaciones/" data-reservar data-ocasion="cumpleanos">Cotizar / Apartar<span class="sr-only">: cumpleaños</span></a>
           </li>
           <li class="paquete paquete--crema">
             <svg class="paquete__icono" aria-hidden="true"><use href="#i-sol"/></svg>
             <h3 class="paquete__titulo">Recovery Brunch para grupos</h3>
             <p class="paquete__copy">Para la banda que sobrevivió al sábado. Mesa larga, cantaritos y cero juicios. Domingos desde las 10 AM.</p>
-            <a class="btn btn--chocolate paquete__btn" href="#reservas" data-reservar data-dia="0" data-ocasion="recovery-brunch">Cotizar / Apartar<span class="sr-only">: Recovery Brunch para grupos</span></a>
+            <a class="btn btn--chocolate paquete__btn" href="/reservaciones/" data-reservar data-dia="0" data-ocasion="recovery-brunch">Cotizar / Apartar<span class="sr-only">: Recovery Brunch para grupos</span></a>
           </li>
           <li class="paquete paquete--chocolate paquete--ancho">
             <svg class="paquete__icono" aria-hidden="true"><use href="#i-micro"/></svg>
             <p class="paquete__para">Para empresas · Diciembre</p>
             <h3 class="paquete__titulo">Posada con despecho</h3>
             <p class="paquete__copy">La posada de la oficina, pero con sentimiento. Grupo grande, menú para compartir y <strong>El Micrófono incluido</strong>, para que hasta el jefe se avente su canción.</p>
-            <a class="btn btn--mostaza paquete__btn" href="#reservas" data-reservar data-ocasion="posada">Cotizar / Apartar<span class="sr-only">: posada con despecho</span></a>
+            <a class="btn btn--mostaza paquete__btn" href="/reservaciones/" data-reservar data-ocasion="posada">Cotizar / Apartar<span class="sr-only">: posada con despecho</span></a>
           </li>
         </ul>
       </div>
@@ -221,8 +221,13 @@
           <p class="nota">Tres toques y el micrófono ya es tuyo.</p>
         </header>
         <div class="reservas__tarjeta" id="reservas-app">
-          <p class="reservas__provisional">Muy pronto vas a poder apartar aquí mismo. Mientras, cáile por OpenTable.</p>
-          <a class="btn btn--mostaza btn--grande" href="https://www.opentable.com/r/sin-yolanda-el-paso" target="_blank" rel="noopener">Reservar en OpenTable</a>
+          <ol class="reservas__pasos" role="list">
+            <li><strong>1.</strong> Escoge tu noche y cuántos vienen.</li>
+            <li><strong>2.</strong> Elige tu mesa en el mapa: cerca del micro o más tranquis.</li>
+            <li><strong>3.</strong> Recibe tu boleto con QR y tu página "Tu noche".</li>
+          </ol>
+          <a class="btn btn--mostaza btn--grande" href="/reservaciones/">Aparta tu mesa</a>
+          <p class="reservas__provisional">¿Prefieres OpenTable? <a href="https://www.opentable.com/r/sin-yolanda-el-paso" target="_blank" rel="noopener">También estamos ahí</a>.</p>
         </div>
       </div>
     </section>
@@ -292,7 +297,7 @@
 
           <div class="ubicacion__botones">
             <a class="btn btn--mostaza btn--grande" href="https://www.google.com/maps/dir/?api=1&amp;destination=340+Vin+Rambla+Dr+El+Paso+TX" target="_blank" rel="noopener">Cómo llegar</a>
-            <a class="btn btn--linea btn--grande" href="#reservas">Aparta tu mesa</a>
+            <a class="btn btn--linea btn--grande" href="/reservaciones/">Aparta tu mesa</a>
           </div>
         </div>
         <div class="ubicacion__mapa" data-entra>
@@ -363,7 +368,7 @@
         <h2 class="footer__titulo">Síguenos</h2>
         <ul class="footer__redes" role="list">
           <li><a href="https://www.instagram.com/sinyolandaelpaso/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-instagram"/></svg> Instagram</a></li>
-          <li><a href="https://www.tiktok.com/@sinyolandaelpaso" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-tiktok"/></svg> TikTok</a></li>
+          <li><a href="https://www.tiktok.com/@sinyolandaelpaso" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-tiktok"/></svg> TikTok</a> <!-- @borrador --></li>
         </ul>
         <p class="footer__opentable">¿Prefieres OpenTable? <a href="https://www.opentable.com/r/sin-yolanda-el-paso" target="_blank" rel="noopener">Reserva ahí</a>.</p>
       </div>
@@ -381,7 +386,7 @@
       <a class="footer__credito" href="https://purpleroots.agency" target="_blank" rel="noopener">
         Sitio por Purple Roots Agency
         <span class="logo-pr" aria-hidden="true"></span>
-      </a>
+      </a> <!-- @borrador -->
     </div>
   </footer>
 </body>

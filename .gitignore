@@ -3,3 +3,5 @@ dist
 public/img
 .DS_Store
 .vercel
+.env
+.env.local

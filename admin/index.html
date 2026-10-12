@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin | Sin Yolanda El Paso</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1d100a">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/src/styles/plataforma.css">
+  <link rel="stylesheet" href="/src/styles/extras.css">
+  <link rel="stylesheet" href="/src/styles/admin.css">
+  <link rel="stylesheet" href="/src/styles/brindis.css">
+  <script type="module" src="/src/plataforma/admin/admin.js"></script>
+</head>
+<body class="admin">
+  <!-- @iconos -->
+
+  <!-- Acceso -->
+  <section class="login" id="login" hidden>
+    <form class="login__caja" id="login-form">
+      <span class="logo login__logo" role="img" aria-label="Sin Yolanda El Paso"></span>
+      <h1 class="login__titulo">Admin de la cantina</h1>
+      <label for="pin" class="etiqueta">PIN</label>
+      <input id="pin" name="pin" type="password" inputmode="numeric" autocomplete="off" maxlength="8" required>
+      <p class="login__demo" id="login-demo" hidden></p>
+      <p class="campo__error" id="login-error" hidden>PIN incorrecto. ¿No te sabes la clave, compa?</p>
+      <button class="btn btn--mostaza btn--grande btn--ancho">Entrar</button>
+    </form>
+  </section>
+
+  <!-- App -->
+  <div class="admin-app" id="app" hidden>
+    <aside class="lateral">
+      <a class="lateral__logo" href="/" aria-label="Ir al sitio"><span class="logo"></span></a>
+      <nav aria-label="Secciones del admin">
+        <ul class="lateral__nav" id="nav" role="list"></ul>
+      </nav>
+      <div class="lateral__pie">
+        <button type="button" class="lateral__sonido" id="sonido" aria-pressed="true">🔔 Sonido</button>
+        <button type="button" class="lateral__salir" id="salir">Salir</button>
+      </div>
+    </aside>
+
+    <main class="principal">
+      <header class="cabecera">
+        <div>
+          <p class="cabecera__fecha" id="cab-fecha"></p>
+          <h1 class="cabecera__titulo" id="cab-titulo">Hoy</h1>
+        </div>
+        <div class="cabecera__der">
+          <span class="en-vivo" id="en-vivo"><span aria-hidden="true"></span> En vivo</span>
+          <span class="reloj" id="reloj"></span>
+          <button type="button" class="btn btn--mostaza btn--chico" id="btn-brindis">🥂 Lanzar brindis</button>
+        </div>
+      </header>
+      <div class="vista" id="vista"></div>
+    </main>
+  </div>
+
+  <dialog class="hoja hoja--oscura" id="hoja"><div id="hoja-contenido"></div></dialog>
+</body>
+</html>

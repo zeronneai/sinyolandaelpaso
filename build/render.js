@@ -45,7 +45,7 @@ export function renderEventos(lang = 'es') {
         <h3 class="poster__nombre">${esc(ev.nombre[lang])}</h3>
         <p class="poster__desc">${esc(ev.descripcion[lang])}</p>
         <p class="poster__hora">${esc(ev.horario[lang])}</p>
-        <a class="btn btn--chico poster__btn" href="#reservas" data-reservar data-dia="${ev.diaSemana}" data-ocasion="${esc(ev.ocasion)}">${t.apartar}<span class="sr-only">: ${esc(ev.nombre[lang])}</span></a>
+        <a class="btn btn--chico poster__btn" href="/reservaciones/" data-reservar data-dia="${ev.diaSemana}" data-ocasion="${esc(ev.ocasion)}">${t.apartar}<span class="sr-only">: ${esc(ev.nombre[lang])}</span></a>
       </li>`;
     })
     .join('');
@@ -131,6 +131,10 @@ export function renderBorrador(lang = 'es') {
   return CONFIG.borrador ? `<span class="etiqueta-borrador">${T[lang].porConfirmar}</span>` : '';
 }
 
+export function renderPapel() {
+  return readFileSync(new URL('../src/partials/papel-picado.svg', import.meta.url), 'utf8');
+}
+
 export function renderIconos() {
   return readFileSync(new URL('../src/partials/iconos.svg', import.meta.url), 'utf8');
 }
@@ -144,6 +148,7 @@ export function renderHTML(html, lang) {
     horario: renderHorario,
     galeria: renderGaleria,
     borrador: renderBorrador,
+    papel: renderPapel,
   };
   return html.replace(/<!--\s*@(\w+)\s*-->/g, (m, nombre) => (bloques[nombre] ? bloques[nombre](lang) : m));
 }

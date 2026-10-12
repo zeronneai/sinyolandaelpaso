@@ -27,8 +27,12 @@ function contenidoEditable() {
   };
 }
 
-const paginas = { main: resolve(__dirname, 'index.html') };
-if (existsSync(resolve(__dirname, 'en/index.html'))) paginas.en = resolve(__dirname, 'en/index.html');
+// Sitio + páginas de la plataforma. Cada carpeta con index.html es una página.
+const RUTAS = ['en', 'reservaciones', 'tu-noche', 'admin', 'mesa', 'pantalla', 'despechometro', 'como-te-fue', 'tarjeta'];
+const paginas = { main: resolve(import.meta.dirname, 'index.html') };
+for (const ruta of RUTAS) {
+  if (existsSync(resolve(import.meta.dirname, ruta, 'index.html'))) paginas[ruta] = resolve(import.meta.dirname, ruta, 'index.html');
+}
 
 export default defineConfig({
   plugins: [contenidoEditable()],
