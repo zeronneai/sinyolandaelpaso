@@ -134,3 +134,22 @@ export function sumarDias(iso, dias) {
 
 /** URL absoluta dentro del sitio (para QR y links compartidos). */
 export const urlSitio = (ruta) => new URL(ruta, window.location.origin).href;
+
+/** Analítica: GA4 y Meta Pixel si están cargados (IDs en config.js). */
+export function track(evento, datos = {}) {
+  try {
+    window.gtag?.('event', evento, datos);
+    if (evento === 'reserva_enviada') window.fbq?.('track', 'Lead', datos);
+  } catch (e) {}
+}
+
+/** Origen de la visita: ?utm_source=, ?src= o el código de un creador. */
+export function fuente() {
+  const p = new URLSearchParams(location.search);
+  const f = p.get('utm_source') || p.get('src');
+  if (f) {
+    try { sessionStorage.setItem('sy-fuente', f); } catch (e) {}
+    return f;
+  }
+  try { return sessionStorage.getItem('sy-fuente') || 'directo'; } catch (e) { return 'directo'; }
+}

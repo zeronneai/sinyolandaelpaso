@@ -96,3 +96,27 @@ export function proximaFecha(diaSemana, fecha = new Date()) {
   base.setUTCDate(base.getUTCDate() + faltan);
   return base.toISOString().slice(0, 10);
 }
+
+/** Desfase en minutos de America/Denver respecto a UTC en un instante dado. */
+function desfaseZona(instante) {
+  const p = new Intl.DateTimeFormat('en-US', {
+    timeZone: CONFIG.zonaHoraria, hourCycle: 'h23',
+    year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
+  }).formatToParts(instante);
+  const g = (t) => Number(p.find((x) => x.type === t).value);
+  const comoUTC = Date.UTC(g('year'), g('month') - 1, g('day'), g('hour'), g('minute'));
+  return (comoUTC - Math.floor(instante.getTime() / 60000) * 60000) / 60000;
+}
+
+/**
+ * Instante real (Date) de una reserva: fecha de servicio + hora en El Paso.
+ * Las horas de madrugada (antes de las 6 AM) son del día siguiente.
+ */
+export function instanteElPaso(fecha, hhmm) {
+  const [y, m, d] = fecha.split('-').map(Number);
+  const [h, min] = hhmm.split(':').map(Number);
+  const dia = d + (h < 6 ? 1 : 0);
+  const aproximado = new Date(Date.UTC(y, m - 1, dia, h, min) + 7 * 3600000);
+  const desfase = desfaseZona(aproximado);
+  return new Date(Date.UTC(y, m - 1, dia, h, min) - desfase * 60000);
+}

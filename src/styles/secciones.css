@@ -184,7 +184,10 @@
   box-shadow: 8px 8px 0 var(--chocolate);
   text-align: center;
 }
-.reservas__provisional { font-family: var(--f-maquina); font-size: 1.1rem; }
+.reservas__provisional { font-family: var(--f-maquina); font-size: 1rem; }
+.reservas__provisional a { color: var(--terracota-oscuro); }
+.reservas__pasos { display: grid; gap: 10px; text-align: left; font-size: 1.05rem; }
+.reservas__pasos strong { font-family: var(--f-titulo); font-weight: 400; color: var(--terracota); font-size: 1.3rem; margin-right: 4px; }
 
 /* ============================================================
    MENÚ

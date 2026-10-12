@@ -204,17 +204,20 @@ function iniciarEstado() {
 }
 
 /* ============================================================
-   "APARTAR PARA ESTE DÍA" / "COTIZAR": prellenado de reservas
-   El formulario (Fase 2) escucha el evento `sy:reservar`.
+   "APARTAR PARA ESTE DÍA" / "COTIZAR": abre /reservaciones/ con la
+   fecha y la ocasión ya llenas.
    ============================================================ */
 function iniciarPrellenado() {
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-reservar]');
     if (!btn) return;
-    const detalle = { ocasion: btn.dataset.ocasion || null, fecha: null };
-    if (btn.dataset.dia !== undefined) detalle.fecha = proximaFecha(Number(btn.dataset.dia));
-    window.syPrellenado = detalle;
-    document.dispatchEvent(new CustomEvent('sy:reservar', { detail: detalle }));
+    e.preventDefault();
+    const p = new URLSearchParams();
+    if (btn.dataset.ocasion) p.set('ocasion', btn.dataset.ocasion);
+    if (btn.dataset.dia !== undefined) p.set('fecha', proximaFecha(Number(btn.dataset.dia)));
+    const utm = new URLSearchParams(location.search).get('utm_source');
+    if (utm) p.set('utm_source', utm);
+    location.href = `/reservaciones/?${p}`;
   });
 }
 

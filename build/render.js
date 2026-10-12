@@ -45,7 +45,7 @@ export function renderEventos(lang = 'es') {
         <h3 class="poster__nombre">${esc(ev.nombre[lang])}</h3>
         <p class="poster__desc">${esc(ev.descripcion[lang])}</p>
         <p class="poster__hora">${esc(ev.horario[lang])}</p>
-        <a class="btn btn--chico poster__btn" href="#reservas" data-reservar data-dia="${ev.diaSemana}" data-ocasion="${esc(ev.ocasion)}">${t.apartar}<span class="sr-only">: ${esc(ev.nombre[lang])}</span></a>
+        <a class="btn btn--chico poster__btn" href="/reservaciones/" data-reservar data-dia="${ev.diaSemana}" data-ocasion="${esc(ev.ocasion)}">${t.apartar}<span class="sr-only">: ${esc(ev.nombre[lang])}</span></a>
       </li>`;
     })
     .join('');
