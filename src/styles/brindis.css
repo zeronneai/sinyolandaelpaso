@@ -1,0 +1,46 @@
+/* Brindis de medianoche: capa a pantalla completa */
+.brindis {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, var(--terracota) 0%, var(--terracota-oscuro) 60%, var(--chocolate) 100%);
+  color: var(--crema-claro);
+  text-align: center;
+  animation: brindis-entra .35s ease-out;
+}
+.brindis--saliendo { animation: brindis-sale .7s ease-in forwards; }
+@keyframes brindis-entra { from { opacity: 0; transform: scale(1.06); } }
+@keyframes brindis-sale { to { opacity: 0; } }
+.brindis__sol {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 260vmax; aspect-ratio: 1;
+  translate: -50% -50%;
+  background: repeating-conic-gradient(from 0deg, rgba(224, 166, 58, .22) 0 7.5deg, transparent 7.5deg 15deg);
+  animation: brindis-gira 20s linear infinite;
+}
+@keyframes brindis-gira { to { rotate: 360deg; } }
+.brindis__confeti { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.brindis__cuenta {
+  position: relative;
+  font-family: var(--f-titulo);
+  font-size: min(60vh, 70vw);
+  line-height: 1;
+  color: var(--mostaza);
+  text-shadow: 10px 10px 0 var(--chocolate);
+}
+.brindis__cuenta--pop { animation: brindis-pop .9s cubic-bezier(.2, 1.6, .4, 1); }
+@keyframes brindis-pop { from { transform: scale(.3); opacity: 0; } 30% { opacity: 1; } to { transform: scale(1); } }
+.brindis__final { position: relative; padding: 0 5vw; animation: brindis-pop 1s cubic-bezier(.2, 1.6, .4, 1); }
+.brindis__salud {
+  font-family: var(--f-titulo);
+  text-transform: uppercase;
+  font-size: min(16vw, 22vh);
+  line-height: .9;
+  text-shadow: 8px 8px 0 var(--chocolate);
+}
+.brindis__salud span { color: var(--mostaza); }
+.brindis__sub { margin-top: 3vh; font-family: var(--f-etiqueta); letter-spacing: .3em; font-size: clamp(1rem, 3vw, 2rem); }
