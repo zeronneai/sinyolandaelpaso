@@ -1,0 +1,44 @@
+{
+  "_instrucciones": "Plano de mesas (INVENTADO, reemplazar con el real). El plano mide 1000 x 700 unidades; x, y es el centro de cada mesa. forma: redonda, cuadrada, rectangular o periquera. zona: una de las claves de \"zonas\". Si cambias mesas, corre `npm run seed` para regenerar supabase/seed.sql.",
+  "ancho": 1000,
+  "alto": 700,
+  "zonas": {
+    "cerca-micro": { "es": "Cerca del micro", "en": "Near the mic" },
+    "tranquis": { "es": "Más tranquis", "en": "Chill side" },
+    "barra": { "es": "Barra", "en": "Bar" },
+    "terraza": { "es": "Terraza", "en": "Patio" }
+  },
+  "decoracion": [
+    { "tipo": "escenario", "x": 380, "y": 18, "w": 300, "h": 84, "texto": "Escenario · El Micrófono" },
+    { "tipo": "barra", "x": 30, "y": 120, "w": 56, "h": 470, "texto": "Barra" },
+    { "tipo": "pista", "x": 300, "y": 380, "w": 420, "h": 130, "texto": "Pista" },
+    { "tipo": "terraza", "x": 230, "y": 570, "w": 590, "h": 118, "texto": "Terraza" },
+    { "tipo": "entrada", "x": 900, "y": 640, "w": 90, "h": 48, "texto": "Entrada" }
+  ],
+  "mesas": [
+    { "id": 1, "numero": 1, "zona": "cerca-micro", "capacidad": 4, "x": 320, "y": 175, "forma": "redonda" },
+    { "id": 2, "numero": 2, "zona": "cerca-micro", "capacidad": 4, "x": 430, "y": 175, "forma": "redonda" },
+    { "id": 3, "numero": 3, "zona": "cerca-micro", "capacidad": 6, "x": 570, "y": 175, "forma": "cuadrada" },
+    { "id": 4, "numero": 4, "zona": "cerca-micro", "capacidad": 6, "x": 680, "y": 175, "forma": "cuadrada" },
+    { "id": 5, "numero": 5, "zona": "cerca-micro", "capacidad": 8, "x": 340, "y": 300, "forma": "rectangular" },
+    { "id": 6, "numero": 6, "zona": "cerca-micro", "capacidad": 4, "x": 470, "y": 300, "forma": "redonda" },
+    { "id": 7, "numero": 7, "zona": "cerca-micro", "capacidad": 2, "x": 565, "y": 300, "forma": "redonda" },
+    { "id": 8, "numero": 8, "zona": "cerca-micro", "capacidad": 12, "x": 670, "y": 300, "forma": "rectangular" },
+    { "id": 9, "numero": 9, "zona": "tranquis", "capacidad": 2, "x": 830, "y": 155, "forma": "redonda" },
+    { "id": 10, "numero": 10, "zona": "tranquis", "capacidad": 2, "x": 930, "y": 155, "forma": "redonda" },
+    { "id": 11, "numero": 11, "zona": "tranquis", "capacidad": 4, "x": 830, "y": 270, "forma": "cuadrada" },
+    { "id": 12, "numero": 12, "zona": "tranquis", "capacidad": 4, "x": 930, "y": 270, "forma": "cuadrada" },
+    { "id": 13, "numero": 13, "zona": "tranquis", "capacidad": 6, "x": 880, "y": 390, "forma": "rectangular" },
+    { "id": 14, "numero": 14, "zona": "tranquis", "capacidad": 10, "x": 880, "y": 510, "forma": "rectangular" },
+    { "id": 15, "numero": 15, "zona": "barra", "capacidad": 2, "x": 150, "y": 165, "forma": "periquera" },
+    { "id": 16, "numero": 16, "zona": "barra", "capacidad": 2, "x": 150, "y": 255, "forma": "periquera" },
+    { "id": 17, "numero": 17, "zona": "barra", "capacidad": 2, "x": 150, "y": 345, "forma": "periquera" },
+    { "id": 18, "numero": 18, "zona": "barra", "capacidad": 4, "x": 150, "y": 435, "forma": "periquera" },
+    { "id": 19, "numero": 19, "zona": "barra", "capacidad": 4, "x": 150, "y": 525, "forma": "periquera" },
+    { "id": 20, "numero": 20, "zona": "terraza", "capacidad": 4, "x": 300, "y": 630, "forma": "redonda" },
+    { "id": 21, "numero": 21, "zona": "terraza", "capacidad": 4, "x": 410, "y": 630, "forma": "redonda" },
+    { "id": 22, "numero": 22, "zona": "terraza", "capacidad": 6, "x": 520, "y": 630, "forma": "cuadrada" },
+    { "id": 23, "numero": 23, "zona": "terraza", "capacidad": 6, "x": 630, "y": 630, "forma": "cuadrada" },
+    { "id": 24, "numero": 24, "zona": "terraza", "capacidad": 8, "x": 745, "y": 630, "forma": "rectangular" }
+  ]
+}

@@ -29,12 +29,12 @@ export const CONFIG = {
   links: {
     instagram: 'https://www.instagram.com/sinyolandaelpaso/',
     instagramUsuario: '@sinyolandaelpaso',
-    tiktok: 'https://www.tiktok.com/@sinyolandaelpaso', // TODO cliente: confirmar usuario
+    tiktok: 'https://www.tiktok.com/@sinyolandaelpaso', // Por confirmar
     opentable: 'https://www.opentable.com/r/sin-yolanda-el-paso',
     mapa: 'https://www.google.com/maps/search/?api=1&query=Sin+Yolanda+340+Vin+Rambla+Dr+El+Paso+TX',
     comoLlegar: 'https://www.google.com/maps/dir/?api=1&destination=340+Vin+Rambla+Dr+El+Paso+TX',
     mapaEmbed: 'https://www.google.com/maps?q=Sin+Yolanda,+340+Vin+Rambla+Dr,+El+Paso,+TX&output=embed',
-    purpleRoots: 'https://purpleroots.agency', // TODO: confirmar URL de la agencia
+    purpleRoots: 'https://purpleroots.agency', // Por confirmar
   },
 
   analytics: {

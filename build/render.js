@@ -131,6 +131,10 @@ export function renderBorrador(lang = 'es') {
   return CONFIG.borrador ? `<span class="etiqueta-borrador">${T[lang].porConfirmar}</span>` : '';
 }
 
+export function renderPapel() {
+  return readFileSync(new URL('../src/partials/papel-picado.svg', import.meta.url), 'utf8');
+}
+
 export function renderIconos() {
   return readFileSync(new URL('../src/partials/iconos.svg', import.meta.url), 'utf8');
 }
@@ -144,6 +148,7 @@ export function renderHTML(html, lang) {
     horario: renderHorario,
     galeria: renderGaleria,
     borrador: renderBorrador,
+    papel: renderPapel,
   };
   return html.replace(/<!--\s*@(\w+)\s*-->/g, (m, nombre) => (bloques[nombre] ? bloques[nombre](lang) : m));
 }
