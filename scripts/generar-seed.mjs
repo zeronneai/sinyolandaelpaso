@@ -47,6 +47,22 @@ const sql = `-- ============================================================
 -- Las fechas son relativas a hoy en El Paso (America/Denver).
 -- ============================================================
 
+-- Migración por si la base viene de una versión anterior del schema
+-- ("corazon_roto" ahora es "modo_fiesta"). Seguro de correr varias veces.
+do $$
+begin
+  if exists (select 1 from information_schema.columns
+             where table_schema = 'public' and table_name = 'reservas' and column_name = 'corazon_roto') then
+    if exists (select 1 from information_schema.columns
+               where table_schema = 'public' and table_name = 'reservas' and column_name = 'modo_fiesta') then
+      alter table public.reservas drop column corazon_roto;
+    else
+      alter table public.reservas rename column corazon_roto to modo_fiesta;
+    end if;
+  end if;
+end $$;
+alter table public.reservas add column if not exists modo_fiesta boolean not null default false;
+
 create or replace function public.sembrar_demo()
 returns void
 language plpgsql
