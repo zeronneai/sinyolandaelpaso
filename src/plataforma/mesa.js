@@ -3,14 +3,17 @@ import { $, $$, esc, iniciarPlataforma, toast, sonar, linkUber, haceCuanto } fro
 import { mesaPorId, nombreZona, MESAS } from './disponibilidad.js';
 import { escucharBrindis } from './brindis.js';
 import menuData from '../data/menu.json';
+import { CONFIG } from '../config.js';
+
+const PEDIR = CONFIG.pedidosDesdeMesa !== false;
 
 const numero = Number(new URLSearchParams(location.search).get('m'));
 const MESA = mesaPorId(numero);
 const CLAVE = `sy-mesa-${numero}`;
 
-const estado = { turnos: [], dedicatorias: [], llamados: [], fotos: [] };
+const estado = { turnos: [], dedicatorias: [], llamados: [], fotos: [], pedidos: [] };
 const mios = (() => {
-  const vacio = { turnos: [], dedicatorias: [], llamados: [], fotos: [] };
+  const vacio = { turnos: [], dedicatorias: [], llamados: [], fotos: [], pedidos: [] };
   try { return { ...vacio, ...JSON.parse(localStorage.getItem(CLAVE)) }; } catch (e) { return vacio; }
 })();
 const guardarMios = () => {
@@ -28,13 +31,19 @@ function iniciar() {
   document.title = `Mesa ${MESA.numero} | Sin Yolanda El Paso`;
   $('#tabbar').hidden = false;
   pintarMenu();
+  if (PEDIR) pintarCarrito();
+  else {
+    $('#pedir-aviso').hidden = true;
+    $('#pedir-alternativa').textContent = 'No se ordena desde aquí: tu mesero te atiende.';
+  }
   pintarSugerencias();
   $('#uber').href = linkUber();
   escucharBrindis();
   cargar();
   pintarMasExtra();
-  suscribir(['turnos_micro', 'dedicatorias', 'llamados', 'fotos'], ({ tabla, nueva }) => {
-    const lista = { turnos_micro: estado.turnos, dedicatorias: estado.dedicatorias, llamados: estado.llamados, fotos: estado.fotos }[tabla];
+  suscribir(['turnos_micro', 'dedicatorias', 'llamados', 'fotos', 'pedidos'], ({ tabla, nueva }) => {
+    if (!nueva) return;
+    const lista = { turnos_micro: estado.turnos, dedicatorias: estado.dedicatorias, llamados: estado.llamados, fotos: estado.fotos, pedidos: estado.pedidos }[tabla];
     const i = lista.findIndex((x) => x.id === nueva.id);
     if (i >= 0) lista[i] = { ...lista[i], ...nueva };
     else lista.push(nueva);
@@ -45,7 +54,12 @@ function iniciar() {
 }
 
 async function cargar() {
-  const [t, d, l, f] = await Promise.all([listar('turnos_micro'), listar('dedicatorias'), listar('llamados'), listar('fotos')]);
+  const [t, d, l, f, p] = await Promise.all([
+    listar('turnos_micro'), listar('dedicatorias'), listar('llamados'), listar('fotos'),
+    PEDIR ? listar('pedidos', { eq: { mesa: MESA.numero } }).catch(() => []) : [],
+  ]);
+  estado.pedidos = p || [];
+  pintarMisPedidos();
   estado.turnos = t;
   estado.dedicatorias = d;
   estado.llamados = l;
@@ -84,7 +98,7 @@ function pintarMenu() {
   $('#top-pedidos').innerHTML = todos
     .filter((p) => p.top)
     .map(
-      (p) => `<li class="top-item">${
+      (p) => `<li class="top-item">${PEDIR ? `<button type="button" class="mas-btn mas-btn--top" data-agregar="${esc(p.nombre.es)}" aria-label="Agregar ${esc(p.nombre.es)} a mi pedido">+</button>` : ''}${
         p.foto ? `<img src="${p.foto}" alt="" loading="lazy">` : `<span class="top-item__icono"><svg aria-hidden="true"><use href="#i-${p.nombre.es.includes('Quesa') ? 'corazon' : p.nombre.es.includes('Elot') ? 'sol' : 'micro'}"/></svg></span>`
       }<strong>${esc(p.nombre.es)}</strong></li>`,
     )
@@ -98,11 +112,132 @@ function pintarMenu() {
         .map((p) =>
           p.pendiente
             ? '<li class="carta-item carta-item--pendiente">Próximamente en el menú</li>'
-            : `<li class="carta-item">${p.foto ? `<img src="${p.foto}" alt="" loading="lazy">` : ''}<div><strong>${esc(p.nombre.es)}</strong><p>${esc(p.descripcion.es)}</p></div></li>`,
+            : `<li class="carta-item${PEDIR ? ' carta-item--pedir' : ''}">${p.foto ? `<img src="${p.foto}" alt="" loading="lazy">` : ''}<div><strong>${esc(p.nombre.es)}</strong><p>${esc(p.descripcion.es)}</p></div>${
+                PEDIR ? `<button type="button" class="mas-btn" data-agregar="${esc(p.nombre.es)}" aria-label="Agregar ${esc(p.nombre.es)} a mi pedido">+</button>` : ''
+              }</li>`,
         )
         .join('')}</ul></details>`,
     )
     .join('');
+}
+
+/* ============================================================
+   PEDIR DESDE LA MESA
+   ============================================================ */
+const CLAVE_CARRITO = `sy-carrito-${numero}`;
+let carrito = (() => {
+  try { return JSON.parse(localStorage.getItem(CLAVE_CARRITO)) || []; } catch (e) { return []; }
+})();
+const guardarCarrito = () => {
+  try { localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito)); } catch (e) {}
+};
+const TXT_PEDIDO = {
+  nuevo: ['Pedido recibido', 'Ya le llegó a la barra.'],
+  preparando: ['Preparándose', 'Ya están en eso, ahorita sale.'],
+  entregado: ['¡Entregado!', '¿Algo más? Aquí sigue el menú.'],
+  cancelado: ['No se pudo', 'Tu mesero te va a explicar.'],
+};
+
+function pintarCarrito() {
+  if (!PEDIR) return;
+  const n = carrito.reduce((a, x) => a + x.cantidad, 0);
+  $('#carrito').hidden = n === 0;
+  $('#carrito-n').textContent = n;
+  $('#pedido-lista').innerHTML = carrito.length
+    ? carrito
+        .map(
+          (x, i) => `<li class="pedido-linea"><span class="pedido-linea__n">${esc(x.nombre)}</span>
+      <span class="cantidad" role="group" aria-label="Cantidad de ${esc(x.nombre)}">
+        <button type="button" data-menos="${i}" aria-label="Quitar uno">−</button><b>${x.cantidad}</b><button type="button" data-mas="${i}" aria-label="Agregar uno">+</button>
+      </span></li>`,
+        )
+        .join('')
+    : '<li class="vacio">Todavía no agregas nada.</li>';
+}
+
+function agregar(nombre) {
+  const x = carrito.find((c) => c.nombre === nombre);
+  if (x) x.cantidad = Math.min(20, x.cantidad + 1);
+  else carrito.push({ nombre, cantidad: 1 });
+  guardarCarrito();
+  pintarCarrito();
+  const btn = $('#ver-carrito');
+  btn.classList.remove('carrito__btn--pulso');
+  void btn.offsetWidth;
+  btn.classList.add('carrito__btn--pulso');
+}
+
+function pintarMisPedidos() {
+  if (!PEDIR) return;
+  const lista = estado.pedidos
+    .filter((p) => mios.pedidos.includes(p.id))
+    .sort((a, b) => b.created_at.localeCompare(a.created_at))
+    .slice(0, 3);
+  $('#mis-pedidos').innerHTML = lista
+    .map((p) => {
+      const [t, d] = TXT_PEDIDO[p.estado] || TXT_PEDIDO.nuevo;
+      const items = (p.items || []).map((x) => `${x.cantidad} ${esc(x.nombre)}`).join(', ');
+      return `<div class="mi-pedido mi-pedido--${p.estado}"><p class="mi-pedido__t">${t}</p><p>${items}</p><p class="mi-pedido__d">${d} · ${haceCuanto(p.created_at)}</p></div>`;
+    })
+    .join('');
+}
+
+if (PEDIR) {
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('[data-agregar]');
+    if (a) return agregar(a.dataset.agregar);
+  });
+  $('#ver-carrito').addEventListener('click', () => {
+    pintarCarrito();
+    $('#hoja-pedido').showModal();
+  });
+  $('#pedido-seguir').addEventListener('click', () => $('#hoja-pedido').close());
+  $('#hoja-pedido').addEventListener('click', (e) => {
+    if (e.target === $('#hoja-pedido')) $('#hoja-pedido').close();
+    const mas = e.target.closest('[data-mas]');
+    const menos = e.target.closest('[data-menos]');
+    if (mas) carrito[mas.dataset.mas].cantidad = Math.min(20, carrito[mas.dataset.mas].cantidad + 1);
+    if (menos) {
+      const i = Number(menos.dataset.menos);
+      carrito[i].cantidad -= 1;
+      if (carrito[i].cantidad <= 0) carrito.splice(i, 1);
+    }
+    if (mas || menos) {
+      guardarCarrito();
+      pintarCarrito();
+      if (!carrito.length) $('#hoja-pedido').close();
+    }
+  });
+  $('#pedido-enviar').addEventListener('click', async () => {
+    if (!carrito.length || !MESA) return;
+    const b = $('#pedido-enviar');
+    b.disabled = true;
+    try {
+      const p = await insertar('pedidos', {
+        mesa: MESA.numero,
+        items: carrito.map((x) => ({ nombre: x.nombre, cantidad: x.cantidad })),
+        nota: $('#pedido-nota').value.trim() || null,
+        estado: 'nuevo',
+        entregado_at: null,
+      });
+      mios.pedidos.push(p.id);
+      guardarMios();
+      if (!estado.pedidos.find((x) => x.id === p.id)) estado.pedidos.push(p);
+      carrito = [];
+      guardarCarrito();
+      $('#pedido-nota').value = '';
+      pintarCarrito();
+      pintarMisPedidos();
+      $('#hoja-pedido').close();
+      ir('menu');
+      toast('¡Pedido mandado! Ya va para tu mesa.', { tipo: 'reserva', icono: 'cantarito' });
+      sonar('ding');
+    } catch (er) {
+      toast('No se pudo mandar el pedido. Llama a tu mesero, porfa.', { tipo: 'error' });
+    } finally {
+      b.disabled = false;
+    }
+  });
 }
 
 /* ============================================================
@@ -385,6 +520,11 @@ function pintarVivo(tabla, nueva) {
     pintarFila();
   }
   if (tabla === 'dedicatorias') pintarMiDedicatoria();
+  if (tabla === 'pedidos' && mios.pedidos.includes(nueva.id)) {
+    pintarMisPedidos();
+    if (nueva.estado === 'preparando') toast('Tu pedido ya se está preparando.', { tipo: 'reserva', icono: 'cantarito' });
+    if (nueva.estado === 'entregado') toast('¡Tu pedido va llegando! Provecho.', { tipo: 'reserva', icono: 'cantarito' });
+  }
   if (tabla === 'llamados') {
     pintarLlamados();
     if (mios.llamados.includes(nueva.id) && nueva.estado === 'atendido') toast(`${TXT_LLAMADO[nueva.tipo]}: ¡atendido!`, { tipo: 'reserva', icono: 'sombrero' });

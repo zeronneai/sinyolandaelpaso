@@ -25,6 +25,8 @@
   <main class="app-main" id="app">
     <!-- MENÚ -->
     <section class="tab" id="tab-menu" aria-labelledby="t-menu" hidden>
+      <div id="mis-pedidos" aria-live="polite"></div>
+      <p class="pedir-aviso" id="pedir-aviso">Pide desde aquí con el <b>+</b> y te lo llevamos a tu mesa. Se paga con tu cuenta al final.</p>
       <h2 class="paso__titulo" id="t-menu">Lo más pedido</h2>
       <ul class="top-pedidos" id="top-pedidos" role="list"></ul>
 
@@ -33,8 +35,8 @@
 
       <h2 class="paso__titulo">La carta</h2>
       <div id="carta"></div>
-      <p class="ayuda centro">No se ordena desde aquí: tu mesero te atiende.</p>
-      <button type="button" class="btn btn--mostaza btn--grande btn--ancho" data-llamar="mesero">Llamar al mesero</button>
+      <p class="ayuda centro" id="pedir-alternativa">¿Prefieres pedir en persona? Llama a tu mesero.</p>
+      <button type="button" class="btn btn--grande btn--ancho" data-llamar="mesero">Llamar al mesero</button>
     </section>
 
     <!-- AL MICRO -->
@@ -119,6 +121,23 @@
       <div class="chips" id="escoger-mesa"></div>
     </section>
   </main>
+
+  <!-- Carrito del pedido -->
+  <div class="carrito" id="carrito" hidden>
+    <button type="button" class="carrito__btn" id="ver-carrito"><span aria-hidden="true">🛒</span> Ver mi pedido <b id="carrito-n">0</b></button>
+  </div>
+  <dialog class="hoja" id="hoja-pedido" aria-labelledby="hp-t">
+    <div class="hoja__caja">
+      <h2 class="tarjeta__titulo" id="hp-t">Tu pedido</h2>
+      <ul class="pedido-lista" id="pedido-lista" role="list"></ul>
+      <div class="campo"><label for="pedido-nota">¿Algo especial? <span class="contador">opcional</span></label><textarea id="pedido-nota" maxlength="160" placeholder="Ej. sin chile, con mucho hielo, para compartir"></textarea></div>
+      <p class="ayuda">Se paga con tu cuenta al final.</p>
+      <div class="botones botones--pedido">
+        <button type="button" class="btn" id="pedido-seguir">Seguir viendo</button>
+        <button type="button" class="btn btn--mostaza" id="pedido-enviar">Mandar pedido</button>
+      </div>
+    </div>
+  </dialog>
 
   <nav class="tabbar" id="tabbar" aria-label="Secciones de la mesa" hidden>
     <button type="button" data-tab="menu"><svg aria-hidden="true"><use href="#i-cantarito"/></svg>Menú</button>

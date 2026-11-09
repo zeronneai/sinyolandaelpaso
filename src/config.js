@@ -12,6 +12,10 @@ export const CONFIG = {
   // en los eventos y cócteles de ejemplo. Ponlo en false al publicar.
   borrador: true,
 
+  // true: en /mesa/ se puede pedir comida y bebida desde la app y le llega al admin
+  // (sección Pedidos). false: el menú es solo para ver y se pide con el mesero.
+  pedidosDesdeMesa: true,
+
   zonaHoraria: 'America/Denver',
 
   direccion: {

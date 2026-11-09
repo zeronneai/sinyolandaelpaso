@@ -102,6 +102,17 @@ create table if not exists public.llamados (
   created_at   timestamptz not null default now()
 );
 
+-- Pedidos de comida y bebida hechos desde /mesa/. items: [{ "nombre": "...", "cantidad": 2 }]
+create table if not exists public.pedidos (
+  id            uuid primary key default gen_random_uuid(),
+  mesa          int not null,
+  items         jsonb not null default '[]'::jsonb,
+  nota          text,
+  estado        text not null default 'nuevo' check (estado in ('nuevo','preparando','entregado','cancelado')),
+  entregado_at  timestamptz,
+  created_at    timestamptz not null default now()
+);
+
 create table if not exists public.fotos (
   id          uuid primary key default gen_random_uuid(),
   mesa        int,
@@ -144,7 +155,7 @@ do $$
 declare t text;
 begin
   foreach t in array array['mesas','reservas','lista_espera','dedicatorias','turnos_micro',
-                           'llamados','fotos','clientes','resenas','eventos_pantalla']
+                           'llamados','fotos','clientes','resenas','eventos_pantalla','pedidos']
   loop
     execute format('alter table public.%I enable row level security', t);
     execute format('drop policy if exists demo_leer on public.%I', t);
@@ -162,7 +173,7 @@ do $$
 declare t text;
 begin
   foreach t in array array['reservas','lista_espera','dedicatorias','turnos_micro',
-                           'llamados','fotos','clientes','resenas','eventos_pantalla']
+                           'llamados','fotos','clientes','resenas','eventos_pantalla','pedidos']
   loop
     if not exists (
       select 1 from pg_publication_tables
@@ -198,7 +209,8 @@ set search_path = public
 as $$
 begin
   truncate public.reservas, public.lista_espera, public.dedicatorias, public.turnos_micro,
-           public.llamados, public.fotos, public.clientes, public.resenas, public.eventos_pantalla;
+           public.llamados, public.fotos, public.clientes, public.resenas, public.eventos_pantalla,
+           public.pedidos;
   perform public.sembrar_demo();
 end $$;
 

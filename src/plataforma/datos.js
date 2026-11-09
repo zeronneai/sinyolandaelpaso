@@ -14,7 +14,7 @@ import { hoyEnElPaso } from '../js/horario.js';
 
 export const TABLAS = [
   'mesas', 'reservas', 'lista_espera', 'dedicatorias', 'turnos_micro',
-  'llamados', 'fotos', 'clientes', 'resenas', 'eventos_pantalla',
+  'llamados', 'fotos', 'clientes', 'resenas', 'eventos_pantalla', 'pedidos',
 ];
 
 export const modo = ENV.haySupabase ? 'supabase' : 'local';
@@ -151,6 +151,7 @@ export function generarSeedLocal() {
     resenas: SEED.resenasSeed.map((r) => base(r, { created_at: haceISO(r._hace) })),
     fotos: SEED.fotosSeed.map((f) => base(f, { created_at: haceISO(f._hace) })),
     eventos_pantalla: [],
+    pedidos: (SEED.pedidosSeed || []).map((p) => base(p, { entregado_at: p._entregado ? haceISO(p._hace - p._entregado) : null, created_at: haceISO(p._hace) })),
   };
 }
 

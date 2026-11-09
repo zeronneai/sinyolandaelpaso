@@ -27,7 +27,7 @@ const azar = (a) => a[Math.floor(Math.random() * a.length)];
 const mesaAzar = () => azar(MESAS).id;
 
 async function pasoSimulacion() {
-  const tipo = azar(['reserva', 'turno', 'turno', 'dedicatoria', 'dedicatoria', 'llamado', 'llamado', 'foto', 'espera']);
+  const tipo = azar(['reserva', 'turno', 'turno', 'dedicatoria', 'dedicatoria', 'llamado', 'llamado', 'foto', 'espera', 'pedido', 'pedido']);
   const [cancion, artista] = azar(CANCIONES);
   const nombre = `${azar(NOMBRES)} ${azar(APELLIDOS)}`;
   if (tipo === 'reserva') {
@@ -52,6 +52,11 @@ async function pasoSimulacion() {
     await insertar('dedicatorias', { mesa: mesaAzar(), cancion, para: azar(PARA), mensaje: azar(MENSAJES), anonimo, estado: 'en_fila' });
   } else if (tipo === 'llamado') {
     await insertar('llamados', { mesa: mesaAzar(), tipo: azar(['mesero', 'mesero', 'cuenta', 'ayuda']), estado: 'pendiente', atendido_at: null });
+  } else if (tipo === 'pedido') {
+    const PLATOS = ['Cantaritos', 'Elotitos', 'Quesabirria', 'El Rey', 'Tequila y mezcal', 'Coctelería de autor', 'Sin alcohol'];
+    const n = azar([1, 1, 2, 3]);
+    const items = [...new Set(Array.from({ length: n }, () => azar(PLATOS)))].map((nombre) => ({ nombre, cantidad: azar([1, 2, 2, 3, 4]) }));
+    await insertar('pedidos', { mesa: mesaAzar(), items, nota: Math.random() < 0.3 ? azar(['Sin chile', 'Con mucho hielo', 'Para compartir', 'Uno sin sal']) : null, estado: 'nuevo', entregado_at: null });
   } else if (tipo === 'foto') {
     await insertar('fotos', { mesa: mesaAzar(), url: azar(FOTOS), estado: 'pendiente' });
   } else {
@@ -89,7 +94,7 @@ const demoVista = {
       <div class="demo-grid">
         <section class="panel">
           <h2 class="panel__t">Simular noche</h2>
-          <p>Cada 6 a 12 segundos entra algo al azar: reservas, turnos al micro, dedicatorias, llamados, fotos y gente en espera. Así el admin y la pantalla se ven vivos.</p>
+          <p>Cada 6 a 12 segundos entra algo al azar: reservas, pedidos, turnos al micro, dedicatorias, llamados, fotos y gente en espera. Así el admin y la pantalla se ven vivos.</p>
           <button type="button" class="btn btn--mostaza btn--grande" id="sim">${simulando() ? '⏸ Pausar simulación' : '▶ Simular noche'}</button>
           <p class="sim-estado" id="sim-estado">${simulando() ? 'Simulando... la noche está prendida.' : 'Apagada.'}</p>
         </section>

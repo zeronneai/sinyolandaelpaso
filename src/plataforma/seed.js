@@ -56,6 +56,13 @@ export const llamadosSeed = [
   { mesa: 18, tipo: 'ayuda', estado: 'atendido', _hace: 15, _atendido: 4 },
 ];
 
+// Pedidos desde la mesa. `items` se guarda como JSON. `_entregado`: minutos después de creados.
+export const pedidosSeed = [
+  { mesa: 4, items: [{ nombre: 'Cantaritos', cantidad: 4 }, { nombre: 'Elotitos', cantidad: 2 }], nota: 'Uno sin chile', estado: 'nuevo', _hace: 1 },
+  { mesa: 9, items: [{ nombre: 'Quesabirria', cantidad: 3 }], nota: null, estado: 'preparando', _hace: 6 },
+  { mesa: 12, items: [{ nombre: 'El Rey', cantidad: 2 }, { nombre: 'Tequila y mezcal', cantidad: 1 }], nota: 'Reposado, derecho', estado: 'entregado', _hace: 30, _entregado: 8 },
+];
+
 export const esperaSeed = [
   { nombre: 'Rocío Galindo', telefono: '+1 915 555 0190', personas: 4, estado: 'esperando', _hace: 22 },
   { nombre: 'Tony Esparza', telefono: '+52 656 555 0128', personas: 2, estado: 'esperando', _hace: 11 },

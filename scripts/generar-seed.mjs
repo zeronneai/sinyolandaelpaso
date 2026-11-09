@@ -40,6 +40,7 @@ cuerpo += insert('lista_espera', S.esperaSeed, (e) => ({ ...conLit(e), created_a
 cuerpo += insert('clientes', S.clientesSeed, (c) => ({ ...conLit(c), ultima_visita: c._ultima ? `hoy - ${c._ultima}` : 'null' }));
 cuerpo += insert('resenas', S.resenasSeed, (r) => ({ ...conLit(r), created_at: hace(r._hace) }));
 cuerpo += insert('fotos', S.fotosSeed, (f) => ({ ...conLit(f), created_at: hace(f._hace) }));
+cuerpo += insert('pedidos', S.pedidosSeed, (p) => ({ ...conLit(p), entregado_at: p._entregado ? hace(p._hace - p._entregado) : 'null', created_at: hace(p._hace) }));
 
 const sql = `-- ============================================================
 -- Datos de demo. GENERADO por scripts/generar-seed.mjs desde

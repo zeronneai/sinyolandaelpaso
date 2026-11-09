@@ -2,7 +2,7 @@
 
 import { listar, suscribir, alReiniciar } from '../datos.js';
 
-const TABLAS = ['reservas', 'lista_espera', 'dedicatorias', 'turnos_micro', 'llamados', 'fotos', 'clientes', 'resenas'];
+const TABLAS = ['reservas', 'lista_espera', 'dedicatorias', 'turnos_micro', 'llamados', 'fotos', 'clientes', 'resenas', 'pedidos'];
 
 export const datos = Object.fromEntries(TABLAS.map((t) => [t, []]));
 const oyentes = new Set();
@@ -15,7 +15,11 @@ const avisar = (cambio) => oyentes.forEach((cb) => cb(cambio));
 
 export async function cargarTodo() {
   const resultados = await Promise.all(
-    TABLAS.map((t) => listar(t, { orden: t === 'clientes' ? 'nombre' : t === 'reservas' ? 'hora' : 'created_at' })),
+    TABLAS.map((t) => {
+      const q = listar(t, { orden: t === 'clientes' ? 'nombre' : t === 'reservas' ? 'hora' : 'created_at' });
+      // Si la base todavía no tiene la tabla de pedidos, el admin sigue funcionando.
+      return t === 'pedidos' ? q.catch(() => []) : q;
+    }),
   );
   TABLAS.forEach((t, i) => (datos[t] = resultados[i] || []));
   avisar({ tabla: '*', tipo: 'CARGA' });

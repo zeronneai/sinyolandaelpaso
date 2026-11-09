@@ -132,3 +132,34 @@
 .reglas-mesa li::marker { font-family: var(--f-titulo); color: var(--terracota); }
 .regreso, .story { margin-top: 18px; }
 .story .btn svg { width: 1.2em; height: 1.2em; }
+
+/* ---------- Pedir desde la mesa ---------- */
+.pedir-aviso { margin: 0 0 18px; padding: 12px 14px; border-radius: 14px; background: var(--mostaza); border: 2px solid var(--chocolate); box-shadow: 4px 4px 0 var(--chocolate); font-weight: 600; }
+.pedir-aviso b { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--chocolate); color: var(--mostaza); }
+.mas-btn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--chocolate); background: var(--mostaza); color: var(--chocolate); font: 700 1.6rem/1 var(--f-texto); box-shadow: 3px 3px 0 var(--chocolate); cursor: pointer; flex: none; }
+.mas-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--chocolate); }
+.mas-btn--top { position: absolute; top: 8px; right: 8px; z-index: 2; width: 40px; height: 40px; }
+.carta-item--pedir { grid-template-columns: auto 1fr auto; }
+.carta-item--pedir:not(:has(img)) { grid-template-columns: 1fr auto; }
+.carta-item > div { min-width: 0; }
+.carrito { position: fixed; left: 0; right: 0; bottom: calc(64px + env(safe-area-inset-bottom)); z-index: 59; padding: 10px 16px; pointer-events: none; }
+.carrito__btn { pointer-events: auto; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 588px; margin: 0 auto; min-height: 56px; border-radius: 16px; border: 3px solid var(--chocolate); background: var(--terracota); color: #fff; font-family: var(--f-etiqueta); font-size: 1.35rem; letter-spacing: .08em; box-shadow: 4px 4px 0 var(--chocolate); cursor: pointer; }
+.carrito__btn b { display: inline-grid; place-items: center; min-width: 30px; height: 30px; padding: 0 8px; border-radius: 999px; background: var(--mostaza); color: var(--chocolate); font-family: var(--f-texto); font-size: 1rem; }
+body.con-tabs .app-main:has(~ .carrito:not([hidden])) { padding-bottom: 190px; }
+.pedido-lista { display: grid; gap: 10px; margin: 6px 0 16px; }
+.pedido-linea { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border: 2px solid var(--chocolate); border-radius: 12px; background: #fff8ea; }
+.pedido-linea__n { font-family: var(--f-etiqueta); font-size: 1.25rem; letter-spacing: .05em; min-width: 0; overflow-wrap: anywhere; }
+.cantidad { display: inline-flex; align-items: center; gap: 10px; flex: none; }
+.cantidad button { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--chocolate); background: var(--crema-claro); font: 700 1.3rem/1 var(--f-texto); cursor: pointer; }
+.cantidad b { min-width: 20px; text-align: center; font-size: 1.1rem; }
+.hoja textarea { width: 100%; min-height: 70px; }
+.botones--pedido { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.mi-pedido { margin-bottom: 14px; padding: 14px 16px; border-radius: 16px; background: var(--chocolate); color: var(--crema-claro); border: 3px solid var(--mostaza); box-shadow: 5px 5px 0 var(--terracota); }
+.mi-pedido__t { font-family: var(--f-titulo); text-transform: uppercase; font-size: 1.7rem; line-height: 1; color: var(--mostaza); margin-bottom: 4px; }
+.mi-pedido__d { font-family: var(--f-maquina); font-size: .9rem; opacity: .85; margin-top: 4px; }
+.mi-pedido--entregado { background: #1f4a2e; border-color: #7ee2a0; }
+.mi-pedido--entregado .mi-pedido__t { color: #7ee2a0; }
+.mi-pedido--cancelado { opacity: .7; }
+.carrito__btn--pulso { animation: carrito-pulso .35s ease-out; }
+@keyframes carrito-pulso { 40% { transform: scale(1.05); background: var(--mostaza); color: var(--chocolate); } }
+@media (prefers-reduced-motion: reduce) { .carrito__btn--pulso { animation: none; } }

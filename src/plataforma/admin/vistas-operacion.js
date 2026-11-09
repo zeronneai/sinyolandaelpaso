@@ -485,4 +485,63 @@ const llamadosVista = {
   },
 };
 
-export const VISTAS_OPERACION = [hoyVista, mapaVista, reservasVista, microVista, llamadosVista];
+/* ============================================================
+   PEDIDOS DESDE LA MESA
+   ============================================================ */
+const pedidosActivos = () => datos.pedidos.filter((p) => p.estado === 'nuevo' || p.estado === 'preparando');
+const pedidosVista = {
+  id: 'pedidos',
+  titulo: 'Pedidos',
+  icono: 'cantarito',
+  badgeAlerta: true,
+  badge: () => datos.pedidos.filter((p) => p.estado === 'nuevo').length || '',
+  montar(el) {
+    el.innerHTML = `<p class="ayuda-admin">Lo que piden las mesas desde su celular. <b>Preparando</b> le avisa a la mesa que ya va, <b>Entregado</b> lo cierra.</p>
+      <div class="pedidos" id="pedidos"></div>
+      <h2 class="panel__t panel__t--sep">Entregados hace poco</h2><ul class="atendidos" id="pedidos-hechos"></ul>`;
+    el.addEventListener('click', async (e) => {
+      const b = e.target.closest('[data-pedido]');
+      if (!b) return;
+      b.disabled = true;
+      const nuevo = b.dataset.estado;
+      await cambiar('pedidos', b.dataset.pedido, { estado: nuevo, entregado_at: nuevo === 'entregado' ? new Date().toISOString() : null });
+    });
+    this.actualizar();
+    this.reloj = setInterval(() => this.actualizar(), 15000);
+  },
+  desmontar() {
+    clearInterval(this.reloj);
+  },
+  actualizar() {
+    if (!$('#pedidos')) return;
+    const act = pedidosActivos().sort((a, b) => a.created_at.localeCompare(b.created_at));
+    $('#pedidos').innerHTML = act.length
+      ? act
+          .map((p) => {
+            const min = minutosDesde(p.created_at);
+            return `<article class="pedido pedido--${p.estado}${min >= 15 ? ' pedido--tarde' : ''}">
+          <div class="pedido__cab"><p class="pedido__mesa">Mesa ${p.mesa}</p><span class="estado-tag">${p.estado === 'nuevo' ? 'Nuevo' : 'Preparando'}</span></div>
+          <ul class="pedido__items" role="list">${(p.items || []).map((x) => `<li><b>${x.cantidad}</b> ${esc(x.nombre)}</li>`).join('')}</ul>
+          ${p.nota ? `<p class="pedido__nota">“${esc(p.nota)}”</p>` : ''}
+          <p class="pedido__tiempo">${min < 1 ? 'ahorita' : `hace ${min} min`}</p>
+          <div class="pedido__btns">
+            ${p.estado === 'nuevo' ? `<button type="button" class="btn btn--chico" data-pedido="${p.id}" data-estado="preparando">Preparando</button>` : ''}
+            <button type="button" class="btn btn--mostaza btn--chico" data-pedido="${p.id}" data-estado="entregado">Entregado</button>
+            <button type="button" class="btn-texto pedido__cancelar" data-pedido="${p.id}" data-estado="cancelado">Cancelar</button>
+          </div>
+        </article>`;
+          })
+          .join('')
+      : '<p class="vacio vacio--oscuro">No hay pedidos pendientes. Todo servido.</p>';
+    const hechos = datos.pedidos
+      .filter((p) => p.estado === 'entregado' || p.estado === 'cancelado')
+      .sort((a, b) => (b.entregado_at || b.created_at).localeCompare(a.entregado_at || a.created_at))
+      .slice(0, 8);
+    $('#pedidos-hechos').innerHTML =
+      hechos
+        .map((p) => `<li>Mesa ${p.mesa} · ${(p.items || []).map((x) => `${x.cantidad} ${esc(x.nombre)}`).join(', ')} · ${p.estado === 'cancelado' ? 'cancelado' : `entregado en ${Math.max(1, Math.round((new Date(p.entregado_at) - new Date(p.created_at)) / 60000))} min`}</li>`)
+        .join('') || '<li class="vacio vacio--oscuro">Nada todavía.</li>';
+  },
+};
+
+export const VISTAS_OPERACION = [hoyVista, mapaVista, reservasVista, pedidosVista, microVista, llamadosVista];

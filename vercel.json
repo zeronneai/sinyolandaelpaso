@@ -46,5 +46,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/despechometro",
+      "destination": "/fiestometro",
+      "permanent": false
+    },
+    {
+      "source": "/despechometro/:path*",
+      "destination": "/fiestometro",
+      "permanent": false
+    }
   ]
 }

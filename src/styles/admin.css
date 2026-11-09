@@ -415,3 +415,22 @@ dialog.mas { display: none; }
   .espera__form > input:first-child { grid-column: 1 / -1; }
   .espera__form > * { min-width: 0; }
 }
+
+/* ---------- Pedidos desde la mesa ---------- */
+.ayuda-admin { color: var(--tenue); margin-bottom: 16px; }
+.ayuda-admin b { color: var(--texto); }
+.pedidos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.pedido { display: grid; gap: 10px; align-content: start; padding: 16px; border-radius: 18px; background: var(--panel); border: 2px solid var(--mostaza); animation: llega .4s var(--ease-rebote); min-width: 0; }
+.pedido--preparando { border-color: var(--crema); }
+.pedido--tarde { border-color: #e5484d; background: #3a1414; }
+.pedido__cab { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.pedido__mesa { font-family: var(--f-titulo); font-size: 2.2rem; line-height: 1; color: var(--mostaza); }
+.pedido--nuevo .estado-tag { background: var(--mostaza); color: var(--chocolate); }
+.pedido__items { display: grid; gap: 4px; list-style: none; padding: 0; margin: 0; font-size: 1.05rem; }
+.pedido__items b { display: inline-grid; place-items: center; min-width: 28px; height: 28px; margin-right: 6px; border-radius: 8px; background: var(--panel-2); color: var(--mostaza); }
+.pedido__nota { font-family: var(--f-maquina); color: var(--tenue); overflow-wrap: anywhere; }
+.pedido__tiempo { color: var(--tenue); font-weight: 700; font-size: .9rem; }
+.pedido--tarde .pedido__tiempo { color: #ff8b8b; }
+.pedido__btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.pedido__btns .btn { flex: 1 1 120px; white-space: nowrap; }
+.pedido__cancelar { color: var(--tenue); }

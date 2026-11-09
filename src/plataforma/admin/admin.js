@@ -46,8 +46,8 @@ let vistaActual = null;
 let sonidoOn = (() => { try { return localStorage.getItem('sy-admin-sonido') !== '0'; } catch (e) { return true; } })();
 
 // Barra inferior en celular: las 4 vistas que más se usan en servicio + "Más".
-const PRINCIPALES = ['hoy', 'mapa', 'micro', 'llamados'];
-const CORTOS = { hoy: 'Hoy', mapa: 'Mapa', micro: 'Micro', llamados: 'Llamados' };
+const PRINCIPALES = ['hoy', 'pedidos', 'mapa', 'llamados'];
+const CORTOS = { hoy: 'Hoy', pedidos: 'Pedidos', mapa: 'Mapa', micro: 'Micro', llamados: 'Llamados' };
 const badgeHTML = (v) => (v.badge?.() ? `<b class="badge${v.badgeAlerta ? ' badge--alerta' : ''}">${v.badge()}</b>` : '');
 
 function pintarTabbar() {
@@ -127,6 +127,8 @@ const TOAST = {
     tipo === 'INSERT' && [`Mesa ${l.mesa} ${{ cuenta: 'pide la cuenta', mesero: 'llama al mesero', ayuda: 'necesita ayuda' }[l.tipo]}`, 'llamado', 'cantarito'],
   fotos: (f, tipo) => tipo === 'INSERT' && [`Mesa ${f.mesa ?? '?'} mandó una foto para la pantalla`, 'foto', 'sol'],
   resenas: (r, tipo) => tipo === 'INSERT' && [`Nueva reseña: ${'★'.repeat(r.estrellas)}${'☆'.repeat(5 - r.estrellas)}`, 'resena', 'destello'],
+  pedidos: (p, tipo) =>
+    tipo === 'INSERT' && [`Mesa ${p.mesa} pidió: ${(p.items || []).map((x) => `${x.cantidad} ${esc(x.nombre)}`).join(', ')}`, 'reserva', 'cantarito'],
   lista_espera: (e, tipo) => tipo === 'INSERT' && [`${esc(e.nombre)} se anotó en la lista de espera (${e.personas} p)`, 'turno', 'sombrero'],
 };
 
