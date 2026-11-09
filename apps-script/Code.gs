@@ -15,7 +15,7 @@
  *   LOGO_URL           PNG del logo, ej. https://sinyolandaelpaso.com/assets/logos/logo-email.png
  *   SHEET_ID           (opcional) Google Sheet de respaldo
  *   SUPABASE_URL       (recomendado) para leer la reserva real por folio
- *   SUPABASE_ANON_KEY  (recomendado) llave anon de Supabase
+ *   SUPABASE_ANON_KEY  (recomendado) llave publishable (sb_publishable_...) o la anon vieja
  *
  * Regla de copy: nada de guiones largos en ningún texto.
  */
@@ -512,7 +512,8 @@ function leerDeSupabase(folio) {
   const key = prop('SUPABASE_ANON_KEY');
   if (!url || !key) return null;
   const r = UrlFetchApp.fetch(`${url}/rest/v1/reservas?folio=eq.${encodeURIComponent(folio)}&select=*`, {
-    headers: { apikey: key, Authorization: `Bearer ${key}` },
+    // Solo apikey: funciona con la llave publishable nueva (sb_publishable_...) y con la anon vieja.
+    headers: { apikey: key },
     muteHttpExceptions: true,
   });
   if (r.getResponseCode() !== 200) return null;
